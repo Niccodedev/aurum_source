@@ -43,9 +43,18 @@ export class InventoryService {
   }
 
   addInventory(inventory, hotelId, key){
+    
     this.afs.collection('inventories').doc(hotelId).update({
       [key] : inventory
+    }).then(()=>{
+
+    })
+    .catch(error=>{
+      this.afs.collection('inventories').doc(hotelId).set({
+        [key] : inventory
+      })
     });
+    
   }
 
    addPayroll(item, hotelId) {

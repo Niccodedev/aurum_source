@@ -56,19 +56,23 @@ export class HKComponent extends HKManager implements OnInit {
 
   showArchive: boolean;
   ngOnInit() {
+    this.showArchive = false;
+    this.byDate = true;
+    this.inventoryLabels = [];
     this.inventoryService.getInventories().subscribe(res => {
       this.inventoryItems = HelperService.getItemsByHotelId(res);
-      if (!this.inventoryItems) {
+      if (!this.inventoryItems) { 
         return;
       }
-      this.showArchive = false;
-      this.inventoryItems = this.inventoryItems;
-      this.inventoryLabels = [];
-
-      if(this.inventoryItems.hk){
+      
+      if(!this.inventoryItems){
+        this.inventoryDates = []
+      
+      }
+      else if(this.inventoryItems.hk){
       this.getDates(
-        this.inventoryItems.hk[Object.keys(this.inventoryItems.hk)[0]]);
-      this.getLabels(this.inventoryItems.hk);
+        this.inventoryItems.hk[Object.keys(this.inventoryItems.hk)[0]]);      
+        this.getLabels(this.inventoryItems.hk);
       }else{
         this.inventoryDates=[]
       }
@@ -97,34 +101,31 @@ export class HKComponent extends HKManager implements OnInit {
     }
   }
   saveFormInput() {
-    if (!this.inventoryItems) {
+    if (!this.inventoryItems || !this.inventoryItems.hk) {
       this.inventoryItems = {
         hk: {}
       };
-      this.inventoryDates = [];
+      this.inventoryDates = [];  
       this.inventoryService.addNewField();
     }
 
-    if (!this.inventoryItems.hk[Object.keys(this.inventoryItems.hk)[0]]) {
-      this.inventoryDates = [];
-    }
     this.form.value.inventories.forEach(item => {
       if (!this.inventoryItems.hk[item.item]) this.addNewItem(item.item);
     });
-
+ 
     let date = this.form.value.date
       ? this.datePipe.transform(this.form.value.date, "yyyy-MM-dd")
       : this.datePipe.transform(new Date(), "MM-dd-YYYY");
     let indexOfItem = this.checkIfDateExist(date);
-
+   
     if (indexOfItem == -1) {
       this.addNewDate(date);
       indexOfItem = this.inventoryDates.length - 1;
     }
     let minco = this.form.value.inventories[0].minco/60;
     let minso = this.form.value.inventories[0].minso/60;
-    this.form.value.inventories.forEach(item => {
-      console.log(item.dnd);
+ 
+    this.form.value.inventories.forEach(item => {           
       this.inventoryItems.hk[item.item].data[indexOfItem].dnd = item.dnd;
       this.inventoryItems.hk[item.item].data[indexOfItem].so = item.so;
       this.inventoryItems.hk[item.item].data[indexOfItem].co = item.co;
@@ -148,6 +149,7 @@ export class HKComponent extends HKManager implements OnInit {
     //        'carolina': [{'date': '2018-06-01', dnd: '1', so: '8',co: '1', time: '8',minso: '2', minco: '3'},
     //         {'date': '2018-05-01',dnd: '1', so: '8',co: '1', time: '8',minso: '2', minco: '3'}]}, localStorage.hotelId);
     this.addItem(this.inventoryItems.hk, localStorage.hotelId);
+    this.openAddModalRef.close()
   }
   addNewItem(name) {
     this.inventoryItems.hk[name] = {
@@ -193,8 +195,6 @@ export class HKComponent extends HKManager implements OnInit {
 
   sortByDate() {
     for (let key in this.inventoryItems.hk) {                                           
-      console.log("-------------- key --------------")
-      console.log( JSON.stringify(this.inventoryItems.hk[key].data))
       this.inventoryItems.hk[key].data.sort(
         (a, b) => +new Date(b.date) - +new Date(a.date)
       );

@@ -43,6 +43,8 @@ export class HKManager {
     this.byDate = false;
     this.byType = false;
     this.currentUser = this.dataStorageService.getUser();
+    // this.inventoryLabels = [];
+    // this.inventoryDates = []
   }
 
 
@@ -64,8 +66,6 @@ export class HKManager {
     
     const inventory = this.createFormInput();
     this.inventories.push(inventory);
-    console.log("----------- inventories ---------------")
-    console.log(this.inventories)
   }
 
   get inventories(): FormArray {
@@ -73,24 +73,43 @@ export class HKManager {
   }
 
   createFormArray(): FormGroup[]{
+    
     let formArray = [];   
-        this.inventoryLabels.forEach(label =>{
-           if(!this.inventoryItems.hk[label].archive){           
-            formArray.push(       
-              this.formBuilder.group({
-                item:label,
-                dnd: '',
-                so: '',
-                co: '',
-                time: '',
-                minso: '',
-                minco: '',
-                threshold: '',
-                variance: ''
-              })
-            )
-          }
-        })
+    if(this.inventoryItems){
+      this.inventoryLabels.forEach(label =>{
+          if(!this.inventoryItems.hk[label].archive){           
+          formArray.push(       
+            this.formBuilder.group({
+              item:label,
+              dnd: '',
+              so: '',
+              co: '',
+              time: '',
+              minso: '',
+              minco: '',
+              threshold: '',
+              variance: ''
+            })
+          )
+        }
+      })
+    }
+    if (formArray.length>1) return formArray;
+   
+    formArray.push(       
+      this.formBuilder.group({
+        item:'',
+        dnd: '',
+        so: '',
+        co: '',
+        time: '',
+        minso: '',
+        minco: '',
+        threshold: '',
+        variance: ''
+      })
+    )
+ 
     
     return formArray;
   }
@@ -150,6 +169,7 @@ export class HKManager {
   }
 
   getLabels(items) {
+    this.inventoryLabels = []
     for (let key in items) {
       this.inventoryLabels.push(key);
     }

@@ -29,7 +29,7 @@
             font-weight: 600;" [hidden]="!byDate">Select Date</p>
                 <select class="custom-select" [(ngModel)]="dateOfItem" (change)="updateItemsByDate()" [hidden]="!byDate" style="width:50%;background-color:#F3F2F0; margin: 0 auto">
           <option selected>Select Date</option>
-          <option *ngFor="let date of inventoryDates" value="{{date}}"></option>
+          <option *ngFor="let date of inventoryDates" value="{{date}}">{{date}}</option>
         </select>
             </div>
 
@@ -152,7 +152,7 @@
                 <tr *ngFor="let label of inventoryLabels">
                     <ng-container *ngIf="!inventoryItems.hk[label].archive">
                         <td scope="row" class="type" id="fname">
-                            <input class="checkbox" type="checkbox" value="onoffswitch" id='checkMe'  [(ngModel)]="inventoryItems.hk[label].archive" *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
+                            <input class="checkbox" type="checkbox" [(ngModel)]="inventoryItems.hk[label].archive" *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
                         </td>
                         <ng-container id="t-data" *ngFor="let item of inventoryItems.hk[label].data.slice(dateIndex, dateIndex + 8); let i = index">
                             <td>
@@ -179,20 +179,20 @@
                 <tr *ngFor="let label of inventoryLabels" class="archive">
                         <ng-container *ngIf="inventoryItems.hk[label].archive && showArchive">
                             <td scope="row" class="type" id="fname">
-                                <input class="checkbox" type="checkbox" value="onoffswitch" id='checkMe' [(ngModel)]="inventoryItems.hk[label].archive"  *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
+                                <input class="checkbox" type="checkbox" [(ngModel)]="inventoryItems.hk[label].archive"  *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
                             </td>
                             <ng-container id="t-data" *ngFor="let item of inventoryItems.hk[label].data.slice(dateIndex, dateIndex + 8); let i = index">
                                 <td>
-                                    <input class="td-numb  " [disabled]="selectedDate != i" [(ngModel)]="item.dnd">
+                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.dnd">
                                 </td>
                                 <td>
                                     <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.so">
                                 </td>
                                 <td>
-                                    <input class="td-numb  " [disabled]="selectedDate != i" [(ngModel)]="item.co">
+                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.co">
                                 </td>
                                 <td>
-                                    <input class="td-numb  " [disabled]="selectedDate != i" [(ngModel)]="item.time">
+                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.time">
                                 </td>
                                 <td>
                                     <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.threshold">
@@ -258,11 +258,11 @@
                                                 </tr>
                                         <tr [formGroupName]="i" >
 
-                                            <td><input type="text" formControlName="item" id="item" name="item" placeholder="Item" required class="input" style="text-transform: lowercase;" oninput="this.value = this.value.toLowerCase()"></td>
-                                            <td><input type="text" formControlName="dnd" id="dnd" name="dnd" placeholder="DND" required class="input"></td>
-                                            <td><input type="text" formControlName="so" id="so" name="so" placeholder="S/O" required class="input"></td>
-                                            <td><input type="text" formControlName="co" id="co" name="co" placeholder="C/O" required class="input"></td>
-                                            <td><input type="text" formControlName="time" id="time" name="time" placeholder="Time" class="input"></td>
+                                            <td><input type="text" formControlName="item" name="item" placeholder="Item" required class="input" style="text-transform: lowercase;" oninput="this.value = this.value.toLowerCase()"></td>
+                                            <td><input type="text" formControlName="dnd"name="dnd" placeholder="DND" required class="input"></td>
+                                            <td><input type="text" formControlName="so"  name="so" placeholder="S/O" required class="input"></td>
+                                            <td><input type="text" formControlName="co"  name="co" placeholder="C/O" required class="input"></td>
+                                            <td><input type="text" formControlName="time" name="time" placeholder="Time" class="input"></td>
                                             <!--<input type="text" formControlName="threshold" id="threshold" name="threshold" placeholder="threshold" class="input">-->
                                             <!--<input type="text" formControlName="variance" id="variance" name="variance" placeholder="variance" class="input">-->
                                         </tr>

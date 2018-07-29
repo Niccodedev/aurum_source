@@ -1,7 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+$primary-color: #0d0d0d;
+$title-color: #E8E721;
+$color-fff: #fff;
+$font-main: Helvetica Neue;
+$font-thin: HelveticaNeue Thin;
+$font-gray: #707070;
 $font-gray4: #F3F2F0;
+$font-bold: 700;
+$font-sz-12: 12px;
+$font-gray2: #575652;
+$font-gray3: #E6E5E2;
+$font-gray4: #F3F2F0;
+
 h1 {
     font-family: Muli;
     font-size: 24px;
@@ -119,17 +131,6 @@ td {
 
 /*Specification*/
 
-$primary-color: #0d0d0d;
-$title-color: #E8E721;
-$color-fff: #fff;
-$font-main: Helvetica Neue;
-$font-thin: HelveticaNeue Thin;
-$font-gray: #707070;
-$font-gray4: #F3F2F0;
-$font-bold: 700;
-$font-sz-12: 12px;
-$font-gray2: #575652;
-$font-gray3: #E6E5E2;
 body {
     font-family: $font-main, Helvetica, Arial, sans-serif;
     overflow-x: hidden;

@@ -1,1 +1,7 @@
-@import url("styles.scss");
+:host {
+    .plus__circle {
+        svg {
+            width: 3em;
+        }
+    }
+}

@@ -75,17 +75,17 @@
           <tr>
             <td><p>Attachment</p></td>
             <td> 
-                <button type="button" class="image_button">
+                <div class="image_button">
                     <input type="file" (change)="selectFile($event)" id="image" class="input" required>
                     <i class="fa fa-cloud-upload" aria-hidden="true"></i>
                       Uploaded {{progress.percentage}}%
-                </button>
+                </div>
             </td>
                 
           </tr>
         </table>
           <div class="save__btn">
-            <button type="submit" class="button__item" [disabled]="formForm.invaild  || progress.percentage!=100 ">Save</button>
+            <button type="submit" class="button__item" [disabled]="formForm.invalid  || progress.percentage!=100 ">Save</button>
             <button type="button" class="button__item" (click)="addFormModalRef.close()">Close</button>
            
           </div>

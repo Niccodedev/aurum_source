@@ -1,7 +1,12 @@
-@import url("styles.scss");
 
 /*Specification*/
-
+:host {
+    .plus__circle {
+        svg {
+            width: 3em;
+        }
+    }
+}
 $color-ff : #e61818;
 $color-fff : #fff;
 $primary-color : #0d0d0d;

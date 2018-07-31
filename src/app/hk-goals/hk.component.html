@@ -87,22 +87,22 @@
                     <tr *ngFor="let item of currentItem.data | filterByDate: dateFrom: dateTo">
                         <td scope="row" class="type">{{item.date}}{{date}}(minso={{getMinso(item.date).minso}}, minco = {{getMinso(item.date).minco}})</td>
                         <td>
-                            <input class="td-numb" [(ngModel)]="item.dnd" disabled>
+                            <input class="cell_edit" [(ngModel)]="item.dnd" disabled>
                         </td>
                         <td>
-                            <input class="td-numb" [(ngModel)]="item.so" disabled>
+                            <input class="cell_edit" [(ngModel)]="item.so" disabled>
                         </td>
                         <td>
-                            <input class="td-numb" [(ngModel)]="item.co" disabled>
+                            <input class="cell_edit" [(ngModel)]="item.co" disabled>
                         </td>
                         <td>
-                            <input class="td-numb" [(ngModel)]="item.time" disabled>
+                            <input class="cell_edit" [(ngModel)]="item.time" disabled>
                         </td>
                         <td>
-                            <input class="td-numb" [(ngModel)]="item.threshold" disabled>
+                            <input class="cell_edit" [(ngModel)]="item.threshold" disabled>
                         </td>
                         <td>
-                            <input class="td-numb" [(ngModel)]="item.variance" disabled>
+                            <input class="cell_edit" [(ngModel)]="item.variance" disabled>
                         </td>
                     </tr>
                 </ng-container>
@@ -156,22 +156,22 @@
                         </td>
                         <ng-container id="t-data" *ngFor="let item of inventoryItems.hk[label].data.slice(dateIndex, dateIndex + 8); let i = index">
                             <td>
-                                <input class="td-numb  " [disabled]="selectedDate != i" [(ngModel)]="item.dnd">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.dnd">
                             </td>
                             <td>
-                                <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.so">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.so">
                             </td>
                             <td>
-                                <input class="td-numb  " [disabled]="selectedDate != i" [(ngModel)]="item.co">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.co">
                             </td>
                             <td>
-                                <input class="td-numb  " [disabled]="selectedDate != i" [(ngModel)]="item.time">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.time">
                             </td>
                             <td>
-                                <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.threshold">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.threshold">
                             </td>
                             <td>
-                                <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.variance">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.variance">
                             </td>
                         </ng-container>
                 </ng-container>
@@ -183,22 +183,22 @@
                             </td>
                             <ng-container id="t-data" *ngFor="let item of inventoryItems.hk[label].data.slice(dateIndex, dateIndex + 8); let i = index">
                                 <td>
-                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.dnd">
+                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.dnd">
                                 </td>
                                 <td>
-                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.so">
+                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.so">
                                 </td>
                                 <td>
-                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.co">
+                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.co">
                                 </td>
                                 <td>
-                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.time">
+                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.time">
                                 </td>
                                 <td>
-                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.threshold">
+                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.threshold">
                                 </td>
                                 <td>
-                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.variance">
+                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.variance">
                                 </td>
                             </ng-container>
                         </ng-container>

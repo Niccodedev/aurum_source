@@ -95,7 +95,7 @@
                     <tr>
                         <th scope="col" style="width:10%;">{{keyTitle}}</th>
                         <th scope="col" class="col__items" colspan="2" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
-                            {{date | date:'MM/dd/yyyy'}}
+                            {{date}}
                             <div style="display: inline;"  (click)="selectedDate = i"><i class="far fa-edit"></i></div>
                         </th>
                     </tr>

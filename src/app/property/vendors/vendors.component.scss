@@ -1,5 +1,4 @@
 
-@import url("styles.scss");
 /*Specification*/
 
 $color-ff: #e61818;
@@ -15,6 +14,13 @@ $font-gray5: #76756F;
 $font-bold: 700;
 $font-sz-12: 12px;
 
+:host {
+    .plus__circle {
+        svg {
+            width: 3em;
+        }
+    }
+}
 /*@font-face {
   font-family: HelveticaNeue Thin;
   src: url("../fonts/HelveticaNeue Thin.ttf") format("opentype");
@@ -55,6 +61,7 @@ label {
     // height: calc(100vh - 55px);
     padding:5px;
     overflow-y: auto;
+  
     .main__title h2 {
         font-size: 30px;
         font-weight: 400;
@@ -75,13 +82,14 @@ label {
     }
     .table__block {
         border: 1px solid black;
-        width: 245px;
+        width: auto;
         border-radius: 15px;
         padding: 1% 1% 1% 2%;
         margin-left: 6%;
         margin-top: 2%;
-        margin-bottom: 2%;
+        margin-bottom: 2%;  
         box-shadow: -5px 5px 3px 4px black;
+        
     }
     .text__block__btn {
         text-align: end;
@@ -89,10 +97,12 @@ label {
             font-size: 10px;
             border: 1px solid $color-ff;
             padding: 8px 10px;
+            margin:20px;
             text-align: center;
             border-radius: 6px;
             background-color: $color-ff;
             cursor: pointer;
+           
         }
     }
     .text__block__name {

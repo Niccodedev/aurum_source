@@ -6,7 +6,7 @@
             <div class="table__block" *ngFor="let employee of employees" (click)="setEmployees(employee.id)">
                 <div class="text__block__btn d-flex ">
                     <span><h3>{{employee.data.name}}</h3></span>
-                    <button class="btn__item" style=" margin: 0 0 8% 25%;" (click)="deleteEmployee(employee.id)">Delete</button>
+                    <button class="btn__item" style=" margin-top:9%;" (click)="deleteEmployee(employee.id)">Delete</button>
                 </div>
                 <div class="email__block">
                     <p class="text__block__email">Contact Phone:</p>

@@ -11,5 +11,8 @@
     th input[type="text"]:enabled {
         background-color: #ffffff !important;
     }
+    .edit::disabled{
+        background-color: #ffffff  !important;
+    }
         
 }

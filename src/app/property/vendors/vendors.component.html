@@ -37,24 +37,26 @@
                   <span aria-hidden="true" class="cros">&times;</span>
                </button>
             </div>
-            <div class="user__block">
-                <form action="#" class="user__form  d-flex flex-column" (ngSubmit)="getVendor(f)" #f="ngForm">
-                    <div class="name__block">
-                        <label for="Vendor Name"><p>Vendor Name</p></label>
-                        <input type="text" id="name" [(ngModel)]="name" placeholder="" name="name" class="input_user" required>
-                    </div>
-                    <div class="name__block">
-                        <label for="Contact Name"><p>Contact Person</p></label>
-                        <input type="text" id="person" [(ngModel)]="person" placeholder="" name="person" class="input_user" required>
-                    </div>
-                    <div class="name__block">
-                        <label for="Contact Phone"><p>Contact Phone</p></label>
-                        <input type="text" id="phone" [(ngModel)]="phone" placeholder="" name="phone" class="input_user" required>
-                    </div>
-                    <div class="name__block">
-                        <label for="Email"><p>Email(Optional)</p></label>
-                        <input type="email" id="email" [(ngModel)]="email" placeholder="" name="email" class="input_user" required>
-                    </div>
+            <div>
+                <form action="#"  (ngSubmit)="getVendor(f)" #f="ngForm">
+                    <table>
+                        <tr>
+                            <td> <label for="Vendor Name"><p>Vendor Name</p></label></td>
+                            <td><input type="text" id="name" [(ngModel)]="name" placeholder="" name="name" class="form-control" required></td>
+                        </tr>
+                        <tr >
+                            <td><label for="Contact Name"><p>Contact Person</p></label></td>
+                            <td><input type="text" id="person" [(ngModel)]="person" placeholder="" name="person" class="form-control" required></td>
+                        </tr>
+                        <tr >
+                            <td><label for="Contact Phone"><p>Contact Phone</p></label></td>
+                            <td><input type="text" id="phone" [(ngModel)]="phone" placeholder="" name="phone" class="form-control" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="Email"><p>Email(Optional)</p></label></td>
+                            <td><input type="email" id="email" [(ngModel)]="email" placeholder="" name="email" class="form-control"></td>
+                        </tr>
+                    </table>
                     <button type="submit" class="confirm__user" (click)="addNewVendor(f);" value="submit">Save Vendor</button>
                 </form>
             </div>

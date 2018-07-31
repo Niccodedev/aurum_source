@@ -37,7 +37,7 @@ export class VendorsComponent implements OnInit {
   phone: any;
   email: string;
   hotelId: any;
-
+  addModalRef: any;
   constructor(private router: Router,
               private modalService: NgbModal,
               private afs: AngularFirestore,
@@ -71,6 +71,7 @@ export class VendorsComponent implements OnInit {
     form.value.htId = this.hotelId;
     console.log(form.value);
     this.vendorService.addVendor(form.value);
+    this.addModalRef.close()
     /*this.hotelId = this.afs.collection('vendors').doc(localStorage.hotelId).ref.id;*/
   }
 
@@ -91,8 +92,8 @@ export class VendorsComponent implements OnInit {
 
 /*popup*/
   openNewProperty(contentNewProperty) {
-    
-    this.modalService.open(contentNewProperty).result.then((result) => {
+    this.addModalRef = this.modalService.open(contentNewProperty);
+    this.addModalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

@@ -52,7 +52,8 @@ label {
 .main__block {
     border: 6px ridge #b1d1ff;
     position: relative;
-    height: calc(100vh - 55px);
+    // height: calc(100vh - 55px);
+    padding:5px;
     overflow-y: auto;
     .main__title h2 {
         font-size: 30px;

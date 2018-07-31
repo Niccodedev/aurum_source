@@ -619,12 +619,7 @@ td:focus::before {
     display: inline;
 }
 
-.input_cell input[type="text"]:disabled{
-    background-color:#fff !important;
-}
-.input_cell input[type="text"]:enabled{
-    background-color:gray !important;
-}
+
 
 .datePicker{
     width:175px;

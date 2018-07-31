@@ -125,7 +125,7 @@
         <!--POPUP ADD PROPERTY FORM-->
         <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
             <div class="modal-container" style="width: 800px; background: white;">
-                <form class="main__block" [formGroup]="form" (submit)="saveFormInput()" #f="ngForm">
+                <form class="main__block" [formGroup]="form" name="form" (submit)="saveFormInput()" #f="ngForm">
                     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
                           <span aria-hidden="true" class="cros">&times;</span>
                      </button>

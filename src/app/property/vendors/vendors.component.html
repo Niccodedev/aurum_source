@@ -29,13 +29,13 @@
     </div>
 
     <!--POPUP ADD PROPERTY FORM-->
-    <ng-template #contentNewProperty let-c="close" let-d="dismiss">
-        <div *ngIf="closeModal==0;" class="user__component d-flex flex-column">
+    <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
+         <div class=" main__block user__component d-flex flex-column">
             <div class="user__text">
                 <h1>Add New Vendor</h1>
                 <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-          <span aria-hidden="true" class="cros">&times;</span>
-        </button>
+                  <span aria-hidden="true" class="cros">&times;</span>
+               </button>
             </div>
             <div class="user__block">
                 <form action="#" class="user__form  d-flex flex-column" (ngSubmit)="getVendor(f)" #f="ngForm">
@@ -55,10 +55,11 @@
                         <label for="Email"><p>Email(Optional)</p></label>
                         <input type="email" id="email" [(ngModel)]="email" placeholder="" name="email" class="input_user" required>
                     </div>
-                    <button type="submit" class="confirm__user" (click)="addNewVendor(f);closeModal=1;" value="submit">Save Vendor</button>
+                    <button type="submit" class="confirm__user" (click)="addNewVendor(f);" value="submit">Save Vendor</button>
                 </form>
             </div>
-        </div>
+        </div> 
+       
     </ng-template>
 
 </section>

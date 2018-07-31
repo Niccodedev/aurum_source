@@ -91,6 +91,7 @@ export class VendorsComponent implements OnInit {
 
 /*popup*/
   openNewProperty(contentNewProperty) {
+    
     this.modalService.open(contentNewProperty).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

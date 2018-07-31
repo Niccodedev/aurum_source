@@ -4,4 +4,12 @@
             width: 3em;
         }
     }
+    
+    th input[type="text"]:disabled{
+        background-color: #ffffff  !important;
+    }
+    th input[type="text"]:enabled {
+        background-color: #ffffff !important;
+    }
+        
 }

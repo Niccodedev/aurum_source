@@ -331,6 +331,7 @@ reCeateFormInput(): FormGroup[] {
   return formgrouparray;
 }
  addItemInput(){
+  console.log("hello, you are adding item")
   this.form = this.formBuilder.group({
     date: [this.form.controls.date.value, Validators.required],
     inventories: this.formBuilder.array(this.reCeateFormInput())

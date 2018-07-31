@@ -96,7 +96,7 @@
                     </td>
                     <ng-container *ngFor="let item of inventoryItems[label].data.slice(dateIndex, dateIndex + 8);let i = index">
                         <td>                        
-                            <input class="td-numb" [disabled]="editingColumnNumber != i" [(ngModel)]="item.price" [class.editable]="selectedDate == i"  (change)="showSave=true;">
+                            <input class="cell_edit" type="text" [disabled]="editingColumnNumber != i" [(ngModel)]="item.price" [class.editable]="selectedDate == i"  (change)="showSave=true;">
                         </td>
                     </ng-container>
                    </ng-container>
@@ -108,7 +108,7 @@
                         </td>
                         <ng-container *ngFor="let item of inventoryItems[label].data.slice(dateIndex, dateIndex + 8);let i = index">
                             <td>                        
-                                <input class="td-numb" [disabled]="editingColumnNumber != i" [(ngModel)]="item.price" [class.editable]="selectedDate == i" (change)="showSave=true;">
+                                <input class="cell_edit" type="text" [disabled]="editingColumnNumber != i" [(ngModel)]="item.price" [class.editable]="selectedDate == i" (change)="showSave=true;">
                             </td>
                         </ng-container>
                        </ng-container>

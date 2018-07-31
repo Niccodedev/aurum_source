@@ -122,10 +122,10 @@
 
                         <ng-container *ngFor="let item of inventoryItems[key][label].data.slice(dateIndex, dateIndex + 8); let i = index">
                             <td>
-                                <input class="edit"  disabled="{{selectedDate != i}}" [(ngModel)]="item.have">
+                                <input class="cell_edit"  disabled="{{selectedDate != i}}" [(ngModel)]="item.have">
                             </td>
                             <td>
-                                <input class="edit"  [disabled]="selectedDate != i" [(ngModel)]="item.need">
+                                <input class="cell_edit"  [disabled]="selectedDate != i" [(ngModel)]="item.need">
                             </td>
                         </ng-container>
                     </ng-container> 
@@ -138,10 +138,10 @@
     
                         <ng-container *ngFor="let item of inventoryItems[key][label].data.slice(dateIndex, dateIndex + 8); let i = index">
                             <td>
-                                <input class="edit" [disabled]="selectedDate != i" [(ngModel)]="item.have">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.have">
                             </td>
                             <td>
-                                <input class="edit" [disabled]="selectedDate != i" [(ngModel)]="item.need">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.need">
                             </td>
                         </ng-container>
                     </ng-container>

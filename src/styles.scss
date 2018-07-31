@@ -624,3 +624,10 @@ td:focus::before {
 .datePicker{
     width:175px;
 }
+
+.cell_edit:disabled{
+    background-color: #fff !important;
+}
+.cell_edit:enabled{
+    background-color: #eeeeee!important;
+}

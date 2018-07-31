@@ -122,8 +122,8 @@ export class HKComponent extends HKManager implements OnInit {
       this.addNewDate(date);
       indexOfItem = this.inventoryDates.length - 1;
     }
-    let minco = this.form.value.inventories[0].minco/60;
-    let minso = this.form.value.inventories[0].minso/60;
+    let minco = this.form.value.inventories[0].minco;
+    let minso = this.form.value.inventories[0].minso;
  
     this.form.value.inventories.forEach(item => {           
       this.inventoryItems.hk[item.item].data[indexOfItem].dnd = item.dnd;

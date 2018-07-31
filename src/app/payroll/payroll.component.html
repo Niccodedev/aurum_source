@@ -81,16 +81,16 @@
                     <tr *ngFor="let item of currentItem.data | filterByDate: dateFrom: dateTo">
                         <td scope="row" class="type">{{item.date}}</td>
                         <td>
-                            <input class="td-numb" [(ngModel)]="item.rt" disabled>
+                            <input class="cell_edit" [(ngModel)]="item.rt" disabled>
                         </td>
                         <td>
-                            <input class="td-numb" [(ngModel)]="item.ot" disabled>
+                            <input class="cell_edit" [(ngModel)]="item.ot" disabled>
                         </td>
                         <td>
-                            <input class="td-numb" [(ngModel)]="item.dt" disabled>
+                            <input class="cell_edit" [(ngModel)]="item.dt" disabled>
                         </td>
                         <td>
-                            <input class="td-numb" [(ngModel)]="item.mt" disabled>
+                            <input class="cell_edit" [(ngModel)]="item.mt" disabled>
                         </td>
                     </tr>
                 </ng-container>
@@ -156,16 +156,16 @@
                         </td>
                         <ng-container id="t-data" *ngFor="let item of inventoryItems.payroll[label].data.slice(dateIndex, dateIndex + 8); let i = index">
                             <td>
-                                <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.rt">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.rt">
                             </td>
                             <td>
-                                <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.ot">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.ot">
                             </td>
                             <td>
-                                <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.dt">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.dt">
                             </td>
                             <td>
-                                <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.mt">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.mt">
                             </td>
                         </ng-container>
                     </ng-container>
@@ -177,16 +177,16 @@
                             </td>
                             <ng-container id="t-data" *ngFor="let item of inventoryItems.payroll[label].data.slice(dateIndex, dateIndex + 8); let i = index">
                                 <td>
-                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.rt">
+                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.rt">
                                 </td>
                                 <td>
-                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.ot">
+                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.ot">
                                 </td>
                                 <td>
-                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.dt">
+                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.dt">
                                 </td>
                                 <td>
-                                    <input class="td-numb" [disabled]="selectedDate != i" [(ngModel)]="item.mt">
+                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.mt">
                                 </td>
                             </ng-container>
                         </ng-container>
@@ -216,7 +216,7 @@
                                 </div>
                                 <div class="select__date d-flex justify-content-center align-items-center">
                                     <div>Select Date:</div>
-                                    <input type="date"  (change)="dateChangeOnAdd()" class="search__date__item" formControlName="date" required placeholder="">
+                                    <input type="date"  (change)="dateChangeOnAdd()" style="width:170px;"  class="search__date__item" formControlName="date" required placeholder="">
                                 </div>
                                 <!-- <button type="button" class="close" aria-label="Close">
                   <span aria-hidden="true" class="cros">&times;</span>

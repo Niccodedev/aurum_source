@@ -137,8 +137,9 @@ export class TransactionsDateComponent implements OnInit {
     }
 
     this.form.value.inventories.forEach(item => {
-      this.inventoryItems[item.item]['data'][indexOfItem].price = item.price;
-      
+      if(item.item!='') {
+       this.inventoryItems[item.item]['data'][indexOfItem].price = item.price;
+      }     
     });
     
     this.inventoryDates.sort((a, b) => +new Date(b) - +new Date(a));

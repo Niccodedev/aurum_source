@@ -160,8 +160,8 @@
             <div class="modal-container" style="width: 800px; background: white;">
                 <form class="main__block" [formGroup]="form" (submit)="saveFormInput()" #f="ngForm">
                     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true" class="cros">&times;</span>
-          </button>
+                        <span aria-hidden="true" class="cros">&times;</span>
+                    </button>
                     <div class="user__component d-flex flex-column">
                         <div class="user__block">
                             <div class="user__block__header d-flex justify-content-between align-items-center">
@@ -176,7 +176,7 @@
                             <hr>
                               
                                 <form formArrayName="inventories" *ngFor="let item of form.get('inventories').controls; let i=index" class="user__array_form">
-                                    <table>
+                                    <table  class="table  table-hover table-responsive m-auto">
                                         <tr *ngIf="i==0">
                                             <td style="background-color: #F3F2F0;">
                                                     <p class="td-numb">{{keyTitle}}</p>

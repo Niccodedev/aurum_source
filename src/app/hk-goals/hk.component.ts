@@ -132,12 +132,13 @@ export class HKComponent extends HKManager implements OnInit {
       this.inventoryItems.hk[item.item].data[indexOfItem].time = item.time;
       this.inventoryItems.hk[item.item].data[indexOfItem].minso = minso;
       this.inventoryItems.hk[item.item].data[indexOfItem].minco = minco;
-      this.inventoryItems.hk[item.item].data[indexOfItem].threshold =
-        // item.minso * item.so + item.minco * item.co - item.minso * item.dnd;
-       minso*item.so + minco*item.minco - minso*item.dnd;
-      this.inventoryItems.hk[item.item].data[indexOfItem].variance =
+      // this.inventoryItems.hk[item.item].data[indexOfItem].threshold =
+      //   // item.minso * item.so + item.minco * item.co - item.minso * item.dnd;
+      //   // Threshold = (Min/SO goal x S/O) + (Min/co x C/O)
+      //  minso*item.so + minco*item.minco - minso*item.dnd;
+      this.inventoryItems.hk[item.item].data[indexOfItem].threshold =minso*item.so+  minco*item.co;
         // item.threshold - item.time;
-        this.inventoryItems.hk[item.item].data[indexOfItem].threshold - item.time;
+      this.inventoryItems.hk[item.item].data[indexOfItem].variance = this.inventoryItems.hk[item.item].data[indexOfItem].threshold - item.time;
     });
 
     this.inventoryDates.sort((a, b) => +new Date(b) - +new Date(a));

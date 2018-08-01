@@ -71,7 +71,8 @@
                     </tr>
                 </thead>
                 <ng-container *ngIf="currentItem">
-                    <tr *ngFor="let item of currentItem.data | filterByDate: dateFrom: dateTo">
+                    <!-- <tr *ngFor="let item of currentItem.data | filterByDate: dateFrom: dateTo"> -->
+                    <tr *ngFor="let item of currentItem.data">
                         <td scope="row" class="type">{{item.date}}</td>
                         <td>
                             <input class="td-numb" [(ngModel)]="item.have" disabled>

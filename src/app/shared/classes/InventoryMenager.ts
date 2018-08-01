@@ -95,8 +95,8 @@ export class InventoryManeger {
       
   }
 
-  dateChangeOnAdd(){  
-    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'MM-dd-yyyy'): this.datePipe.transform(new Date(), 'MM-dd-yyyy');
+  dateChangeOnAdd(){    
+    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd') : this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     let indexOfItem = this.checkIfDateExist(date);   
     if(indexOfItem>-1  && this.currentUser.role=='manager'){
       this.dateExists = true;

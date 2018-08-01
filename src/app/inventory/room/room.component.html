@@ -43,7 +43,7 @@
                 <div class="date-range__item d-flex justify-content-center align-items-center">
                     <input type="date" class="search__date__item" [(ngModel)]="dateFrom" [disabled]="!nameOfItem" [hidden]="!byType">
                     <p class="date-range__title" [hidden]="!byType" style=" margin-bottom:6em">Date Range</p>
-                    <input type="date" class="search__date__item" [(ngModel)]="dateTo" [disabled]="!dateFrom" [hidden]="!byType">
+                    <input type="date" class="search__date__item" [(ngModel)]="dateTo" [disabled]="!nameOfItem" [hidden]="!byType">
                 </div>
             </div>
         </div>
@@ -71,8 +71,7 @@
                     </tr>
                 </thead>
                 <ng-container *ngIf="currentItem">
-                    <!-- <tr *ngFor="let item of currentItem.data | filterByDate: dateFrom: dateTo"> -->
-                    <tr *ngFor="let item of currentItem.data">
+                    <tr *ngFor="let item of currentItem.data | filterByDate: dateFrom: dateTo">                   
                         <td scope="row" class="type">{{item.date}}</td>
                         <td>
                             <input class="td-numb" [(ngModel)]="item.have" disabled>

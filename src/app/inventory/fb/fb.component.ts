@@ -86,7 +86,7 @@ export class FbComponent extends InventoryManeger implements OnInit {
         this.addNewItem(item.item);
     });
 
-    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'MM-dd-yyyy'): this.datePipe.transform(new Date(), 'MM-dd-yyyy');
+    let date = this.form.value.date ? this.datePipe.transform(this.form.value.date, 'yyyy-MM-dd') : this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     let indexOfItem = this.checkIfDateExist(date);
 
     if (indexOfItem == -1) {

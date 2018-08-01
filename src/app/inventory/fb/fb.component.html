@@ -122,7 +122,7 @@
 
                         <ng-container *ngFor="let item of inventoryItems[key][label].data.slice(dateIndex, dateIndex + 8); let i = index">
                             <td>
-                                <input class="cell_edit " [disabled]="selectedDate != i" [(ngModel)]="item.have">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.have">
                             </td>
                             <td>
                                 <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.need">
@@ -138,7 +138,7 @@
     
                         <ng-container *ngFor="let item of inventoryItems[key][label].data.slice(dateIndex, dateIndex + 8); let i = index">
                             <td>
-                                <input class="cell_edit " [disabled]="selectedDate != i" [(ngModel)]="item.have">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.have">
                             </td>
                             <td>
                                 <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.need">
@@ -189,7 +189,7 @@
                                             </td>                                                 
                                         </tr>
                                         <tr [formGroupName]="i">
-                                          <td><input type="text" formControlName="item" id="item" name="item" placeholder="Item" class="input" style="text-transform: lowercase;" oninput="this.value = this.value.toLowerCase()"></td>  
+                                          <td><input type="text" formControlName="item" id="item" name="item" placeholder="Item" class="input"></td>  
                                             <td><input type="text" formControlName="have" id="have" name="have" placeholder="Have" class="input"></td>
                                             <td><input type="text" formControlName="need" id="need" name="need" placeholder="Need" class="input"></td>
                                         </tr>

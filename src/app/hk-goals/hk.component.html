@@ -99,10 +99,11 @@
                             <input class="cell_edit" [(ngModel)]="item.time" disabled>
                         </td>
                         <td>
-                            <input class="cell_edit" [(ngModel)]="item.threshold" disabled>
+                            <input class="cell_edit" disabled value="{{getMinso(item.date).minso * item.so + getMinso(item.date).minco * item.co }}">
+                            <!-- minso*item.so+  minco*item.co; -->
                         </td>
                         <td>
-                            <input class="cell_edit" [(ngModel)]="item.variance" disabled>
+                            <input class="cell_edit" disabled value="{{getMinso(item.date).minso * item.so + getMinso(item.date).minco * item.co -item.time }}">
                         </td>
                     </tr>
                 </ng-container>
@@ -168,10 +169,10 @@
                                 <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.time">
                             </td>
                             <td>
-                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.threshold">
+                                <input class="cell_edit" disabled="selectedDate != i" value="{{getMinso(item.date).minso * item.so + getMinso(item.date).minco * item.co}}">
                             </td>
                             <td>
-                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.variance">
+                                <input class="cell_edit" disabled value="{{getMinso(item.date).minso * item.so + getMinso(item.date).minco * item.co -item.time}}">
                             </td>
                         </ng-container>
                 </ng-container>
@@ -195,10 +196,10 @@
                                     <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.time">
                                 </td>
                                 <td>
-                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.threshold">
+                                    <input class="cell_edit" disabled value="{{getMinso(item.date).minso * item.so + getMinso(item.date).minco * item.co}}">
                                 </td>
                                 <td>
-                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.variance">
+                                    <input class="cell_edit" disabled value="{{getMinso(item.date).minso * item.so + getMinso(item.date).minco * item.co -item.time}}">
                                 </td>
                             </ng-container>
                         </ng-container>

@@ -136,9 +136,9 @@ export class HKComponent extends HKManager implements OnInit {
       //   // item.minso * item.so + item.minco * item.co - item.minso * item.dnd;
       //   // Threshold = (Min/SO goal x S/O) + (Min/co x C/O)
       //  minso*item.so + minco*item.minco - minso*item.dnd;
-      this.inventoryItems.hk[item.item].data[indexOfItem].threshold =minso*item.so+  minco*item.co;
-        // item.threshold - item.time;
-      this.inventoryItems.hk[item.item].data[indexOfItem].variance = this.inventoryItems.hk[item.item].data[indexOfItem].threshold - item.time;
+      // this.inventoryItems.hk[item.item].data[indexOfItem].threshold =minso*item.so+  minco*item.co;
+      //   // item.threshold - item.time;
+      // this.inventoryItems.hk[item.item].data[indexOfItem].variance = this.inventoryItems.hk[item.item].data[indexOfItem].threshold - item.time;
     });
 
     this.inventoryDates.sort((a, b) => +new Date(b) - +new Date(a));
@@ -165,9 +165,7 @@ export class HKComponent extends HKManager implements OnInit {
         co: "",
         minso: "",
         minco: "",
-        time: "",
-        threshold: "",
-        variance: ""
+        time: "",       
       });
     });
   }
@@ -184,9 +182,7 @@ export class HKComponent extends HKManager implements OnInit {
         so: "",
         co: "",
         minso: "",
-        minco: "",
-        threshold: "",
-        variance: ""
+        minco: "",       
       });
     }
   }

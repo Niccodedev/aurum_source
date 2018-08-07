@@ -116,6 +116,11 @@
             <a href="#" class="select__item" *ngIf="isAdmin" routerLink="/rate-page">Rate Page</a>
         </div>
         <div class="flex__item">
+
+                <i class="fa fa-calendar"></i>
+                <a routerLink="/calendar" class="select__item">Calendar</a>
+            </div>
+        <div class="flex__item">
             <i class="fas fa-sign-out-alt"></i>
             <a (click)="onLogout()" class="select__item" style="color:#b1d1ff">Logout</a>
         </div>

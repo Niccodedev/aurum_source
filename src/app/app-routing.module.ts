@@ -26,7 +26,7 @@ import {FormsComponent} from "./upload/forms/forms.component";
 import {NewSuperAdmitPageComponent} from './new-super-admit-page/new-super-admit-page.component';
 import {RatePageComponent} from './rate-page/rate-page.component';
 import { HKComponent } from './hk-goals/hk.component';
-
+import { CalendarComponent } from './calendar/calendar.component';
 
 const appRoutes: Routes = [
   { path: '',  redirectTo: '/login', pathMatch: 'full' },
@@ -51,6 +51,7 @@ const appRoutes: Routes = [
   { path: 'forms', component: FormsComponent, canActivate: [AutGuard]},
   { path: 'super-admin', component: NewSuperAdmitPageComponent, canActivate: [AutGuard] },
   { path: 'rate-page', component: RatePageComponent, canActivate: [AutGuard] },
+  { path: 'calendar', component: CalendarComponent, canActivate: [AutGuard] },
   ];
 
 @NgModule({

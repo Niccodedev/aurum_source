@@ -60,6 +60,7 @@ import { BillsMiscComponent } from './upload/bills-misc/bills-misc.component';
 import { FormsComponent } from './upload/forms/forms.component';
 import {AuthService} from './auth/auth.service';
 import {AppRoutingModule} from './app-routing.module';
+import { CalendarComponent } from './calendar/calendar.component';
 import {DataStorageService} from './shared/services/data-storage.service';
 import {UploadFileService} from './shared/services/upload-file.service';
 import { HotelsComponent } from './hotels/hotels.component';
@@ -119,6 +120,7 @@ import { SafePipe } from './shared/pipes/SafePipe';
     ActivityComponent,
     PayrollComponent,
     HKComponent,
+    CalendarComponent,
     VendorsComponent,
     CredentialsComponent,
     EmployeeComponent,

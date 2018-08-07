@@ -1,0 +1,158 @@
+<app-header></app-header>
+<section id="main">
+        <div class="main__block">
+            <div align="center">
+                <button class="btn btn-primary" (click)="onPrev()">Prev</button>
+                {{monthes[month]}}, {{year}}
+                <button class="btn btn-primary" (click)="onNext()">Next</button>
+            </div>
+            <table>
+                <thead>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thr</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </thead>
+                <tr *ngFor="let item of createRange(6); let _week=index">
+                        <td *ngFor="let _item of createRange(7); let _day=index">
+                               
+                                        <div *ngIf="!thisMonthDay(_week*7 + _day)">
+                                            <div class="inactive_date"><b>{{getExcatDate(startDate + _week*7 + _day)}}</b></div>                                
+                                        </div>
+                                        <div *ngIf="thisMonthDay(_week*7 + _day)">
+                                            
+                                            <div>
+                                                <b>{{getExcatDate(startDate + _week*7 + _day)}}</b>
+                                                
+                                            </div>
+                                            <span class="pull-right" (click)="createNewSchedule(getExcatDate(startDate + _week*7 + _day))"><i class="fas fa-calendar" aria-hidden="true" style="width:25px; color:black;"></i></span>                                
+                                            <span class="pull-right" (click)="createNewSchedule(getExcatDate(startDate + _week*7 + _day))"><i class="fas fa-plus" style="width:25px; color:black;"></i></span>                                
+                                            <span class="pull-right" (click)="createNewSchedule(getExcatDate(startDate + _week*7 + _day))"><i class="fas fa-eye" style="width:25px; color:black;"></i></span>                               
+                                        </div>
+                                            
+                                        
+                                
+                        </td>
+                </tr>
+                <!-- <tr>
+                    <td>
+                        <div *ngIf="getExcatDate(startDate)>7">
+                            <div class="inactive_date"><b>{{getExcatDate(startDate)}}</b></div>                                
+                        </div>
+                        <div *ngIf="getExcatDate(startDate)<8">
+                            <div><b>{{getExcatDate(startDate)}}</b></div>                                
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="getExcatDate(startDate+1)>7">
+                            <div class="inactive_date"><b>{{getExcatDate(startDate+1)}}</b></div>                                
+                        </div>
+                        <div *ngIf="getExcatDate(startDate+1)<8">
+                            <div><b>{{getExcatDate(startDate+1)}}</b></div>                                
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="getExcatDate(startDate+2)>7">
+                            <div class="inactive_date"><b>{{getExcatDate(startDate+2)}}</b></div>                                
+                        </div>
+                        <div *ngIf="getExcatDate(startDate+2)<8">
+                            <div><b>{{getExcatDate(startDate+2)}}</b></div>                                
+                        </div>
+                    </td>                   
+                    <td>
+                        <div *ngIf="getExcatDate(startDate+3)>7">
+                            <div class="inactive_date"><b>{{getExcatDate(startDate+3)}}</b></div>                                
+                        </div>
+                        <div *ngIf="getExcatDate(startDate+3)<8">
+                            <div><b>{{getExcatDate(startDate+3)}}</b></div>                                
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="getExcatDate(startDate+4)>7">
+                            <div class="inactive_date"><b>{{getExcatDate(startDate+4)}}</b></div>                                
+                        </div>
+                        <div *ngIf="getExcatDate(startDate+4)<8">
+                            <div><b>{{getExcatDate(startDate+4)}}</b></div>                                
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="getExcatDate(startDate+5)>7">
+                            <div class="inactive_date"><b>{{getExcatDate(startDate+5)}}</b></div>                                
+                        </div>
+                        <div *ngIf="getExcatDate(startDate+5)<8">
+                            <div><b>{{getExcatDate(startDate+5)}}</b></div>                                
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="getExcatDate(startDate+6)>7">
+                            <div class="inactive_date"><b>{{getExcatDate(startDate+6)}}</b></div>                                
+                        </div>
+                        <div *ngIf="getExcatDate(startDate+6)<8">
+                            <div><b>{{getExcatDate(startDate+6  )}}</b></div>                                
+                        </div>
+                    </td>
+            
+                </tr>
+                <tr> 
+                    <td>{{startDate+7}}</td>                     
+                    <td>{{startDate+8}}</td>
+                    <td>{{startDate+9}}</td>
+                    <td>{{startDate+10}}</td>
+                    <td>{{startDate+11}}</td>
+                    <td>{{startDate+12}}</td>
+                    <td>{{startDate+13}}</td>
+                    
+                </tr>
+                <tr>
+                    <td>{{startDate+14}}</td>
+                    <td>{{startDate+15}}</td>
+                    <td>{{startDate+16}}</td>
+                    <td>{{startDate+17}}</td>
+                    <td>{{startDate+18}}</td>
+                    <td>{{startDate+19}}</td>
+                    <td>{{startDate+20}}</td>
+                    
+                </tr>
+                <tr>
+                    <td>{{startDate+21}}</td>
+                    <td>{{startDate+22}}</td>
+                    <td>{{startDate+23}}</td>
+                    <td>{{startDate+24}}</td>
+                    <td>{{startDate+25}}</td>
+                    <td>{{startDate+26}}</td>
+                    <td>{{startDate+27}}</td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <div *ngIf="getExcatDate(startDate+28)<15">
+                            <div class="inactive_date"><b>{{getExcatDate(startDate+28)}}</b></div>                                
+                        </div>
+                        <div *ngIf="getExcatDate(startDate+28)>15">
+                            <div><b>{{getExcatDate(startDate+28  )}}</b></div>                                
+                        </div>
+                    </td>
+                    
+                    <td>{{getExcatDate(startDate+29)}}</td>
+                    <td>{{getExcatDate(startDate+30)}}</td>
+                    <td>{{getExcatDate(startDate+31)}}</td>
+                    <td>{{getExcatDate(startDate+32)}}</td>
+                    <td>{{getExcatDate(startDate+33)}}</td>
+                    <td>{{getExcatDate(startDate+34)}}</td>                    
+                </tr>
+                <tr>
+                    <td>{{getExcatDate(startDate+35)}}</td>
+                    <td>{{getExcatDate(startDate+36)}}</td>
+                    <td>{{getExcatDate(startDate+37)}}</td>
+                    <td>{{getExcatDate(startDate+38)}}</td>
+                    <td>{{getExcatDate(startDate+39)}}</td>
+                    <td>{{getExcatDate(startDate+40)}}</td>
+                    <td>{{getExcatDate(startDate+41)}}</td>                    
+                </tr> -->
+            
+            </table>
+        </div>
+</section>

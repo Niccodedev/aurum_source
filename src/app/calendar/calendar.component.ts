@@ -25,7 +25,7 @@ import { Hotel } from "../hotels/interfaces/hotel";
 import { DataProcessingService } from "../shared/services/data-processing.service";
 import { DataStorageService } from "../shared/services/data-storage.service";
 import { AuthService } from "../auth/auth.service";
-import { InventoryService } from "../inventory/services/inventory.service";
+import { CalendarService } from "./services/calendar.service";
 import { HelperService } from "../shared/services/helper.service";
 import { HKManager } from "../shared/classes/HKManager";
 
@@ -43,8 +43,9 @@ export class CalendarComponent implements OnInit {
     public formBuilder: FormBuilder,
     public dataProcessingService: DataProcessingService,
     public dataStorageService: DataStorageService,
-    // public inventoryService: InventoryService,
+    public calendarService: CalendarService,
     public datePipe: DatePipe
+
   ) {
     // super(
     //   modalService,
@@ -60,13 +61,21 @@ export class CalendarComponent implements OnInit {
   year:number;
   startDate:number;
   monthes=["", "January", "February", "March", "April", "May", "June", "July", "August","September","Octover", "November", "December"]
+  scheduleModalRef:any;
+  schedules:any;
   ngOnInit() {
       let today = new Date();
       this.day = today.getDate();
       this.month = today.getMonth()+1;
       this.year = today.getFullYear();
-     this.getStartDate();
-      
+      this.getStartDate();
+      this.calendarService.getSchedules(1,1)
+      .subscribe( res =>{
+          this.schedules = res;
+          alert(JSON.stringify(this.schedules))
+      });
+      alert(JSON.stringify(this.schedules)) 
+      console.log(this.schedules)
   }
   getDaysInMonth = (year, month) => {   
    return new Date(year, month, 0).getDate();  
@@ -121,5 +130,13 @@ export class CalendarComponent implements OnInit {
       }
       createNewSchedule = (day) =>{
           alert(day)
+      }
+      openSchedulModal = (modal) =>{
+        this.scheduleModalRef = this.modalService.open(modal);
+        // this.scheduleModalRef.result.then((result) => {
+        //     this.closeResult = `Closed with: ${result}`;
+        //   }, (reason) => {
+        //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        //   });
       }
 }

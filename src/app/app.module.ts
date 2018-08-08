@@ -78,6 +78,7 @@ import { InventoryHeaderComponent } from './inventory/inventory-header/inventory
 import {ChangePropertyComponent} from './change-property/change-property.component';
 import { ActivityChatComponent } from './activity/activity-chat/activity-chat.component';
 import {InventoryService} from "./inventory/services/inventory.service";
+import { CalendarService } from './calendar/services/calendar.service';
 import {ActivityChatService} from "./activity/activity-chat/service/activity-chat.service";
 import {CredentialsService} from "./property/services/credentials.service";
 import {EmployeesService} from "./property/services/employees.service";
@@ -94,6 +95,7 @@ import { FilterByDatePipe } from './shared/pipes/filter-by-date.pipe';
 import {NgxAutoScroll} from 'ngx-auto-scroll';
 import { ItemsManagerComponent } from './shared/classes/items-manager/items-manager.component';
 import { HKComponent } from './hk-goals/hk.component';
+
 import { HKService } from './hk-goals/services/hk.service';
 import { SafePipe } from './shared/pipes/SafePipe';
 
@@ -197,6 +199,7 @@ import { SafePipe } from './shared/pipes/SafePipe';
     TransactionService,
     HomeService,
     InventoryService,
+    CalendarService,
     ActivityChatService,
     CredentialsService,
     EmployeesService,

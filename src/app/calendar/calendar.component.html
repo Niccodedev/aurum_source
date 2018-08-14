@@ -1,50 +1,89 @@
 <app-header></app-header>
 <section id="main">
-        <div class="main__block">
-            <div align="center">
-                <button class="btn btn-primary" (click)="onPrev()">Prev</button>
-                {{monthes[month]}}, {{year}}
-                <button class="btn btn-primary" (click)="onNext()">Next</button>
-            </div>
-            <table>
-                <thead>
-                    <th>Sun</th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thr</th>
-                    <th>Fri</th>
-                    <th>Sat</th>
-                </thead>
-                <tr *ngFor="let item of createRange(6); let _week=index">
-                    <td *ngFor="let _item of createRange(7); let _day=index">                            
-                        <div *ngIf="!thisMonthDay(_week*7 + _day)">
-                            <div class="inactive_date"><b>{{getExcatDate(startDate + _week*7 + _day)}}</b></div>                                
-                        </div>
-                        <div *ngIf="thisMonthDay(_week*7 + _day)">
-                            
-                            <div (click)="openSchedulModal(scheduleContentModal)">
-                                <b>{{getExcatDate(startDate + _week*7 + _day)}}</b>
-                                
+    <div class="row">
+        <div class="col-md-8">
+            <div class="main__block">
+                <div align="center">
+                    <button class="btn btn-primary" (click)="onPrev()">Prev</button>
+                    {{monthes[month]}}, {{year}}
+                    <button class="btn btn-primary" (click)="onNext()">Next</button>
+                </div>
+                <table>
+                    <thead>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thr</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </thead>
+                    <tr *ngFor="let item of createRange(6); let _week=index">
+                        <td *ngFor="let _item of createRange(7); let _day=index">                            
+                            <div *ngIf="!thisMonthDay(_week*7 + _day)">
+                                <div class="inactive_date"><b>{{getExcatDate(startDate + _week*7 + _day)}}</b></div>                                
                             </div>
-                            <!-- <span class="pull-right" (click)="createNewSchedule(getExcatDate(startDate + _week*7 + _day))"><i class="fas fa-calendar calendar_icon" ></i>&nbsp;</span>                                
-                            <span class="pull-right" (click)="createNewSchedule(getExcatDate(startDate + _week*7 + _day))"><i class="fa fa-plus-circle calendar_icon"></i>&nbsp; </span>                                                                            -->
-                        </div>                                 
-                     </td>
-                </tr>               
-            </table>
-
+                            <div *ngIf="thisMonthDay(_week*7 + _day)">                                
+                                <div (click)="showSchedule(startDate + _week*7 + _day)">
+                                    <b>{{getExcatDate(startDate + _week*7 + _day)}}</b>
+                                    
+                                </div>
+                                <!-- <span class="pull-right" (click)="createNewSchedule(getExcatDate(startDate + _week*7 + _day))"><i class="fas fa-calendar calendar_icon" ></i>&nbsp;</span>                                
+                                <span class="pull-right" (click)="createNewSchedule(getExcatDate(startDate + _week*7 + _day))"><i class="fa fa-plus-circle calendar_icon"></i>&nbsp; </span>                                                                            -->
+                            </div>                                 
+                        </td>
+                    </tr>               
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
             <!-- //////////////  Popup Modal -->
-            <ng-template #scheduleContentModal let-c="close" let-d="dismiss" class="modal-lg">
+            <div class="main__block">
                     <div class=" main__block user__component d-flex flex-column">
                         <div class="user__text">                                
-                            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                               <span aria-hidden="true" class="cros">&times;</span>
-                            </button>
+                            
                             <h1>Schedule Information</h1>
-                        </div>
-                        
+                        </div>                        
+                    
+                        <table>
+                            <thead>
+                                <td>Time</td>
+                                <td>content</td>
+                                <td></td>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let schedule of selectedDaySchedules; let i=index;">
+                                    <td>{{schedule.time}}</td>
+                                    <td>{{schedule.content}}</td>
+                                    <td><button type="button" (click)="deleteSchedule(i)">Delete</button></td>
+                                </tr>
+                            </tbody>
+                            <button type="button" (click)="openSchedulModal(newScheduleModal)">Add new schedule</button>  
+                        </table>
                     </div>
-                </ng-template>
+            </div>
         </div>
+    </div>
+    <ng-template #newScheduleModal let-c="close" let-d="dismiss" class="modal-lg">
+            <div class="modal-container" style="width: 800px; background: white;">
+                <form class="main__block" [formGroup]="form" (submit)="saveNewSchedule()">
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true" class="cros">&times;</span>
+                    </button>
+                    <div class="user__component d-flex flex-column">
+                        <div class="user__block">
+                            <div class="user__block__header d-flex justify-content-between align-items-center">
+                                <div class="user__text">
+                                    <p>Create new schedule</p>
+                                </div>
+                                Time: <input type="time" formControlName = "time" id="time" required>
+                                Content: <input type="text" formControlName="content" id="content">
+
+                            </div>
+                            <button>Save</button>
+                        </div>                                                               
+                    </div>
+                </form>
+            </div>
+        </ng-template>
 </section>

@@ -62,8 +62,8 @@ export class CalendarComponent implements OnInit {
   monthes=["", "January", "February", "March", "April", "May", "June", "July", "August","September","Octover", "November", "December"]
   scheduleModalRef:any;
   monthSchedules:object;
-  selectedDaySchedules:object[];
-  selectedDay:number;
+  daySchedules:object[];
+  
   form:FormGroup;
   manager:any;
   content:string;
@@ -74,20 +74,7 @@ export class CalendarComponent implements OnInit {
       this.month = today.getMonth()+1;
       this.year = today.getFullYear();
       this.getStartDate();      
-      this.calendarService.getSchedules(localStorage.hotelId,this.year,this.month)
-      .subscribe( res =>{
-          this.monthSchedules = res;
-          this.selectedDay = this.day;
-          if(this.monthSchedules==null){
-              this.monthSchedules = {}
-          }
-          if(this.monthSchedules.hasOwnProperty(this.selectedDay))
-            this.selectedDaySchedules = this.monthSchedules[this.selectedDay]   
-          else
-            this.selectedDaySchedules = [];
-
-                 
-      });    
+      this.getMonthSchedule()
      
   }
   getDaysInMonth = (year, month) => {   
@@ -99,23 +86,45 @@ export class CalendarComponent implements OnInit {
        if(day>days) return day-days;
        return day
    }
+
+   getMonthSchedule = ()=> {
+    this.calendarService.getSchedules(localStorage.hotelId,this.year,this.month)
+    .subscribe( res =>{
+        this.monthSchedules = res;       
+        if(this.monthSchedules==null){
+            this.monthSchedules = {}
+        }
+        if(this.monthSchedules.hasOwnProperty(this.day))
+          this.daySchedules = this.monthSchedules[this.day]   
+        else
+          this.daySchedules = [];
+
+               
+    });   
+   }
+
    onPrev = ()=>{       
-       this.month = this.month-1
-       if(this.month==0) {
+        this.month = this.month-1
+        if(this.month==0) {
             this.month=12;
             this.year = this.year-1;
         }
-      this.getStartDate();
-
+        
+        this.getStartDate();
+        this.getMonthSchedule()
+        this.day = 1;
    }
 
    onNext = ()=>{       
     this.month = this.month+1
     if(this.month==13) {
-         this.month=1;
-         this.year = this.year+1;
-     }
-     this.getStartDate();
+        this.month=1;
+        this.year = this.year+1;
+    }
+    
+    this.getStartDate();
+    this.getMonthSchedule();
+    this.day = 1;
     }
     
     getStartDate  = ()=> {
@@ -156,26 +165,26 @@ export class CalendarComponent implements OnInit {
       }
 
     showSchedule(day){      
-        this.selectedDay = day;
+        this.day = day;
         if (this.monthSchedules.hasOwnProperty(day))
-            this.selectedDaySchedules = this.monthSchedules[day]
+            this.daySchedules = this.monthSchedules[day]
         else
-            this.selectedDaySchedules = []
+            this.daySchedules = []
     }
 
     saveNewSchedule(){
-        this.selectedDaySchedules.push({
+        this.daySchedules.push({
             name:this.manager.name,
             content:this.form.value.content
         })
         
-        this.monthSchedules[this.selectedDay] = this.selectedDaySchedules;
+        this.monthSchedules[this.day] = this.daySchedules;
         this.calendarService.saveSchedules(localStorage.hotelId, this.year, this.month, this.monthSchedules )
         .then(response =>{
             this.scheduleModalRef.close()
             alert("New schedule was created succefully.")
         }).catch( error=>{
-            this.selectedDaySchedules = this.selectedDaySchedules.slice(0,-1);
+            this.daySchedules = this.daySchedules.slice(0,-1);
             alert(error)
             this.scheduleModalRef.close()
             
@@ -185,15 +194,15 @@ export class CalendarComponent implements OnInit {
     }
 
     deleteSchedule(index){      
-        this.selectedDaySchedules.splice(index,1);  
-        this.monthSchedules[this.selectedDay] = this.selectedDaySchedules;
+        this.daySchedules.splice(index,1);  
+        this.monthSchedules[this.day] = this.daySchedules;
         this.calendarService.saveSchedules(localStorage.hotelId, this.year, this.month, this.monthSchedules )
         .then(response =>{
             this.scheduleModalRef.close()
             alert("The schedule was deleted succefully.")
 
         }).catch( error=>{
-            this.selectedDaySchedules = this.selectedDaySchedules.slice(0,-1);
+            this.daySchedules = this.daySchedules.slice(0,-1);
             alert(error)
             this.scheduleModalRef.close()
             
@@ -203,7 +212,7 @@ export class CalendarComponent implements OnInit {
     canDelete = (time) =>{
         let today = new Date();
        
-        if(this.year*400+this.month*32+this.selectedDay < today.getFullYear()*400 + (today.getMonth()+1)*32 + today.getDate()){
+        if(this.year*400+this.month*32+this.day < today.getFullYear()*400 + (today.getMonth()+1)*32 + today.getDate()){
            return false;
         }
         return true;
@@ -211,7 +220,7 @@ export class CalendarComponent implements OnInit {
 
     canCreate = () => {
         let today = new Date();
-        if(this.year*400+this.month*32+this.selectedDay < today.getFullYear()*400 + (today.getMonth()+1)*32 + today.getDate()){
+        if(this.year*400+this.month*32+this.day < today.getFullYear()*400 + (today.getMonth()+1)*32 + today.getDate()){
             return false;
         }
         return true;

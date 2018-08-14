@@ -13,9 +13,36 @@
     }
     .name{
         color: #3ed319;
+        display: inline;
     }
     .content{
-        color:#ee08ee
+        color:#ee08ee;
+        display: inline;
     }
 
+    .calendar-header{
+        width:  150px !important;  
+    }
+    .calendar-cell {
+        background-color:#b1d1ff !important;        
+        padding-right:5px;
+        padding-left: 5px;        
+        height: 150px !important;
+        width: 150px;
+        overflow: hidden;
+        // display: inline-block;
+        white-space: nowrap;
+            
+    }
+    .schedule-header{
+        background-color:#b1d1ff !important;
+        align-content: center;
+    }
+    .schedule-cell{
+        background-color:#dee2e6 !important;
+        
+    }
+    .schedule-button{
+        background-color:#b1d1ff !important;
+    }
 }

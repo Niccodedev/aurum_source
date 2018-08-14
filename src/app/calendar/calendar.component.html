@@ -1,32 +1,33 @@
 <app-header></app-header>
 <section id="main">
+    <div class="main__block">
     <div class="row">
-        <div class="col-md-8">
-            <div class="main__block">
+        <div class="col-md-8" style="margin:0px;">
+            <div>
                 <div align="center" style="margin:30px;">
-                    <button class="btn btn-primary" (click)="onPrev()">Prev</button>
-                    <button class="btn btn-danger"  style="width:150px; margin:auto;">{{monthes[month]}}, {{year}}</button>
-                    <button class="btn btn-primary" (click)="onNext()">Next</button>
+                    <button class="btn schedule-button" (click)="onPrev()">Prev</button>
+                    <button class="btn dark-button" style="width:150px; margin:auto;">{{monthes[month]}}, {{year}}</button>
+                    <button class="btn schedule-button" (click)="onNext()">Next</button>
                 </div>
-                <table class="table table-striped">
-                    <thead class="table-dark">
-                        <th>Sun</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thr</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
+                <table class="table">
+                    <thead>
+                        <th class="dark-button calendar-header" >Sun</th>
+                        <th class="dark-button calendar-header">Mon</th>
+                        <th class="dark-button calendar-header">Tue</th>
+                        <th class="dark-button calendar-header">Wed</th>
+                        <th class="dark-button calendar-header">Thr</th>
+                        <th class="dark-button calendar-header">Fri</th>
+                        <th class="dark-button calendar-header">Sat</th>
                     </thead>
-                    <tr class="table table-primary" *ngFor="let item of createRange(6); let _week=index">
-                        <td *ngFor="let _item of createRange(7); let _day=index" (click)="showSchedule(startDate + _week*7 + _day)"> 
+                    <tr class="table" *ngFor="let item of createRange(6); let _week=index">
+                        <td class="calendar-cell" *ngFor="let _item of createRange(7); let _day=index" (click)="showSchedule(startDate + _week*7 + _day)"> 
                             <div *ngIf="!thisMonthDay(_week*7 + _day)">
                                 <div class="inactive_date"><b>{{getExcatDate(startDate + _week*7 + _day)}}</b></div>                                
                             </div>
                             <div *ngIf="thisMonthDay(_week*7 + _day)" >                               
                                 <b>{{getExcatDate(startDate + _week*7 + _day)}}</b>
                                 <div *ngFor="let _schedule of getScheduleList(startDate, _week*7,_day)">
-                                    <span class="name">{{ _schedule.name }}</span>:<span class="content">{{ _schedule.content }}</span>
+                                    <div style="display: inline-block; white-space: nowrap;"><span class="name">{{ _schedule.name }}</span>:<span class="content">{{ _schedule.content }}</span></div>
                                 </div>
                                 <div *ngIf="showMore(startDate + _week*7 +_day)">
                                     ...
@@ -39,31 +40,35 @@
         </div>
         <div class="col-md-4">
             <!-- //////////////  Popup Modal -->
-            <div class="main__block">
-                    <div class=" main__block user__component d-flex flex-column">
-                        <button class="btn btn-danger">Schedules on {{month}}/{{day}}/{{year}}</button>
+            
+                    <div class="d-flex flex-column" style="margin-left:0px;">
+                        <button class="btn dark-button" style="margin:30px;">Schedules on {{month}}/{{day}}/{{year}}</button>
                         <div *ngIf="daySchedules.length>0">
                             <table class="table table-striped">
-                                <thead class="table-danger">
-                                    <td>Scheduler</td>
+                                <thead class="schedule-header">
+                                    <td style="align-content: center;">Scheduler</td>
                                     <td>Content</td>
                                     <td></td>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let schedule of daySchedules; let i=index;" class="table-success">
-                                        <td>{{schedule.name}}</td>
-                                        <td>{{schedule.content}}</td>
-                                        <td><div *ngIf="canDelete(schedule.time)"><button type="button" (click)="deleteSchedule(i)">Delete</button></div></td>
+                                        <td class="schedule-cell">{{schedule.name}}</td>
+                                        <td class="schedule-cell">{{schedule.content}}</td>
+                                        <td class="schedule-cell"><div *ngIf="canDelete(schedule.time)"><button type="button" (click)="deleteSchedule(i)">Delete</button></div></td>
                                     </tr>
                                 </tbody>
                                 
                             </table>
                         </div>
                         <div *ngIf="daySchedules.length==0">
-                            <div class="alert-info"><h3>No schedules yet.</h3></div>
+                            <div class="alert schedule-header"><h3>No schedules yet.</h3></div>
+                            
                         </div>
                         <div *ngIf="canCreate()" align="center">
-                            <button type="button" class="btn btn-primary" (click)="openSchedulModal(newScheduleModal)">Add new schedule</button>  
+                            
+                            <div class="add__item__block" (click)="openSchedulModal(newScheduleModal)">
+                                <button type="button" class="add__item__btn">Add new schedule </button>
+                            </div> 
                         </div>
                     </div>
             </div>

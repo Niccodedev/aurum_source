@@ -174,7 +174,7 @@ export class CalendarComponent implements OnInit {
 
     saveNewSchedule(){
         this.daySchedules.push({
-            name:this.manager.name,
+            name:this.manager.name +"("+ new Date().toLocaleTimeString() +")",
             content:this.form.value.content
         })
         

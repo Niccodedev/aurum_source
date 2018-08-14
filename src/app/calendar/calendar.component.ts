@@ -141,9 +141,7 @@ export class CalendarComponent implements OnInit {
         }
         return true
       }
-      createNewSchedule = (day) =>{
-          alert(day)
-      }
+
       openSchedulModal = (modal) =>{
         this.form = new FormGroup({
             // time: new FormControl('',[Validators.required]),
@@ -157,8 +155,7 @@ export class CalendarComponent implements OnInit {
         //   });
       }
 
-    showSchedule(day){
-        alert("j")
+    showSchedule(day){      
         this.selectedDay = day;
         if (this.monthSchedules.hasOwnProperty(day))
             this.selectedDaySchedules = this.monthSchedules[day]

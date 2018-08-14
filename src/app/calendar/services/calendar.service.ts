@@ -31,8 +31,7 @@ export class CalendarService {
               private hotelSevice: HotelService) {}
 
 
-    getSchedules(hotelId,year,month) {
-        alert(this.getMonthFormat(year, month))
+    getSchedules(hotelId,year,month) {        
         return this.afs.collection('calendar')
         .doc(hotelId)
         .collection('months')

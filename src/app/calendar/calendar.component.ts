@@ -1,7 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { DatePipe } from "@angular/common";
-
 import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import "rxjs/add/operator/map";
 import {
@@ -10,8 +9,7 @@ import {
   FormGroup,
   Validators,
   NgForm,
-  FormControl,
- 
+  FormControl 
 } from "@angular/forms";
 import {
   AngularFirestore,
@@ -68,18 +66,27 @@ export class CalendarComponent implements OnInit {
   selectedDay:number;
   form:FormGroup;
   manager:any;
+  content:string;
   ngOnInit() {
       this.manager = this.dataStorageService.getUser();
       let today = new Date();
       this.day = today.getDate();
       this.month = today.getMonth()+1;
       this.year = today.getFullYear();
-      this.getStartDate();
-      this.calendarService.getSchedules(this.manager.id,this.year,this.month)
+      this.getStartDate();      
+      this.calendarService.getSchedules(localStorage.hotelId,this.year,this.month)
       .subscribe( res =>{
           this.monthSchedules = res;
           this.selectedDay = this.day;
-          this.selectedDaySchedules = this.monthSchedules[this.selectedDay]          
+          if(this.monthSchedules==null){
+              this.monthSchedules = {}
+          }
+          if(this.monthSchedules.hasOwnProperty(this.selectedDay))
+            this.selectedDaySchedules = this.monthSchedules[this.selectedDay]   
+          else
+            this.selectedDaySchedules = [];
+
+                 
       });    
      
   }
@@ -139,7 +146,7 @@ export class CalendarComponent implements OnInit {
       }
       openSchedulModal = (modal) =>{
         this.form = new FormGroup({
-            time: new FormControl('',[Validators.required]),
+            // time: new FormControl('',[Validators.required]),
             content: new FormControl('',[ Validators.required])
         });
         this.scheduleModalRef = this.modalService.open(modal);
@@ -151,6 +158,7 @@ export class CalendarComponent implements OnInit {
       }
 
     showSchedule(day){
+        alert("j")
         this.selectedDay = day;
         if (this.monthSchedules.hasOwnProperty(day))
             this.selectedDaySchedules = this.monthSchedules[day]
@@ -160,12 +168,12 @@ export class CalendarComponent implements OnInit {
 
     saveNewSchedule(){
         this.selectedDaySchedules.push({
-            time:this.form.value.time,
+            name:this.manager.name,
             content:this.form.value.content
         })
         
         this.monthSchedules[this.selectedDay] = this.selectedDaySchedules;
-        this.calendarService.saveSchedules(this.manager.id, this.year, this.month, this.monthSchedules )
+        this.calendarService.saveSchedules(localStorage.hotelId, this.year, this.month, this.monthSchedules )
         .then(response =>{
             this.scheduleModalRef.close()
             alert("New schedule was created succefully.")
@@ -179,13 +187,14 @@ export class CalendarComponent implements OnInit {
         
     }
 
-    deleteSchedule(index){
-        this.selectedDaySchedules.splice(index,1);
+    deleteSchedule(index){      
+        this.selectedDaySchedules.splice(index,1);  
         this.monthSchedules[this.selectedDay] = this.selectedDaySchedules;
-        this.calendarService.saveSchedules(this.manager.id, this.year, this.month, this.monthSchedules )
+        this.calendarService.saveSchedules(localStorage.hotelId, this.year, this.month, this.monthSchedules )
         .then(response =>{
             this.scheduleModalRef.close()
             alert("The schedule was deleted succefully.")
+
         }).catch( error=>{
             this.selectedDaySchedules = this.selectedDaySchedules.slice(0,-1);
             alert(error)
@@ -193,4 +202,57 @@ export class CalendarComponent implements OnInit {
             
         })
     }
+
+    canDelete = (time) =>{
+        let today = new Date();
+       
+        if(this.year*400+this.month*32+this.selectedDay < today.getFullYear()*400 + (today.getMonth()+1)*32 + today.getDate()){
+           return false;
+        }
+        return true;
+    }
+
+    canCreate = () => {
+        let today = new Date();
+        if(this.year*400+this.month*32+this.selectedDay < today.getFullYear()*400 + (today.getMonth()+1)*32 + today.getDate()){
+            return false;
+        }
+        return true;
+    }
+
+    getScheduleList(_day1, _day2, _day3){
+        let day = this.getExcatDate(_day1+ _day2+_day3);
+        if(this.monthSchedules==null) {
+            this.monthSchedules = {};
+        }
+        if(!this.monthSchedules.hasOwnProperty(day)){
+            return [];
+        }
+        let returnSchedules = [];
+        let daySchedules = this.monthSchedules[day]
+        for(let i =0; i < daySchedules.length; i++){
+            returnSchedules.push({name:daySchedules[i].name, content: daySchedules[i].content.substring(0,15)});
+        }
+        if (returnSchedules.length >4) {
+            return returnSchedules.slice(0,3)
+        }          
+        
+        return returnSchedules;
+        
+        
+
+    }
+
+    showMore = (_day) => {
+        let day = this.getExcatDate(_day)       
+        if(this.monthSchedules==null) {
+            this.monthSchedules = {};
+        }
+        if(!this.monthSchedules.hasOwnProperty(day)){
+            return false;
+        }
+        let daySchedules = this.monthSchedules[day]
+        return daySchedules.length > 4;
+    }
+
 }

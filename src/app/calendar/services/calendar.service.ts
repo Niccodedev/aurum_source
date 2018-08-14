@@ -31,18 +31,18 @@ export class CalendarService {
               private hotelSevice: HotelService) {}
 
 
-    getSchedules(managerId,year,month) {
+    getSchedules(hotelId,year,month) {
         alert(this.getMonthFormat(year, month))
         return this.afs.collection('calendar')
-        .doc(managerId)
+        .doc(hotelId)
         .collection('months')
         .doc(this.getMonthFormat(year, month))
         .valueChanges()
         }
     
-    saveSchedules(managerId, year,month, schedules){
+    saveSchedules(hotelId, year,month, schedules){
         return this.afs.collection('calendar')
-        .doc(managerId)
+        .doc(hotelId)
         .collection('months')
         .doc(this.getMonthFormat(year, month))
         .set(schedules)

@@ -10,6 +10,7 @@ import {
   FormGroup,
   Validators,
   NgForm,
+  FormControl,
  
 } from "@angular/forms";
 import {
@@ -62,20 +63,25 @@ export class CalendarComponent implements OnInit {
   startDate:number;
   monthes=["", "January", "February", "March", "April", "May", "June", "July", "August","September","Octover", "November", "December"]
   scheduleModalRef:any;
-  schedules:any;
+  monthSchedules:object;
+  selectedDaySchedules:object[];
+  selectedDay:number;
+  form:FormGroup;
+  manager:any;
   ngOnInit() {
+      this.manager = this.dataStorageService.getUser();
       let today = new Date();
       this.day = today.getDate();
       this.month = today.getMonth()+1;
       this.year = today.getFullYear();
       this.getStartDate();
-      this.calendarService.getSchedules(1,1)
+      this.calendarService.getSchedules(this.manager.id,this.year,this.month)
       .subscribe( res =>{
-          this.schedules = res;
-          alert(JSON.stringify(this.schedules))
-      });
-      alert(JSON.stringify(this.schedules)) 
-      console.log(this.schedules)
+          this.monthSchedules = res;
+          this.selectedDay = this.day;
+          this.selectedDaySchedules = this.monthSchedules[this.selectedDay]          
+      });    
+     
   }
   getDaysInMonth = (year, month) => {   
    return new Date(year, month, 0).getDate();  
@@ -132,6 +138,10 @@ export class CalendarComponent implements OnInit {
           alert(day)
       }
       openSchedulModal = (modal) =>{
+        this.form = new FormGroup({
+            time: new FormControl('',[Validators.required]),
+            content: new FormControl('',[ Validators.required])
+        });
         this.scheduleModalRef = this.modalService.open(modal);
         // this.scheduleModalRef.result.then((result) => {
         //     this.closeResult = `Closed with: ${result}`;
@@ -139,4 +149,48 @@ export class CalendarComponent implements OnInit {
         //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         //   });
       }
+
+    showSchedule(day){
+        this.selectedDay = day;
+        if (this.monthSchedules.hasOwnProperty(day))
+            this.selectedDaySchedules = this.monthSchedules[day]
+        else
+            this.selectedDaySchedules = []
+    }
+
+    saveNewSchedule(){
+        this.selectedDaySchedules.push({
+            time:this.form.value.time,
+            content:this.form.value.content
+        })
+        
+        this.monthSchedules[this.selectedDay] = this.selectedDaySchedules;
+        this.calendarService.saveSchedules(this.manager.id, this.year, this.month, this.monthSchedules )
+        .then(response =>{
+            this.scheduleModalRef.close()
+            alert("New schedule was created succefully.")
+        }).catch( error=>{
+            this.selectedDaySchedules = this.selectedDaySchedules.slice(0,-1);
+            alert(error)
+            this.scheduleModalRef.close()
+            
+        })
+
+        
+    }
+
+    deleteSchedule(index){
+        this.selectedDaySchedules.splice(index,1);
+        this.monthSchedules[this.selectedDay] = this.selectedDaySchedules;
+        this.calendarService.saveSchedules(this.manager.id, this.year, this.month, this.monthSchedules )
+        .then(response =>{
+            this.scheduleModalRef.close()
+            alert("The schedule was deleted succefully.")
+        }).catch( error=>{
+            this.selectedDaySchedules = this.selectedDaySchedules.slice(0,-1);
+            alert(error)
+            this.scheduleModalRef.close()
+            
+        })
+    }
 }

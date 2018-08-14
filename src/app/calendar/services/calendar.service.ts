@@ -31,26 +31,31 @@ export class CalendarService {
               private hotelSevice: HotelService) {}
 
 
-  getSchedules(year,month) {
-    return this.afs.collection('calendar')
-    .doc('XbgCR6rCOlc6jr6W3OOe')
-    .collection('months')
-    .doc('2018-09')
-    .valueChanges()
+    getSchedules(managerId,year,month) {
+        alert(this.getMonthFormat(year, month))
+        return this.afs.collection('calendar')
+        .doc(managerId)
+        .collection('months')
+        .doc(this.getMonthFormat(year, month))
+        .valueChanges()
+        }
+    
+    saveSchedules(managerId, year,month, schedules){
+        return this.afs.collection('calendar')
+        .doc(managerId)
+        .collection('months')
+        .doc(this.getMonthFormat(year, month))
+        .set(schedules)
+    }
+    
+    getMonthFormat(year, month){
+       if (month > 9 ) return "" + year + "-" + month;
+       return "" + year + "-0" + month;
+       }
+    
+    
    
-    
-    
-    // return this.inventoriesCol.snapshotChanges()
-    //   .map(actions => {
-    //     return actions.map(a => {
-    //       const data = a.payload.doc.data() as Schedule;
-    //       const id = a.payload.doc.id;
-    //       return {id, data};
-    //     })
-    //   })    
-    
-  }
-  
+   
 //   addInventory(inventory, hotelId, key){
     
 //     this.afs.collection('inventories').doc(hotelId).update({

@@ -237,7 +237,7 @@ export class CalendarComponent implements OnInit {
         let returnSchedules = [];
         let daySchedules = this.monthSchedules[day]
         for(let i =0; i < daySchedules.length; i++){
-            returnSchedules.push({name:daySchedules[i].name, content: daySchedules[i].content.substring(0,15)});
+            returnSchedules.push({name:daySchedules[i].name.substring(0,3).split('(')[0], content: daySchedules[i].content.substring(0,15)});
         }
         if (returnSchedules.length >4) {
             return returnSchedules.slice(0,3)

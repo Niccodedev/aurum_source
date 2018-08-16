@@ -16,6 +16,7 @@ import {MaintenanceComponent} from "./inventory/maintenance/maintenance.componen
 import {FbComponent} from "./inventory/fb/fb.component";
 import {FdMiscComponent} from "./inventory/fd-misc/fd-misc.component";
 import {PayrollComponent} from "./payroll/payroll.component";
+import {InspectionComponent} from "./inspections/inspection.component";
 import {VendorsComponent} from "./property/vendors/vendors.component";
 import {EmployeeComponent} from "./property/employee/employee.component";
 import {CredentialsComponent} from "./property/credentials/credentials.component";
@@ -41,6 +42,7 @@ const appRoutes: Routes = [
   { path: 'fb', component: FbComponent, canActivate: [AutGuard] },
   { path: 'fd-misc', component: FdMiscComponent, canActivate: [AutGuard] },
   { path: 'payroll', component: PayrollComponent, canActivate: [AutGuard] },
+  { path: 'inspection', component: InspectionComponent, canActivate: [AutGuard] },
   { path: 'hk', component: HKComponent, canActivate: [AutGuard] },
   { path: 'vendors', component: VendorsComponent, canActivate: [AutGuard] },
   { path: 'employee', component: EmployeeComponent, canActivate: [AutGuard] },

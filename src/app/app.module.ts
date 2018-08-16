@@ -53,6 +53,7 @@ import { FbComponent } from './inventory/fb/fb.component';
 import { FdMiscComponent } from './inventory/fd-misc/fd-misc.component';
 import { ActivityComponent } from './activity/activity.component';
 import { PayrollComponent } from './payroll/payroll.component';
+import { InspectionComponent } from './inspections/inspection.component';
 import { VendorsComponent } from './property/vendors/vendors.component';
 import { CredentialsComponent } from './property/credentials/credentials.component';
 import { EmployeeComponent } from './property/employee/employee.component';
@@ -142,7 +143,8 @@ import { SafePipe } from './shared/pipes/SafePipe';
     RatePageComponent,
     FilterByDatePipe,
     ItemsManagerComponent,
-    SafePipe
+    SafePipe,
+    InspectionComponent
   ],
   imports: [
     BrowserModule,

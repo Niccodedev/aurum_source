@@ -3,18 +3,7 @@
 <section id="main">
   <div #scroller class="main__block">
     <div class="w-90 m-auto message__history" (scroll)="setWheelState()" id = "message__history" ngx-auto-scroll >
-      <!--<div class="message__block__cover"><div class="message__block right">BB machine was turned on in room 203 </div></div>-->
-      <!-- <div class="message__block__cover"><div class="message__block right">BB machine was turned on in room 203</div></div>
-         <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
-         <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>
-         <div class="message__block__cover"><div class="left"><div class="message__block__sender">Raj</div><div class="message__block">BB machine was turned on in room 203</div></div></div>-->
-      <div class="message__block__cover" *ngFor="let message of messages; let i = index" >
-        <!-- <div [ngStyle]="{background: message.data.managerId === current.managerId ? 'green': 'red'}">-->
-
-        <!--   <div [ngClass]="{'right' : managerId === currentUser,
-           'left': managerId !== currentUser}">
-         </div>-->
-        <!--<div class="message__block__item" [ngClass]="{'right':checkOrder(i)}">-->
+     <div class="message__block__cover" *ngFor="let message of messages; let i = index" >
         <div class="message__block__item" [class.my-message]="checkMessagePosition(message.data.idOsManager)" *ngIf="checkMessagePosition(message.data.idOsManager)">
           <p>
             <span class="message_meta">
@@ -40,18 +29,7 @@
             </span>
           </p>
           </div>
-        <!-- // other user
-         <p style="text-align: left">
-           <b> {{ message.data.managerId }} </b><br>
-           {{message.data.author}}
-           {{message.data.date}}
-         </p>
-         <div class="message__block left">
-           {{message.data.text}}
-         </div>-->
-        <!--<div class="message__block__cover"><div class="message__block right">{{messages}}</div></div>-->
-      </div>
-
+        </div>
     </div>
     <div class="message__block__write">
         <div class="m-auto w-90">

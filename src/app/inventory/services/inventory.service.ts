@@ -64,6 +64,14 @@ export class InventoryService {
     });
   }
 
+
+  addInspection(item, hotelId) {
+
+    this.afs.collection('inventories').doc(hotelId).update({
+      'inspection' : item
+    });
+  }
+
   addHK(item, hotelId) {
 
     this.afs.collection('inventories').doc(hotelId).update({

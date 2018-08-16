@@ -11,7 +11,7 @@
                         <a (click)="changeTable('date')" [ngClass]="{'dark-button':byDate}" class="button__item">By Date</a>
                     </div>
                     <div class="type_button">
-                        <a (click)="changeTable('type')" [ngClass]="{'dark-button':byType}" class="button__item">By Employee</a>
+                        <a (click)="changeTable('type')" [ngClass]="{'dark-button':byType}" class="button__item">By Room</a>
                     </div>
                     <div *ngIf="archiveToggle==true && !byType && inventoryDates" class="type_button">
                         <a class="button__item" (click)="showArchive = !showArchive">Archive</a>
@@ -38,7 +38,7 @@
                 <div class="d-flex flex-column">
                     <p class="date-range__title" [hidden]="!byType" style="color: darkslategray;opacity: 0.6;font-weight: 600; font-size:16px;">Select Type</p>
                     <select placeholder="Select Type" class="custom-select" [(ngModel)]="nameOfItem" [hidden]="!byType" (change)="updateItemsByType()">
-               <option selected>Select Employee</option>
+               <option selected>Select Room</option>
           <option *ngFor="let label of inventoryLabels" value="{{label}}">{{label}}</option>
         </select>
                 </div>
@@ -54,44 +54,38 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">Employees</th>
-                        <th scope="col" class="col__items" colspan="4">
+                        <th scope="col">Rooms</th>
+                        <th scope="col" class="col__items" colspan="3">
                             {{nameOfItem}}
                         </th>
                     </tr>
                 </thead>
                 <thead>
                     <tr>
-                        <td scope="row" class="type"></td>
-                        <td style="background-color: #F3F2F0;">
-                            <p class="td-numb">RT</p>
+                        <td scope="row"></td>
+                        <td style="background-color: #F3F2F0;" class="cleaning">
+                            <p><b>HK Cleaning</b></p>
                         </td>
-                        <td style="background-color: #F3F2F0;">
-                            <p class="td-numb">OT</p>
+                        <td style="background-color: #F3F2F0;" class="inspector">                            
+                            <p><b>Inspector</b></p>
                         </td>
-                        <td style="background-color: #F3F2F0;">
-                            <p class="td-numb">DT</p>
-                        </td>
-                        <td style="background-color: #F3F2F0;">
-                            <p class="td-numb">MT</p>
+                        <td style="background-color: #F3F2F0;" class="commenting">
+                            <p><b>Dirty? Commands:</b></p>
                         </td>
                     </tr>
                 </thead>
                 <ng-container *ngIf="currentItem">
                     <tr *ngFor="let item of currentItem.data | filterByDate: dateFrom: dateTo">
                         <td scope="row" class="type">{{item.date}}</td>
-                        <td>
-                            <input class="cell_edit" [(ngModel)]="item.rt" disabled>
+                        <td  class="cleaning">
+                            <input class="cell_edit" [(ngModel)]="item.cleaning" disabled>
                         </td>
-                        <td>
-                            <input class="cell_edit" [(ngModel)]="item.ot" disabled>
+                        <td  class="inspector">
+                            <input class="cell_edit" [(ngModel)]="item.inspector" disabled>
                         </td>
-                        <td>
-                            <input class="cell_edit" [(ngModel)]="item.dt" disabled>
-                        </td>
-                        <td>
-                            <input class="cell_edit" [(ngModel)]="item.mt" disabled>
-                        </td>
+                        <td  class="comments">
+                            <input class="cell_edit" [(ngModel)]="item.comments" disabled>
+                        </td>                    
                     </tr>
                 </ng-container>
             </table>
@@ -104,8 +98,8 @@
             <table class="table table-bordered" id="table">
                 <thead>
                     <tr>
-                        <th scope="col" style="width: 10%;">Employees</th>
-                        <th scope="col" class="col__items" colspan="4"  *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
+                        <th scope="col" style="width: 10%;">Rooms</th>
+                        <th scope="col" class="col__items" colspan="3"  *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
                             {{date | date:'MM/dd/yyyy'}}
                             <div style="display: inline;"  (click)="selectedDate = i"><i class="far fa-edit"></i></div>
                         </th>
@@ -115,61 +109,52 @@
                     <tr>
                         <td scope="row" class="type"></td>
                         <ng-container *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8)">
-                            <td style="background-color: #F3F2F0;">
-                                <p class="td-numb">RT</p>
+                            <td style="background-color: #F3F2F0;" class="cleaning">
+                                <p >HK Cleaning</p>
                             </td>
-                            <td style="background-color: #F3F2F0;">
-                                <p class="td-numb">OT</p>
+                            <td style="background-color: #F3F2F0;" class="inspector">
+                                <p >inspector    </p>
                             </td>
-                            <td style="background-color: #F3F2F0;">
-                                <p class="td-numb">DT</p>
-                            </td>
-                            <td style="background-color: #F3F2F0;">
-                                <p class="td-numb">MT</p>
-                            </td>
+                            <td style="background-color: #F3F2F0;"  class="comments">
+                                <p class="comments">Dirty? commnets:</p>
+                            </td> 
                         </ng-container>
                     </tr>
                 </thead>
               
                 <tr *ngFor="let label of inventoryLabels">
-                    <ng-container *ngIf="!inventoryItems.payroll[label].archive">
+                    <ng-container *ngIf="!inventoryItems.inspection[label].archive">
                         <td scope="row" class="type" id="fname">
-                            <input class="checkbox" type="checkbox"   [(ngModel)] = "inventoryItems.payroll[label].archive" value="onoffswitch" id='checkMe' *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
+                            <input class="checkbox" type="checkbox"   [(ngModel)] = "inventoryItems.inspection[label].archive" value="onoffswitch" id='checkMe' *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
                         </td>
-                        <ng-container id="t-data" *ngFor="let item of inventoryItems.payroll[label].data.slice(dateIndex, dateIndex + 8); let i = index">
+                        <ng-container id="t-data" *ngFor="let item of inventoryItems.inspection[label].data.slice(dateIndex, dateIndex + 8); let i = index">
                             <td>
-                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.rt">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.cleaning">
                             </td>
                             <td>
-                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.ot">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.inspector">
                             </td>
                             <td>
-                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.dt">
-                            </td>
-                            <td>
-                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.mt">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.comments">
                             </td>
                         </ng-container>
                     </ng-container>
                 </tr>
                 <tr *ngFor="let label of inventoryLabels" class="archive">
-                        <ng-container *ngIf="inventoryItems.payroll[label].archive && showArchive" >
+                        <ng-container *ngIf="inventoryItems.inspection[label].archive && showArchive" >
                             <td scope="row" class="type" id="fname">
-                                <input class="checkbox" type="checkbox" value="onoffswitch" id='checkMe' [(ngModel)]="inventoryItems.payroll[label].archive" *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
+                                <input class="checkbox" type="checkbox" value="onoffswitch" id='checkMe' [(ngModel)]="inventoryItems.inspection[label].archive" *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
                             </td>
-                            <ng-container id="t-data" *ngFor="let item of inventoryItems.payroll[label].data.slice(dateIndex, dateIndex + 8); let i = index">
+                            <ng-container id="t-data" *ngFor="let item of inventoryItems.inspection[label].data.slice(dateIndex, dateIndex + 8); let i = index">
                                 <td>
-                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.rt">
+                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.cleaning">
                                 </td>
                                 <td>
-                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.ot">
+                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.inspector">
                                 </td>
                                 <td>
-                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.dt">
-                                </td>
-                                <td>
-                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.mt">
-                                </td>
+                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.comments">
+                                </td>                               
                             </ng-container>
                         </ng-container>
                     </tr>
@@ -194,7 +179,7 @@
                         <div class="user__block">
                             <div class="user__block__header d-flex justify-content-between align-items-center">
                                 <div class="user__text">
-                                    <p>Add Employee</p>
+                                    <p>Add Room</p>
                                 </div>
                                 <div class="select__date d-flex justify-content-center align-items-center">
                                     <div>Select Date:</div>
@@ -205,27 +190,23 @@
                                 <table>
                                     <tr *ngIf="i==0">
                                             <td style="background-color: #F3F2F0;">
-                                                    <p class="td-numb">Employee</p>
+                                                    <p>Room</p>
                                                 </td>
                                         <td style="background-color: #F3F2F0;">
-                                                <p class="td-numb">RT</p>
+                                                <p >HK Cleaning</p>
                                             </td>
                                             <td style="background-color: #F3F2F0;">
-                                                <p class="td-numb">OT</p>
+                                                <p>Inspector</p>
                                             </td>
                                             <td style="background-color: #F3F2F0;">
-                                                <p class="td-numb">DT</p>
-                                            </td>
-                                            <td style="background-color: #F3F2F0;">
-                                                <p class="td-numb">MT</p>
-                                            </td>
+                                                <p>Dirty? Comments:</p>
+                                            </td>                                           
                                         </tr>
                                     <tr [formGroupName]="i">
-                                        <td><input type="text" formControlName="item" id="item" name="item" placeholder="Employee" class="input"></td>
-                                        <td><input type="text" formControlName="rt" id="rt" name="rt" placeholder="Regular" class="input"></td>
-                                        <td><input type="text" formControlName="ot" id="ot" name="ot" placeholder="Over" class="input"></td>
-                                        <td><input type="text" formControlName="dt" id="dt" name="dt" placeholder="Double" class="input"></td>
-                                        <td><input type="text" formControlName="mt" id="mt" name="mt" placeholder="Missed" class="input"></td>
+                                        <td><input type="text" formControlName="item" id="item" name="item" placeholder="Room" class="input"></td>
+                                        <td><input type="text" formControlName="cleaning" id="cleaning" name="cleaning" placeholder="" class="input"></td>
+                                        <td><input type="text" formControlName="inspector" id="inspector" name="inspector" placeholder="" class="input"></td>
+                                        <td><input type="text" formControlName="comments" id="comments" name="comments" placeholder="" class="input"></td>                                       
                                     </tr>
                                 </table>
                             </form>

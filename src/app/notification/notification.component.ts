@@ -62,7 +62,7 @@ export class NotificationComponent implements OnInit {
   }
 
   dateCompaere(notiA, notiB){
-    if(notiA.data.time > notiA.data.time){
+    if(notiA.data.time < notiB.data.time){
       return 1;
     }
     return -1;

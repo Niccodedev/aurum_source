@@ -4,6 +4,7 @@ import {AngularFireDatabase} from "angularfire2/database";
 import 'rxjs/add/operator/map';
 // Interfaces
 import {Transaction} from '../interfaces/transaction';
+import { NotificationService } from '../../notification/services/notification.service';
 
 @Injectable()
 export class TransactionService {
@@ -12,7 +13,9 @@ export class TransactionService {
 
 
   constructor(private afs: AngularFirestore,
-              private db: AngularFireDatabase) {}
+              private db: AngularFireDatabase,
+              private notificationService: NotificationService
+            ) {}
 
   getTransactions() {
     this.transactionsCol = this.afs.collection('transactions');
@@ -28,7 +31,12 @@ export class TransactionService {
 
   addTransaction(item, hotelId) {
     
-    this.afs.collection('transactions').doc(hotelId).set(item);
+    this.afs.collection('transactions').doc(hotelId).set(item).then(
+      ()=>{
+        let action =" added new Transaction data"
+        this.notificationService.createNewAction(action)
+      }
+    );
   }
 
   // addNewField(){

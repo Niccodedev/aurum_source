@@ -35,9 +35,6 @@ export class HKService {
   addHK(item, hotelId) {
       console.log(item);
     this.afs.collection('hks').add(item);
-    // this.afs.collection('inventories').doc(hotelId).update({
-    //   "hk" : item
-    // });
   }
 addNewField() {
     this.afs.collection('hks').doc(localStorage.hotelId).set({

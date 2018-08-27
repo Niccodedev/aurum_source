@@ -63,7 +63,7 @@ export class InventoryService {
     this.afs.collection('inventories').doc(hotelId).update({
       'payroll' : item
     }).then(()=>{
-      let action =" added new payroll data.";
+      let action =" added new Payroll data.";
       this.notificationService.createNewAction(action)
     });
   }
@@ -74,7 +74,7 @@ export class InventoryService {
     this.afs.collection('inventories').doc(hotelId).update({
       'inspection' : item
     }).then(()=>{
-      let action =" added new inspection data.";
+      let action =" added new Inspection data.";
       this.notificationService.createNewAction(action)
     });
   }
@@ -84,7 +84,7 @@ export class InventoryService {
     this.afs.collection('inventories').doc(hotelId).update({
       'hk' : item
     }).then(()=>{
-      let action =" added new inspection data.";
+      let action =" added new HK data.";
       this.notificationService.createNewAction(action)
     });
   }

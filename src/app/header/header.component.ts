@@ -32,7 +32,8 @@ export class HeaderComponent implements OnInit {
       "/employee": "Information - Employee",
       "/bills-misc": "Upload - Bills",
       "/forms": "Upload - Forms",
-      "/hotels": ""
+      "/hotels": "",
+      "/notifications":"Notifications"
     }
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

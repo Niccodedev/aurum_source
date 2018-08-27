@@ -33,15 +33,7 @@ export class NotificationComponent implements OnInit {
     this.notifications = []
     this.notificationService.getNotifications(localStorage.hotelId).subscribe(
       res=> {
-        this.notifications = res;
-        alert(JSON.stringify(this.notifications))
-      })
-  
+        this.notifications = res;      
+      })  
   }
-
-  
-
-  
-
-  
 }

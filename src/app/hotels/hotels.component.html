@@ -21,7 +21,7 @@
       <h2>Select a property</h2>
     </div>
     <div class="main__table">
-      <div class="table__block" *ngFor="let hotel of hotels" (click)="goToHotelUsers(hotel.id)">
+      <div class="table__block" *ngFor="let hotel of hotels" (click)="goToNotifications(hotel.id)">
         <img [src]="hotel.data.image" alt="hotel" class="table__image__item">
         <hr> <hr>
         <p class="table__link__item">{{ hotel.data.name }}</p>
@@ -42,18 +42,6 @@
 
   <!--POPUP ADD HOTEL FORM-->
   <ng-template #contentNewHotel let-c="close" let-d="dismiss" class="modal-lg">
-    <!-- <div class="user__component d-flex flex-column">
-      <div class="user__block">
-        <div class="user__block__header d-flex justify-content-between align-items-center">
-      <div class="user__text">
-        <p>Add Property</p>
-      </div>
-      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true" class="cros">&times;</span>
-      </button>
-    </div>
-    <hr> -->
-    
     <form  [formGroup]="form" class="add_property_block" (ngSubmit)="addNewHotel()">
         <div class="super__admin__block d-flex flex-column align-items-center create_admin_haader"> 
             <h1> Add New Hotel</h1>   

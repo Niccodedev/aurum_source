@@ -36,15 +36,15 @@ export class NotificationService {
       hotelId: localStorage.hotelId,
       manager: this.dataStorageService.getUser().name,
       action:action,
-      time:"(" + this.changeDateTimeFormat(new Date()) + ")"
+      time: new Date().getTime()
     };
 
     this.addNotification(notification);
   }
 
-  changeDateTimeFormat(date){
-    return date.toISOString().substring(0,19)
-  }
+  // changeDateTimeFormat(date){
+  //   return date.toISOString().substring(0,19)
+  // }
 
   addNotification(notification) {
     this.afs.collection('notifications').add(notification).then(()=>

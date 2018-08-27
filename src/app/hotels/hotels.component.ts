@@ -130,8 +130,8 @@ export class HotelsComponent implements OnInit {
     this.upload();
   }
 
-  goToHotelUsers(hotelId) {
+  goToNotifications(hotelId) {
     this.dataStorageService.setHotelId(hotelId);
-    this.router.navigate(['managers']);
+    this.router.navigate(['notifications']);
   }
 }

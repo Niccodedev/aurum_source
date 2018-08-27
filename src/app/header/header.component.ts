@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
       "/fd-misc": "Inventory - FD/Misc",
       "/houskeeping-data": "HK Goal",
       "/transactions-date": "Transaction",
-      "/home": "Home",
+      "/managers": "Managers",
       "/activity-chat": "Activity Log",
       "/payroll": "Payroll",
       "/hk":"HK-Goals",

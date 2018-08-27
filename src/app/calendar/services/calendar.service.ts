@@ -5,7 +5,7 @@ import * as firebase from 'firebase';
 import {FormBuilder} from '@angular/forms';
 // Interfaces
 import { Schedule } from './schedule';
-import {Manager} from '../../home/interfaces/manager';
+import {Manager} from '../../managers/interfaces/manager';
 import {Hotel} from '../../hotels/interfaces/hotel';
 // Services
 import { DataStorageService } from '../../shared/services/data-storage.service';

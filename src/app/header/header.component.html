@@ -6,8 +6,8 @@
     </div>
     <div id="menu-sidebar" *ngIf="noSuperAdmin">
         <div class="flex__item">
-            <i class="fas fa-home"></i>
-            <a routerLink="/home" class="select__item" *ngIf="isAdmin">Home</a>
+            <i class="fas fa-users"></i>
+            <a routerLink="/managers" class="select__item" *ngIf="isAdmin">Managers</a>
         </div>
 
 
@@ -143,11 +143,3 @@
     </div>
 </section>
 
-<!--
-<header>
-  <div class="header">
-    <div class="main-logo"></div>
-    <span class="page-name">Home</span>
-  </div>
-</header>
--->

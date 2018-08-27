@@ -11,7 +11,7 @@ import {Hotel} from '../../hotels/interfaces/hotel';
 import {Vendor} from '../../property/interfaces/vendor';
 import {DataProcessingService} from '../../shared/services/data-processing.service';
 import {AuthService} from '../../auth/auth.service';
-import {Manager} from '../../home/interfaces/manager';
+import {Manager} from '../../managers/interfaces/manager';
 import * as firebase from 'firebase';
 
 @Injectable()

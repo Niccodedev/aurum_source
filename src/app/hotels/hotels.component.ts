@@ -132,6 +132,6 @@ export class HotelsComponent implements OnInit {
 
   goToHotelUsers(hotelId) {
     this.dataStorageService.setHotelId(hotelId);
-    this.router.navigate(['home']);
+    this.router.navigate(['managers']);
   }
 }

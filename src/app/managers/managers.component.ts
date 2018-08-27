@@ -17,12 +17,12 @@ import {DataProcessingService} from "../shared/services/data-processing.service"
 import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-managers',
+  templateUrl: './managers.component.html',
+  styleUrls: ['./managers.component.scss']
 })
 
-export class HomeComponent implements OnInit {
+export class ManagerComponent implements OnInit {
   closeResult: string;
 
   managersCol: any;

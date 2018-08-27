@@ -45,7 +45,7 @@ import 'hammerjs';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
+import { ManagerComponent } from './managers/managers.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { RoomComponent } from './inventory/room/room.component';
 import { MaintenanceComponent } from './inventory/maintenance/maintenance.component';
@@ -70,7 +70,7 @@ import {HelperService} from "./shared/services/helper.service";
 import {AutGuard} from "./shared/classes/auth.guard";
 import {AdminGuard} from "./shared/classes/admin.guard";
 import {DataProcessingService} from "./shared/services/data-processing.service";
-import {HomeService} from './home/services/home.service';
+import {ManagerService} from './managers/services/managers.service';
 import { TransactionsHeaderComponent } from './transactions/transactions-header/transactions-header.component';
 import { TransactionsDateComponent } from './transactions/transactions-date/transactions-date.component';
 import { TransactionsTypeComponent } from './transactions/transactions-type/transactions-type.component';
@@ -114,7 +114,7 @@ import { SafePipe } from './shared/pipes/SafePipe';
     AppComponent,
     LoginComponent,
     HeaderComponent,
-    HomeComponent,
+    ManagerComponent,
     TransactionsComponent,
     RoomComponent,
     MaintenanceComponent,
@@ -199,7 +199,7 @@ import { SafePipe } from './shared/pipes/SafePipe';
     AutGuard,
     AdminGuard,
     TransactionService,
-    HomeService,
+    ManagerService,
     InventoryService,
     CalendarService,
     ActivityChatService,

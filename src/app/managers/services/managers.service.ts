@@ -3,7 +3,7 @@ import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} 
 import {AngularFireDatabase} from 'angularfire2/database';
 
 @Injectable()
-export class HomeService {
+export class ManagerService {
 
   constructor(private afs: AngularFirestore,
               private db: AngularFireDatabase) {

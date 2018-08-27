@@ -33,7 +33,38 @@ export class NotificationComponent implements OnInit {
     this.notifications = []
     this.notificationService.getNotifications(localStorage.hotelId).subscribe(
       res=> {
-        this.notifications = res;      
+        this.notifications = res.sort(this.dateCompaere);      
       })  
+  }
+
+  isNewNotification(time){
+    return new Date().getTime() < time + 1000 * 60 * 60 *24;
+  }
+  
+  formatDate(time){
+    let date = new Date(time);
+    let year = date.getFullYear();
+    let month = this.fixTwoDigit(date.getMonth() + 1)
+    let day = this.fixTwoDigit(date.getDate());
+    let amOrPm = 'AM';
+    if(date.getHours() >= 12){
+      amOrPm = 'PM'
+    }
+    let hour = this.fixTwoDigit((date.getHours()-1) % 12 +1);
+    let min = this.fixTwoDigit(date.getMinutes());
+    let second = this.fixTwoDigit(date.getSeconds());
+    return `(${month}/${day}/${year} ${hour}:${min}:${second} ${amOrPm})`
+  }
+
+  fixTwoDigit(num){
+    if (num>9) return num;
+    else return "0" + num;
+  }
+
+  dateCompaere(notiA, notiB){
+    if(notiA.data.time > notiA.data.time){
+      return 1;
+    }
+    return -1;
   }
 }

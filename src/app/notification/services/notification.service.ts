@@ -20,7 +20,7 @@ export class NotificationService {
   }
 
   getNotifications(hotelId) {  
-    this.notificationsCol = this.afs.collection('notifications', ref=>ref.where('hotelId', '==', hotelId));
+    this.notificationsCol = this.afs.collection('notifications', ref=>ref.where('hotelId', '==', hotelId))
     return this.notificationsCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {

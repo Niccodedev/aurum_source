@@ -6,6 +6,7 @@ import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} 
 import {AngularFireDatabase} from 'angularfire2/database';
 import {AngularFireAuth} from "angularfire2/auth";
 import {Observable} from "rxjs/Observable";
+import { NotificationService } from '../../../notification/services/notification.service';
 
 @Injectable()
 export class ActivityChatService {
@@ -19,15 +20,13 @@ export class ActivityChatService {
   constructor(private afs: AngularFirestore,
               private dataStorageService: DataStorageService,
               private db: AngularFireDatabase,
-              private afAuth: AngularFireAuth) {
+              private afAuth: AngularFireAuth,
+              private notificationService: NotificationService
+            ) {
     this.afAuth.authState.subscribe(auth => {
       if (auth !== undefined && auth !== null) {
         this.user = auth;
       }
-      // this.getUser().subscribe(a => {
-      //   this.userName = a.displayName;
-      //   console.log(this.users);
-      // })
     });
   }
 
@@ -43,15 +42,13 @@ export class ActivityChatService {
 
   sendMessage(msg: Message): void {
     const timestamp = ActivityChatService.getTimeStamp();
-    // this.user = new User('');
-    // const userName = this.user.name;
-
-
     msg.date = timestamp;
-    /*msg.author = userName;*/
-
     this.afs.collection('messages').add(msg);
+    let action = "wrote in activity log"
+    this.notificationService.createNewAction(action)
   }
+
+
 
   static getTimeStamp() {
    const now = new Date();

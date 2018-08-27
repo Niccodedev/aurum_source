@@ -27,6 +27,7 @@ import { AuthService } from "../auth/auth.service";
 import { CalendarService } from "./services/calendar.service";
 import { HelperService } from "../shared/services/helper.service";
 import { HKManager } from "../shared/classes/HKManager";
+import { NotificationService } from "../notification/services/notification.service";
 
 @Component({
   selector: "app-calendar",
@@ -43,7 +44,8 @@ export class CalendarComponent implements OnInit {
     public dataProcessingService: DataProcessingService,
     public dataStorageService: DataStorageService,
     public calendarService: CalendarService,
-    public datePipe: DatePipe
+    public datePipe: DatePipe,
+    public notificationService:NotificationService
 
   ) {
     // super(
@@ -182,6 +184,8 @@ export class CalendarComponent implements OnInit {
         this.calendarService.saveSchedules(localStorage.hotelId, this.year, this.month, this.monthSchedules )
         .then(response =>{
             this.scheduleModalRef.close()
+            let action =" added an event to Calendar.";
+            this.notificationService.createNewAction(action);
             alert("New schedule was created succefully.")
         }).catch( error=>{
             this.daySchedules = this.daySchedules.slice(0,-1);
@@ -199,8 +203,10 @@ export class CalendarComponent implements OnInit {
         this.calendarService.saveSchedules(localStorage.hotelId, this.year, this.month, this.monthSchedules )
         .then(response =>{
             this.scheduleModalRef.close()
+            let action =" delete an event in Calendar.";
+            this.notificationService.createNewAction(action)
             alert("The schedule was deleted succefully.")
-
+            
         }).catch( error=>{
             this.daySchedules = this.daySchedules.slice(0,-1);
             alert(error)
@@ -260,5 +266,6 @@ export class CalendarComponent implements OnInit {
         let daySchedules = this.monthSchedules[day]
         return daySchedules.length > 4;
     }
+
 
 }

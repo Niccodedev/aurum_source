@@ -28,11 +28,13 @@ import {NewSuperAdmitPageComponent} from './new-super-admit-page/new-super-admit
 import {RatePageComponent} from './rate-page/rate-page.component';
 import { HKComponent } from './hk-goals/hk.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { NotificationComponent } from './notification/notification.component';
 
 const appRoutes: Routes = [
   { path: '',  redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component:  LoginComponent },
   { path: 'managers', component:  ManagerComponent , canActivate: [AutGuard, AdminGuard] },
+  { path: 'notifications', component:  NotificationComponent , canActivate: [AutGuard, AdminGuard] },
   { path: 'transactions', component: TransactionsComponent , canActivate: [AutGuard] },
   { path: 'hotels', component:  HotelsComponent , canActivate: [AutGuard, AdminGuard] },
   { path: 'transactions-date', component: TransactionsDateComponent, canActivate: [AutGuard] },

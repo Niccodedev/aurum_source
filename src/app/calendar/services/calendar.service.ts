@@ -52,7 +52,9 @@ export class CalendarService {
        return "" + year + "-0" + month;
        }
     
-    
+    changeDateTimeFormat(date){
+       return date.toISOString().substring(0,19)
+    }
    
    
 //   addInventory(inventory, hotelId, key){

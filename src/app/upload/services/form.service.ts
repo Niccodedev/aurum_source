@@ -10,15 +10,10 @@ import {Hotel} from "../../hotels/interfaces/hotel";
 import {DataProcessingService} from "../../shared/services/data-processing.service";
 import {DataStorageService} from "../../shared/services/data-storage.service";
 import {UploadFileService} from "../../shared/services/upload-file.service";
-
-/*import {default as storage} from "firebase/app";
-import {getFileNameFromResponseContentDisposition, saveFile} from "../bills-misc/file-download-helper";
-import {RequestOptions, ResponseContentType} from "@angular/http";
-import { InterceptorService } from 'ng2-interceptors';*/
-// import { ConfigService } from 'app/common/services/config.service';
 import { saveAs } from "file-saver";
 import * as FileSaver from "file-saver";
 import * as url from "url";
+import { NotificationService } from '../../notification/services/notification.service';
 
 @Injectable()
 export class FormService {
@@ -31,7 +26,9 @@ export class FormService {
               private db: AngularFireDatabase,
               private uploadFileService: UploadFileService,
               private DataProcessingService: DataProcessingService,
-              private http: Http,) {
+              private http: Http,
+              private notificationService: NotificationService
+            ) {
   }
 
   getForms() {
@@ -47,14 +44,16 @@ export class FormService {
   }
 
   addForm(form) {
-    /*this.afs.collection('vendors').doc(hotelId).set(vendor);*/
-    /*this.afs.collection('bills').add(bill);*/
-    
-    this.afs.collection('forms').add(form);
+    this.afs.collection('forms').add(form).then(()=>{
+      this.notificationService.createNewAction("uploaded a form")
+    });
+
   }
 
   deleteFormService(formId) {
-    this.afs.doc('forms/' + formId).delete();
+    this.afs.doc('forms/' + formId).delete().then(() => {
+      this.notificationService.createNewAction("deleted a form")
+    });
   }
 
 }

@@ -19,6 +19,7 @@ import { saveAs } from "file-saver";
 import * as FileSaver from "file-saver";
 import {Http, Response, RequestOptions, Headers, ResponseContentType} from "@angular/http";
 import * as url from "url";
+import { NotificationService } from '../../notification/services/notification.service';
 
 // import {  } from "file-saver";
 
@@ -38,6 +39,7 @@ export class BillService {
               private uploadFileService: UploadFileService,
               private DataProcessingService: DataProcessingService,
               private http: Http,
+              private notificationService:NotificationService
               /*private fileSaver: MSFileSaver*/) {
   }
 
@@ -60,24 +62,13 @@ export class BillService {
 
   addBill(bill) {
     this.afs.collection('bills').add(bill);
+    this.notificationService.createNewAction("uploaded a bill")
   }
 
   deleteBillService(billId) {
     this.afs.doc('bills/' + billId).delete();
+    this.notificationService.createNewAction("deleted a bill")
   }
-
-  // public async downloadZip(): Promise<void> {
-  //   const blob = await this.service.downloadZip(this.id);
-  //   const url = <strong>window.URL.createObjectURL</strong>(blob);
-  //
-  //   const link = this.downloadZipLink.nativeElement;
-  //   link.href = url;
-  //   link.download = 'archive.zip';
-  //   link.click();
-  //
-  //   <strong>window.URL.revokeObjectURL</strong>(url);
-  //
-  // }
 
   downloadResource(id: string): Promise<Blob> {
     console.log(id);

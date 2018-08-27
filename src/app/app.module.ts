@@ -87,6 +87,7 @@ import {VendorsService} from "./property/services/vendors.service";
 import {PayrollService} from "./payroll/services/payroll.service";
 import {BillService} from "./upload/services/bill.service";
 import {FormService} from './upload/services/form.service';
+import {NotificationService} from './notification/services/notification.service';
 import {AngularFireAuth} from 'angularfire2/auth';
 import { NewSuperAdmitPageComponent } from './new-super-admit-page/new-super-admit-page.component';
 import {SuperAdminService} from './new-super-admit-page/services/super-admin.service';
@@ -96,7 +97,7 @@ import { FilterByDatePipe } from './shared/pipes/filter-by-date.pipe';
 import {NgxAutoScroll} from 'ngx-auto-scroll';
 import { ItemsManagerComponent } from './shared/classes/items-manager/items-manager.component';
 import { HKComponent } from './hk-goals/hk.component';
-
+import { NotificationComponent } from './notification/notification.component';
 import { HKService } from './hk-goals/services/hk.service';
 import { SafePipe } from './shared/pipes/SafePipe';
 
@@ -144,7 +145,8 @@ import { SafePipe } from './shared/pipes/SafePipe';
     FilterByDatePipe,
     ItemsManagerComponent,
     SafePipe,
-    InspectionComponent
+    InspectionComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -212,7 +214,8 @@ import { SafePipe } from './shared/pipes/SafePipe';
     FormService,
     AngularFireAuth,
     SuperAdminService,
-    DatePipe
+    DatePipe,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })

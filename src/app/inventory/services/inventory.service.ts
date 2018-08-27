@@ -13,7 +13,7 @@ import {DataProcessingService} from '../../shared/services/data-processing.servi
 import {AuthService} from '../../auth/auth.service';
 import {HotelService} from '../../hotels/services/hotel.service';
 import {HelperService} from '../../shared/services/helper.service';
-
+import { NotificationService } from '../../notification/services/notification.service'
 @Injectable()
 export class InventoryService {
 
@@ -27,7 +27,8 @@ export class InventoryService {
               public dataProcessingService: DataProcessingService,
               private authService: AuthService,
               private formBuilder: FormBuilder,
-              private hotelSevice: HotelService) {}
+              private hotelSevice: HotelService,
+              private notificationService: NotificationService) {}
 
 
   getInventories() {
@@ -43,16 +44,16 @@ export class InventoryService {
   }
 
   addInventory(inventory, hotelId, key){
-    
     this.afs.collection('inventories').doc(hotelId).update({
       [key] : inventory
     }).then(()=>{
-
+      let action =" added new Inventory - " + key.toUpperCase();
+      this.notificationService.createNewAction(action)
     })
     .catch(error=>{
       this.afs.collection('inventories').doc(hotelId).set({
         [key] : inventory
-      })
+      })  
     });
     
   }
@@ -61,6 +62,9 @@ export class InventoryService {
 
     this.afs.collection('inventories').doc(hotelId).update({
       'payroll' : item
+    }).then(()=>{
+      let action =" added new payroll data.";
+      this.notificationService.createNewAction(action)
     });
   }
 
@@ -69,6 +73,9 @@ export class InventoryService {
 
     this.afs.collection('inventories').doc(hotelId).update({
       'inspection' : item
+    }).then(()=>{
+      let action =" added new inspection data.";
+      this.notificationService.createNewAction(action)
     });
   }
 
@@ -76,9 +83,11 @@ export class InventoryService {
 
     this.afs.collection('inventories').doc(hotelId).update({
       'hk' : item
+    }).then(()=>{
+      let action =" added new inspection data.";
+      this.notificationService.createNewAction(action)
     });
   }
-
 
   addNewField() {
     this.afs.collection('inventories').doc(localStorage.hotelId).set({

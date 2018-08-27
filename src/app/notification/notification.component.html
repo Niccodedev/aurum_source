@@ -1,0 +1,9 @@
+<app-header></app-header>
+
+<section id="main">
+  <div class="main__block">
+    <div *ngFor="let notification of notifications">
+    {{notification.data.manager}} {{notification.data.action}} {{notification.data.time}} 
+    </div>
+  </div>
+</section>

@@ -2,8 +2,21 @@
 
 <section id="main">
   <div class="main__block">
+      <div>
+        <h3>New Notifications</h3>
+      </div>
     <div *ngFor="let notification of notifications">
-    {{notification.data.manager}} {{notification.data.action}} {{formatDate(notification.data.time)}} 
+      <div *ngIf="isRecent(notification.data.time)">
+        - {{notification.data.manager}} {{notification.data.action}} {{formatDate(notification.data.time)}} 
+      </div>
+    </div>
+    <div>
+        <h3>Old Notifications</h3>
+      </div>
+    <div *ngFor="let notification of notifications">
+      <div *ngIf="!isRecent(notification.data.time)">
+        - {{notification.data.manager}} {{notification.data.action}} {{formatDate(notification.data.time)}} 
+      </div>
     </div>
   </div>
 </section>

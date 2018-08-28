@@ -37,7 +37,7 @@ export class NotificationComponent implements OnInit {
       })  
   }
 
-  isNewNotification(time){
+  isRecent(time){
     return new Date().getTime() < time + 1000 * 60 * 60 *24;
   }
   

@@ -34,7 +34,7 @@ const appRoutes: Routes = [
   { path: '',  redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component:  LoginComponent },
   { path: 'managers', component:  ManagerComponent , canActivate: [AutGuard, AdminGuard] },
-  { path: 'notifications', component:  NotificationComponent , canActivate: [AutGuard, AdminGuard] },
+  { path: 'notifications', component:  NotificationComponent , canActivate: [AutGuard] },
   { path: 'transactions', component: TransactionsComponent , canActivate: [AutGuard] },
   { path: 'hotels', component:  HotelsComponent , canActivate: [AutGuard, AdminGuard] },
   { path: 'transactions-date', component: TransactionsDateComponent, canActivate: [AutGuard] },

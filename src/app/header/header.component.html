@@ -11,9 +11,9 @@
             <a routerLink="/notifications" class="select__item">Notifications</a>
         </div>
 
-        <div class="flex__item">
+        <div class="flex__item"  *ngIf="isAdmin">
             <i class="fas fa-users"></i>
-            <a routerLink="/managers" class="select__item" *ngIf="isAdmin">Managers</a>
+            <a routerLink="/managers" class="select__item">Managers</a>
         </div>
 
 

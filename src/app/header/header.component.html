@@ -118,13 +118,13 @@
             </div>
         </div>
 
-        <div class="flex__item">
+        <div class="flex__item" *ngIf="isAdmin">
             <i class="fas fa-exchange-alt"></i>
-            <a href="#" class="select__item" *ngIf="isAdmin" routerLink="/hotels">Properties</a>
+            <a href="#" class="select__item"  routerLink="/hotels">Properties</a>
         </div>
-        <div class="flex__item">
+        <div class="flex__item"  *ngIf="isAdmin">
             <i class="fas fa-dollar-sign"></i>
-            <a href="#" class="select__item" *ngIf="isAdmin" routerLink="/rate-page">Rate Page</a>
+            <a href="#" class="select__item" routerLink="/rate-page">Rate Page</a>
         </div>
         <div class="flex__item">
 

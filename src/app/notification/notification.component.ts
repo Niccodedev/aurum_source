@@ -43,7 +43,7 @@ export class NotificationComponent implements OnInit {
   
   formatDate(time){
     let date = new Date(time);
-    let year = date.getFullYear();
+    let year = date.getFullYear() % 100;
     let month = this.fixTwoDigit(date.getMonth() + 1)
     let day = this.fixTwoDigit(date.getDate());
     let amOrPm = 'AM';

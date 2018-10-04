@@ -54,7 +54,7 @@
                                     <tr *ngFor="let schedule of daySchedules; let i=index;" class="table-success">
                                         <td class="schedule-cell">{{schedule.name}}</td>
                                         <td class="schedule-cell">{{schedule.content}}</td>
-                                        <td class="schedule-cell"><div *ngIf="canDelete(schedule.time)"><button type="button" (click)="deleteSchedule(i)">Delete</button></div></td>
+                                        <td class="schedule-cell"><div *ngIf="canDelete(schedule.time)"><button type="button" class="add__item__btn grey-button" (click)="deleteSchedule(i)">Delete</button></div></td>
                                     </tr>
                                 </tbody>
                                 

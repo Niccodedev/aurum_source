@@ -20,11 +20,11 @@
                         <th class="dark-button calendar-header">Sat</th>
                     </thead>
                     <tr class="table" *ngFor="let item of createRange(6); let _week=index">
-                        <td class="calendar-cell" *ngFor="let _item of createRange(7); let _day=index" (click)="showSchedule(startDate + _week*7 + _day)"> 
+                        <td class="calendar-cell" *ngFor="let _item of createRange(7); let _day=index" [ngClass]="{'grey-border': day===(startDate + _week*7 + _day)}" (click)="showSchedule(startDate + _week*7 + _day)" > 
                             <div *ngIf="!thisMonthDay(_week*7 + _day)">
                                 <div class="inactive_date"><b>{{getExcatDate(startDate + _week*7 + _day)}}</b></div>                                
                             </div>
-                            <div *ngIf="thisMonthDay(_week*7 + _day)" >                               
+                            <div *ngIf="thisMonthDay(_week*7 + _day)">                               
                                 <b>{{getExcatDate(startDate + _week*7 + _day)}}</b>
                                 <div *ngFor="let _schedule of getScheduleList(startDate, _week*7,_day)">
                                     <div style="display: inline-block; white-space: nowrap;"><span class="name">{{ _schedule.name }}</span>:<span class="content">{{ _schedule.content }}</span></div>
@@ -41,14 +41,14 @@
         <div class="col-md-4">
             <!-- //////////////  Popup Modal -->
             
-                    <div class="d-flex flex-column" style="margin-left:0px;">
-                        <button class="btn dark-button" style="margin:30px;">Schedules on {{month}}/{{day}}/{{year%100}}</button>
-                        <div *ngIf="daySchedules.length>0">
+                    <div class="d-flex flex-column 	grey" style="margin-left:0px;">
+                        <button class="btn grey-button" style="margin:30px;">Schedules on {{month}}/{{day}}/{{year%100}}</button>
+                        <div *ngIf="daySchedules.length>0" >
                             <table class="table table-striped">
-                                <thead class="schedule-header">
-                                    <td style="align-content: center;">Scheduler</td>
-                                    <td>Content</td>
-                                    <td></td>
+                                <thead class="schedule-header grey-button">
+                                    <td style="align-content: center;" class="grey-button">Scheduler</td>
+                                    <td  class="grey-button">Content</td>
+                                    <td  class="grey-button"></td>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let schedule of daySchedules; let i=index;" class="table-success">
@@ -67,7 +67,7 @@
                         <div *ngIf="canCreate()" align="center">
                             
                             <div class="add__item__block" (click)="openSchedulModal(newScheduleModal)">
-                                <button type="button" class="add__item__btn">Add new schedule </button>
+                                <button type="button" class="add__item__btn grey-button">Add new schedule </button>
                             </div> 
                         </div>
                     </div>

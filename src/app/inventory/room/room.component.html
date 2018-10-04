@@ -11,7 +11,7 @@
                         <a (click)="changeTable('date')" [ngClass]="{'dark-button':byDate}" class="button__item">By Date</a>
                     </div>
                     <div class="type_button">
-                        <a (click)="changeTable('type')" [ngClass]="{'dark-button':byType}" class="button__item">By Type</a>
+                        <a (click)="changeTable('type')" [ngClass]="{'dark-button':byType}" class="button__item">By Item</a>
                     </div>
                     <div *ngIf="archiveToggle==true && !byType && inventoryDates" class="type_button">
                         <a class="button__item" (click)="showArchive=!showArchive;">Archive</a>
@@ -52,7 +52,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">{{keyTitle}}</th>
+                        <th scope="col">Item</th>
                         <th scope="col" class="col__items" colspan="2">
                             {{nameOfItem}}
                             <!--<i class="far fa-edit"></i>-->
@@ -93,7 +93,7 @@
             <table class="table table-bordered" id="table">
                 <thead>
                     <tr>
-                        <th scope="col" style="width:10%;">{{keyTitle}}</th>
+                        <th scope="col" style="width:10%;">Item</th>
                         <th scope="col" class="col__items" colspan="2" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
                             {{date | date:'MM/dd/yy'}}
                             <div style="display: inline;"  (click)="selectedDate = i"><i class="far fa-edit"></i></div>
@@ -179,7 +179,7 @@
                                     <table  class="table  table-hover table-responsive m-auto">
                                         <tr *ngIf="i==0">
                                             <td style="background-color: #F3F2F0;">
-                                                    <p class="td-numb">{{keyTitle}}</p>
+                                                    <p class="td-numb">Item</p>
                                                 </td>
                                             <td style="background-color: #F3F2F0;">
                                                 <p class="td-numb">Stock</p>

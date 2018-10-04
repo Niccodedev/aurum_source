@@ -11,7 +11,7 @@
                         <a (click)="changeTable('date')" [ngClass]="{'dark-button':byDate}" class="button__item">By Date</a>
                     </div>
                     <div class="type_button">
-                        <a (click)="changeTable('type')" [ngClass]="{'dark-button':byType}" class="button__item">By Type</a>
+                        <a (click)="changeTable('type')" [ngClass]="{'dark-button':byType}" class="button__item">By Item</a>
                     </div>
                     <div *ngIf="archiveToggle==true && !byType && inventoryDates" class="type_button">
                         <a class="button__item" (click)="showArchive=!showArchive;">Archive</a>
@@ -43,7 +43,7 @@
                 <div class="date-range__item d-flex justify-content-center align-items-center">
                     <input type="date" class="search__date__item" [(ngModel)]="dateFrom" [disabled]="!nameOfItem" [hidden]="!byType">
                     <p class="date-range__title" [hidden]="!byType" style=" margin-bottom:6em">Date Range</p>
-                    <input type="date" class="search__date__item" [(ngModel)]="dateTo" [disabled]="!dateFrom" [hidden]="!byType">
+                    <input type="date" class="search__date__item" [(ngModel)]="dateTo" [disabled]="!nameOfItem" [hidden]="!byType">
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">{{keyTitle}}</th>
+                        <th scope="col">Item</th>
                         <th scope="col" class="col__items" colspan="2">
                             {{nameOfItem}}
                             <!--<i class="far fa-edit"></i>-->
@@ -63,15 +63,15 @@
                     <tr>
                         <td scope="row" class="type"></td>
                         <td>
-                            <p class="td-numb">Stock</p>
+                            <p>Stock</p>
                         </td>
                         <td>
-                            <p class="td-numb">Order</p>
+                            <p>Order</p>
                         </td>
                     </tr>
                 </thead>
                 <ng-container *ngIf="currentItem">
-                    <tr *ngFor="let item of currentItem.data | filterByDate: dateFrom: dateTo">
+                    <tr *ngFor="let item of currentItem.data | filterByDate: dateFrom: dateTo">                   
                         <td scope="row" class="type">{{item.date | date:'MM/dd/yy'}}</td>
                         <td>
                             <input class="td-numb" [(ngModel)]="item.have" disabled>
@@ -93,7 +93,7 @@
             <table class="table table-bordered" id="table">
                 <thead>
                     <tr>
-                        <th scope="col" style="width:10%;">{{keyTitle}}</th>
+                        <th scope="col" style="width:10%;">Item</th>
                         <th scope="col" class="col__items" colspan="2" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
                             {{date | date:'MM/dd/yy'}}
                             <div style="display: inline;"  (click)="selectedDate = i"><i class="far fa-edit"></i></div>
@@ -122,10 +122,10 @@
 
                         <ng-container *ngFor="let item of inventoryItems[key][label].data.slice(dateIndex, dateIndex + 8); let i = index">
                             <td>
-                                <input class="cell_edit " [disabled]="selectedDate != i" [(ngModel)]="item.have">
+                                <input class="cell_edit"  disabled="{{selectedDate != i}}" [(ngModel)]="item.have">
                             </td>
                             <td>
-                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.need">
+                                <input class="cell_edit"  [disabled]="selectedDate != i" [(ngModel)]="item.need">
                             </td>
                         </ng-container>
                     </ng-container> 
@@ -138,7 +138,7 @@
     
                         <ng-container *ngFor="let item of inventoryItems[key][label].data.slice(dateIndex, dateIndex + 8); let i = index">
                             <td>
-                                <input class="cell_edit " [disabled]="selectedDate != i" [(ngModel)]="item.have">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.have">
                             </td>
                             <td>
                                 <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.need">
@@ -160,8 +160,8 @@
             <div class="modal-container" style="width: 800px; background: white;">
                 <form class="main__block" [formGroup]="form" (submit)="saveFormInput()" #f="ngForm">
                     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true" class="cros">&times;</span>
-          </button>
+                        <span aria-hidden="true" class="cros">&times;</span>
+                    </button>
                     <div class="user__component d-flex flex-column">
                         <div class="user__block">
                             <div class="user__block__header d-flex justify-content-between align-items-center">
@@ -176,10 +176,10 @@
                             <hr>
                               
                                 <form formArrayName="inventories" *ngFor="let item of form.get('inventories').controls; let i=index" class="user__array_form">
-                                    <table>
+                                    <table  class="table  table-hover table-responsive m-auto">
                                         <tr *ngIf="i==0">
                                             <td style="background-color: #F3F2F0;">
-                                                    <p class="td-numb">{{keyTitle}}</p>
+                                                    <p class="td-numb">Item</p>
                                                 </td>
                                             <td style="background-color: #F3F2F0;">
                                                 <p class="td-numb">Stock</p>

@@ -9,7 +9,7 @@
             <span class="message_meta">
             <b> {{ message.data.managerId }} </b>
             {{message.data.author}}
-            {{message.data.date}}
+            {{message.data.date | date:'MM/dd/yy' }}
           </span>
           <span class="message__block">
             {{message.data.text}}
@@ -25,7 +25,7 @@
             <span class="message_meta">
               <b> {{ message.data.managerId }} </b>
               {{message.data.author}}
-              {{message.data.date}}
+              {{message.data.date | date:'MM/dd/yy' }}
             </span>
           </p>
           </div>

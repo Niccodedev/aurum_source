@@ -29,7 +29,7 @@
             font-weight: 600;" [hidden]="!byDate">Select Date</p>
                 <select class="custom-select" [(ngModel)]="dateOfItem" (change)="updateItemsByDate()" [hidden]="!byDate" style="width:50%;background-color:#F3F2F0; margin: 0 auto">
           <option selected>Select Date</option>
-          <option *ngFor="let date of inventoryDates" value="{{date}}">{{date}}</option>
+          <option *ngFor="let date of inventoryDates" value="{{date}}">{{date | date:'MM/dd/yy'}}</option>
         </select>
             </div>
 
@@ -85,7 +85,7 @@
                 </thead>
                 <ng-container *ngIf="currentItem">
                     <tr *ngFor="let item of currentItem.data | filterByDate: dateFrom: dateTo">
-                        <td scope="row" class="type">{{item.date}}{{date}}(minso={{getMinso(item.date).minso}}, minco = {{getMinso(item.date).minco}})</td>
+                        <td scope="row" class="type">{{item.date | date:'MM/dd/yy'}}(minso={{getMinso(item.date).minso}}, minco = {{getMinso(item.date).minco}})</td>
                         <td>
                             <input class="cell_edit" [(ngModel)]="item.dnd" disabled>
                         </td>
@@ -120,7 +120,7 @@
                     <tr>
                         <th scope="col" style="width: 10%;">Employees</th>
                         <th scope="col" class="col__items" colspan="6" (click)="selectedDate = i" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
-                            {{date | date:'MM/dd/yyyy'}}(minso={{getMinso(date).minso}}, minco = {{getMinso(date).minco}})
+                            {{date | date:'MM/dd/yy'}}(minso={{getMinso(date).minso}}, minco = {{getMinso(date).minco}})
                             <i class="far fa-edit"></i>
                         </th>
                     </tr>

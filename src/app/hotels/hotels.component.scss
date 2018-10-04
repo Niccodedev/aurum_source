@@ -371,3 +371,10 @@ input:focus {
     font-size: 25px;
   }
 }
+:host {
+  .plus__circle {
+      svg {
+          width: 3em;
+      }
+  }
+}

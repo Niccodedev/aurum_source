@@ -42,7 +42,7 @@
             <!-- //////////////  Popup Modal -->
             
                     <div class="d-flex flex-column" style="margin-left:0px;">
-                        <button class="btn dark-button" style="margin:30px;">Schedules on {{month}}/{{day}}/{{year}}</button>
+                        <button class="btn dark-button" style="margin:30px;">Schedules on {{month}}/{{day}}/{{year%100}}</button>
                         <div *ngIf="daySchedules.length>0">
                             <table class="table table-striped">
                                 <thead class="schedule-header">

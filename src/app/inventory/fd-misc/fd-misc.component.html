@@ -27,7 +27,7 @@
                 <p class="date-range__title" style="color: darkslategray; font-style:normal;opacity: 0.5;font-weight: 600;" [hidden]="!byDate">Select Date</p>
                 <select class="custom-select" [(ngModel)]="dateOfItem" (change)="updateItemsByDate()" [hidden]="!byDate" style="width:50%;background-color:#F3F2F0; margin: 0 auto">
                     <option selected>Select Date</option>
-                    <option *ngFor="let date of inventoryDates" value="{{date}}">{{date}}</option>
+                    <option *ngFor="let date of inventoryDates" value="{{date}}">{{date | date:'MM/dd/yy'}}</option>
                 </select>
             </div>
 
@@ -72,7 +72,7 @@
                 </thead>
                 <ng-container *ngIf="currentItem">
                     <tr *ngFor="let item of currentItem.data | filterByDate: dateFrom: dateTo">
-                        <td scope="row" class="type">{{item.date}}</td>
+                        <td scope="row" class="type">{{item.date | date:'MM/dd/yy'}}</td>
                         <td>
                             <input class="td-numb" [(ngModel)]="item.have" disabled>
                         </td>
@@ -95,7 +95,7 @@
                     <tr>
                         <th scope="col" style="width:10%;">{{keyTitle}}</th>
                         <th scope="col" class="col__items" colspan="2" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
-                                {{date}}
+                            {{date | date:'MM/dd/yy'}}
                             <div style="display: inline;"  (click)="selectedDate = i"><i class="far fa-edit"></i></div>
                         </th>
                     </tr>

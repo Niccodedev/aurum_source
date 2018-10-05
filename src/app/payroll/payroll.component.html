@@ -104,8 +104,8 @@
             <table class="table table-bordered" id="table">
                 <thead>
                     <tr>
-                        <th scope="col" style="width: 10%;">Employees</th>
-                        <th scope="col" class="col__items" colspan="4"  *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
+                        <th scope="col" style="width: 10%;" class="thick-border headcol">Employees</th>
+                        <th scope="col" class="col__items thick-border" colspan="4"  *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
                             {{date | date:'MM/dd/yy'}}
                             <div style="display: inline;"  (click)="selectedDate = i"><i class="far fa-edit"></i></div>
                         </th>
@@ -113,7 +113,7 @@
                 </thead>
                 <thead>
                     <tr>
-                        <td scope="row" class="type"></td>
+                        <td scope="row" class="type thick-border headcol"></td>
                         <ng-container *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8)">
                             <td style="background-color: #F3F2F0;">
                                 <p class="td-numb">RT</p>
@@ -124,7 +124,7 @@
                             <td style="background-color: #F3F2F0;">
                                 <p class="td-numb">DT</p>
                             </td>
-                            <td style="background-color: #F3F2F0;">
+                            <td  class="thick-border" style="background-color: #F3F2F0;">
                                 <p class="td-numb">MT</p>
                             </td>
                         </ng-container>
@@ -133,7 +133,7 @@
               
                 <tr *ngFor="let label of inventoryLabels">
                     <ng-container *ngIf="!inventoryItems.payroll[label].archive">
-                        <td scope="row" class="type" id="fname">
+                        <td scope="row" class="type thick-border headcol" id="fname">
                             <input class="checkbox" type="checkbox"   [(ngModel)] = "inventoryItems.payroll[label].archive" value="onoffswitch" id='checkMe' *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
                         </td>
                         <ng-container id="t-data" *ngFor="let item of inventoryItems.payroll[label].data.slice(dateIndex, dateIndex + 8); let i = index">
@@ -146,7 +146,7 @@
                             <td>
                                 <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.dt">
                             </td>
-                            <td>
+                            <td class="thick-border">
                                 <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.mt">
                             </td>
                         </ng-container>
@@ -154,11 +154,11 @@
                 </tr>
                 <tr *ngFor="let label of inventoryLabels" class="archive">
                         <ng-container *ngIf="inventoryItems.payroll[label].archive && showArchive" >
-                            <td scope="row" class="type" id="fname">
+                            <td scope="row" class="type thick-border headcol" id="fname">
                                 <input class="checkbox" type="checkbox" value="onoffswitch" id='checkMe' [(ngModel)]="inventoryItems.payroll[label].archive" *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
                             </td>
                             <ng-container id="t-data" *ngFor="let item of inventoryItems.payroll[label].data.slice(dateIndex, dateIndex + 8); let i = index">
-                                <td>
+                                <td >
                                     <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.rt">
                                 </td>
                                 <td>
@@ -167,7 +167,7 @@
                                 <td>
                                     <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.dt">
                                 </td>
-                                <td>
+                                <td class="thick-border">
                                     <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.mt">
                                 </td>
                             </ng-container>

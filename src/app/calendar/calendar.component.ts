@@ -168,6 +168,7 @@ export class CalendarComponent implements OnInit {
 
     showSchedule(day){      
         this.day = day;
+        if(day<1) return
         if (this.monthSchedules.hasOwnProperty(day))
             this.daySchedules = this.monthSchedules[day]
         else

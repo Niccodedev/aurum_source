@@ -118,8 +118,8 @@
             <table class="table table-bordered" id="table">
                 <thead>
                     <tr>
-                        <th scope="col" style="width: 10%;">Employees</th>
-                        <th scope="col" class="col__items" colspan="6" (click)="selectedDate = i" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
+                        <th scope="col" style="width: 10%;" class="thick-border headcol">Employees</th>
+                        <th scope="col" class="col__items thick-border" colspan="6" (click)="selectedDate = i" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
                             {{date | date:'MM/dd/yy'}}(minso={{getMinso(date).minso}}, minco = {{getMinso(date).minco}})
                             <i class="far fa-edit"></i>
                         </th>
@@ -127,7 +127,7 @@
                 </thead>
                 <thead>
                     <tr>
-                        <td scope="row" class="type"></td>
+                        <td scope="row" class="type thick-border headcol"></td>
                         <ng-container *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8)">
                             <td style="background-color: #F3F2F0;">
                                 <p class="td-numb">DND</p>
@@ -144,7 +144,7 @@
                             <td style="background-color: #F3F2F0;">
                                 <p class="td-numb">STD</p>
                             </td>
-                            <td style="background-color: #F3F2F0;">
+                            <td class="thick-border" style="background-color: #F3F2F0;">
                                 <p class="td-numb">DIF</p>
                             </td>
                         </ng-container>
@@ -152,7 +152,7 @@
                 </thead>
                 <tr *ngFor="let label of inventoryLabels">
                     <ng-container *ngIf="!inventoryItems.hk[label].archive">
-                        <td scope="row" class="type" id="fname">
+                        <td scope="row" class="type" id="fname" class="thick-border headcol">
                             <input class="checkbox" type="checkbox" [(ngModel)]="inventoryItems.hk[label].archive" *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
                         </td>
                         <ng-container id="t-data" *ngFor="let item of inventoryItems.hk[label].data.slice(dateIndex, dateIndex + 8); let i = index">
@@ -171,7 +171,7 @@
                             <td>
                                 <input class="cell_edit" disabled="selectedDate != i" value="{{getMinso(item.date).minso * item.so + getMinso(item.date).minco * item.co}}">
                             </td>
-                            <td>
+                            <td class="thick-border">
                                 <input class="cell_edit" disabled value="{{getMinso(item.date).minso * item.so + getMinso(item.date).minco * item.co -item.time}}">
                             </td>
                         </ng-container>
@@ -179,7 +179,7 @@
                 </tr>
                 <tr *ngFor="let label of inventoryLabels" class="archive">
                         <ng-container *ngIf="inventoryItems.hk[label].archive && showArchive">
-                            <td scope="row" class="type" id="fname">
+                            <td scope="row" class="type thick-border headcol" id="fname">
                                 <input class="checkbox" type="checkbox" [(ngModel)]="inventoryItems.hk[label].archive"  *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
                             </td>
                             <ng-container id="t-data" *ngFor="let item of inventoryItems.hk[label].data.slice(dateIndex, dateIndex + 8); let i = index">
@@ -198,7 +198,7 @@
                                 <td>
                                     <input class="cell_edit" disabled value="{{getMinso(item.date).minso * item.so + getMinso(item.date).minco * item.co}}">
                                 </td>
-                                <td>
+                                <td class="thick-border">
                                     <input class="cell_edit" disabled value="{{getMinso(item.date).minso * item.so + getMinso(item.date).minco * item.co -item.time}}">
                                 </td>
                             </ng-container>

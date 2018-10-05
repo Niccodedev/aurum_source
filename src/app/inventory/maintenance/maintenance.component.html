@@ -72,7 +72,7 @@
                 </thead>
                 <ng-container *ngIf="currentItem">
                     <tr *ngFor="let item of currentItem.data | filterByDate: dateFrom: dateTo">                   
-                        <td scope="row" class="type">{{item.date | date:'MM/dd/yy'}}</td>
+                        <td scope="row" class="type ">{{item.date | date:'MM/dd/yy'}}</td>
                         <td>
                             <input class="td-numb" [(ngModel)]="item.have" disabled>
                         </td>
@@ -89,12 +89,14 @@
 
         <!--///////////////////////////DEFAULT///////////////////////////////////-->
 
+
+     
         <div class="main__title d-flex align-items-center" *ngIf="!byType && inventoryDates">
             <table class="table table-bordered" id="table">
                 <thead>
                     <tr>
-                        <th scope="col" style="width:10%;">Item</th>
-                        <th scope="col" class="col__items" colspan="2" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
+                        <th scope="col" style="width:10%;" class="thick-border headcol">Item</th>
+                        <th scope="col" class="col__items thick-border" colspan="2" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
                             {{date | date:'MM/dd/yy'}}
                             <div style="display: inline;"  (click)="selectedDate = i"><i class="far fa-edit"></i></div>
                         </th>
@@ -102,12 +104,12 @@
                 </thead>
                 <thead>
                     <tr>
-                        <td scope="row" class="type"></td>
+                        <td scope="row" class="type thick-border headcol"></td>
                         <ng-container *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8)">
                             <td>
                                 <p class="td-numb">Stock</p>
                             </td>
-                            <td>
+                            <td class="thick-border">
                                 <p class="td-numb">Order</p>
                             </td>
                         </ng-container>
@@ -116,15 +118,15 @@
 
                 <tr *ngFor="let label of inventoryLabels" id='toggle' name="achive">
                     <ng-container *ngIf="! inventoryItems[key][label].archive">
-                        <td scope="row" class="type" id="fname">
-                            <input class="checkbox" type="checkbox" id='checkMe' *ngIf="showArchive" [(ngModel)]="inventoryItems[key][label].archive" (change)="archiveToggle=false;"> {{label}}
+                        <td scope="row" class="type thick-border headcol" id="fname">
+                            <input class="checkbox" type="checkbox" *ngIf="showArchive" [(ngModel)]="inventoryItems[key][label].archive" (change)="archiveToggle=false;"> {{label}}
                         </td>
 
                         <ng-container *ngFor="let item of inventoryItems[key][label].data.slice(dateIndex, dateIndex + 8); let i = index">
                             <td>
                                 <input class="cell_edit"  disabled="{{selectedDate != i}}" [(ngModel)]="item.have">
                             </td>
-                            <td>
+                            <td class="thick-border">
                                 <input class="cell_edit"  [disabled]="selectedDate != i" [(ngModel)]="item.need">
                             </td>
                         </ng-container>
@@ -132,21 +134,32 @@
                 </tr>
                 <tr *ngFor="let label of inventoryLabels" id='toggle' name="achive" class = "archive">
                     <ng-container *ngIf="showArchive && inventoryItems[key][label].archive">
-                        <td scope="row" class="type" id="fname">
-                            <input class="checkbox" type="checkbox" id='checkMe' *ngIf="showArchive" [(ngModel)]="inventoryItems[key][label].archive" (change)="archiveToggle=false;"> {{label}}
+                        <td scope="row " class="type thick-border headcol" id="fname">
+                            <input class="checkbox" type="checkbox"  *ngIf="showArchive" [(ngModel)]="inventoryItems[key][label].archive" (change)="archiveToggle=false;"> {{label}}
                         </td>
     
                         <ng-container *ngFor="let item of inventoryItems[key][label].data.slice(dateIndex, dateIndex + 8); let i = index">
                             <td>
                                 <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.have">
                             </td>
-                            <td>
+                            <td class="thick-border">
                                 <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.need">
                             </td>
                         </ng-container>
                     </ng-container>
                     </tr>
             </table>
+
+
+
+            <!--//////////////////////////////////////////////-->
+         
+
+
+
+
+
+                
             <div class="save__btn" *ngIf="selectedDate != -1" (click)="updateItem();selectedDate=-1">
                 <button class="add__btn">Save</button>
             </div>
@@ -155,6 +168,14 @@
             </div>
 
         </div>
+
+
+
+
+
+
+
+
         <!--POPUP ADD PROPERTY FORM-->
         <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
             <div class="modal-container" style="width: 800px; background: white;">

@@ -17,12 +17,15 @@
                         <a (click)="changeTable('type')" [ngClass]="{'dark-button':byType}" class="button__item">By Employee</a>
                     </div>
                     <div *ngIf="archiveToggle==true && !byType && inventoryDates" class="type_button">
-                        <a class="button__item" (click)="showArchive = !showArchive">Archive</a>
+                        <a class="button__item"  [ngClass]="{'green-border':showArchive}" (click)="showArchive = !showArchive">Archive</a>
 
                     </div>
                     <div *ngIf="archiveToggle==false && !byType && inventoryDates" class="type_button">
-                        <a class="button__item" (click)="updateItem();selectedDate=-1;showArchive=false;archiveToggle=true;"> Save Archive</a>
+                        <a class="button__item green-border" (click)="updateItem();selectedDate=-1;showArchive=false;archiveToggle=true;"> Save Archive</a>
                     </div>
+                    <div class="type_button" *ngIf="(selectedDate != -1) && !byType" (click)="updateItem();selectedDate=-1">
+                        <a class="button__item purple-border">Save Edit</a>
+                    </div> 
                 </div>
             </div>
 
@@ -107,7 +110,16 @@
                         <th scope="col" style="width: 10%;" class="thick-border headcol">Employees</th>
                         <th scope="col" class="col__items thick-border" colspan="4"  *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
                             {{date | date:'MM/dd/yy'}}
-                            <div style="display: inline;"  (click)="selectedDate = i"><i class="far fa-edit"></i></div>
+                            <ng-container *ngIf="selectedDate == i">
+                                <div style="display: inline;" (click)="selectedDate = i">
+                                    <i class="far fa-edit purple"></i>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="selectedDate != i">
+                                <div style="display: inline;" (click)="selectedDate = i">
+                                    <i class="far fa-edit"></i>
+                                </div>
+                            </ng-container> 
                         </th>
                     </tr>
                 </thead>
@@ -173,10 +185,7 @@
                             </ng-container>
                         </ng-container>
                     </tr>
-            </table>
-            <div class="save__btn" *ngIf="selectedDate != -1" (click)="updateItem();selectedDate=-1">
-                <button class="add__btn">Save</button>
-            </div>            
+            </table>                       
 
         </div>
 

@@ -62,6 +62,7 @@ export class TransactionsDateComponent implements OnInit {
     this.dateIndex = 0;
     this.byDate = true;
     this.byType = false;
+    this.editingColumnNumber = -1;
   }
 
   ngOnInit() {

@@ -18,12 +18,15 @@
                     </div>
                     <div *ngIf="(currentUser.role=='admin') &&(!byType && inventoryDates)" class="type_button">
                         <!-- <a class="button__item" (click)="isEnabled=true;archiveRow();">Archive</a> -->
-                        <a class="button__item" (click)="showArchive = !showArchive">Archive</a>
+                        <a class="button__item" [ngClass]="{'green-border':showArchive}" (click)="showArchive = !showArchive">Archive</a>
 
                     </div>
                     <div *ngIf="archiveToggle==false && !byType && inventoryDates" class="type_button">
-                            <a class="button__item" (click)="updateItem();selectedDate=-1;archiveToggle =true;showArchive=false;"> Save Archive</a>
+                            <a class="button__item green-border" (click)="updateItem();selectedDate=-1;archiveToggle =true;showArchive=false;"> Save Archive</a>
                         </div>
+                    <div class="type_button" *ngIf="(editingColumnNumber != -1) && !byType" (click)="updateItem();showSave=false;archiveToggle=true;editingColumnNumber=-1">
+                        <a class="button__item purple-border">Save Edit</a>
+                    </div>
                 </div>
             </div>
 
@@ -83,8 +86,17 @@
                     <tr>
                         <th scope="col" class="headcol">Type</th>
                         <th scope="col" class="col__items dataPicker" colspan="1" (click)="selectedDate = i" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8);let i = index">
-                            {{date | date:'MM/dd/yy'}}
-                            <div class='inline_edit_icon' (click)="setEditingColumn(i)"><i class="far fa-edit"></i></div>                            
+                            {{date | date:'MM/dd/yy'}}                            
+                            <ng-container *ngIf="editingColumnNumber == i">
+                                <div style="display: inline;" (click)="setEditingColumn(i)">
+                                    <i class="far fa-edit purple"></i>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="editingColumnNumber != i">
+                                <div style="display: inline;"(click)="setEditingColumn(i)">
+                                    <i class="far fa-edit"></i>
+                                </div>
+                            </ng-container>                            
                         </th>
                     </tr>
                 </thead>
@@ -113,9 +125,7 @@
                        </ng-container>
                     </tr>
             </table>
-            <div class="save__btn" *ngIf="selectedDate != -1 && showSave" (click)="updateItem();showSave=false;archiveToggle=true;editingColumnNumber=-1">
-                <button class="add__btn">Save</button>
-            </div>
+            
           </div>
         <!--POPUP ADD PROPERTY FORM-->
         <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">

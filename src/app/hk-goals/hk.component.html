@@ -3,10 +3,13 @@
 <section id="main">
     <div class="main__block">
         <!--///////////////////////////FILTER///////////////////////////////////-->
-        <div class="search__block d-flex align-items-center justify-content-around">
+        <div class="search__block d-flex align-items-center justify-content-around filter-box">
             <div class="search__text__block d-flex flex-column">
                 <p>Search History</p>
                 <div class="search__buttons d-flex justify-content-center align-items-center">
+                    <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
+                        <i class="fas fa-plus"></i>
+                    </div>
                     <div class="date_button">
                         <a (click)="changeTable('date')" [ngClass]="{'dark-button':byDate}" class="button__item">By Date</a>
                     </div>
@@ -108,10 +111,7 @@
                     </tr>
                 </ng-container>
                
-            </table>
-            <div class="plus__circle" (click)="openNewProperty(contentNewProperty)">
-                <i class="fas fa-plus"></i>
-            </div>
+            </table>            
         </div>
         <!--///////////////////////////DEFAULT///////////////////////////////////-->
         <div class="main__title d-flex align-items-center" *ngIf="!byType && inventoryDates">
@@ -207,10 +207,7 @@
             </table>
             <div class="save__btn" *ngIf="selectedDate != -1" (click)="updateItem();selectedDate=-1">
                 <button class="add__btn">Save</button>
-            </div>
-            <div class="plus__circle" *ngIf="selectedDate == -1" (click)="openNewProperty(contentNewProperty)">
-                <i class="fas fa-plus"></i>
-            </div>
+            </div>           
 
         </div>
 

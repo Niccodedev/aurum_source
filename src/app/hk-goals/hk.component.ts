@@ -69,7 +69,7 @@ export class HKComponent extends HKManager implements OnInit {
         this.inventoryDates = []
       
       }
-      else if(this.inventoryItems.hk){
+      else if(this.inventoryItems.hk){       
       this.getDates(
         this.inventoryItems.hk[Object.keys(this.inventoryItems.hk)[0]]);      
         this.getLabels(this.inventoryItems.hk);
@@ -90,14 +90,20 @@ export class HKComponent extends HKManager implements OnInit {
   }
  
   getMinso(date){
-    let data = this.inventoryItems.hk[Object.keys(this.inventoryItems.hk)[0]].data;
-    for(let i = 0; i< data.length; i++){      
+    
+    let length = Object.keys(this.inventoryItems.hk).length;
+    for (let j = 0; j< length; j++){
+      let data = this.inventoryItems.hk[Object.keys(this.inventoryItems.hk)[j]].data;
+      for(let i = 0; i< data.length; i++) {      
         if(data[i].date == date ){
-          return {
-            minso: data[i].minso,
-            minco: data[i].minco
+          if(date[i].minso!="" &&  data[i].co!="") {
+            return {
+              minso: data[i].minso,
+              minco: data[i].minco
+           }
+          }
         }
-     }
+      }
     }
   }
   saveFormInput() {

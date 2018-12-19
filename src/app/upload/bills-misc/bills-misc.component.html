@@ -16,11 +16,13 @@
           <img [src]="bill.data.image" alt="image">
           </div>-->
             </div>
-            
-            <ng-template #contentViewImg let-c="close" let-d="dismiss" class="modal-lg">            
+
+            <ng-template #contentViewImg let-c="close" let-d="dismiss" class="modal-lg">
                 <iframe *ngIf="isPdf(bill.data.image)" [src]="bill.data.image | safe" class="main__block"></iframe>
-                <a  download [href]="bill.data.image | safe"> <img controls *ngIf="!isPdf(bill.data.image)" [src]="bill.data.image | safe" [alt]="bill.data.name"  class="main__block"></a>
-             </ng-template>
+                <a download [href]="bill.data.image | safe">
+                    <img controls *ngIf="!isPdf(bill.data.image)" [src]="bill.data.image | safe" [alt]="bill.data.name" class="main__block">
+                </a>
+            </ng-template>
 
             <div class="table__block_btn">
                 <div class="text__block__btn">
@@ -73,49 +75,61 @@
     </ng-template> -->
 
     <ng-template #contentNewProperty let-c="close" let-d="dismiss">
-       
-            <div class="d-flex flex-column">
-                    <div class="super__admin__block d-flex flex-column align-items-center create_admin_haader"> 
-                            <h1> Add a bill</h1>   
-                        </div> 
-                <div class="panel">
-                    <form action="#" [formGroup] = "form" class="d-flex flex-column form-group" (ngSubmit)="getBill()">
-                        <table class="table table-bordered table-hover table-responisve" style="border: 1px solid #ddd !important;">
-                            <tr>
-                                <td><p>Select Date</p></td>
-                                <td>
-                                    <input type="date" formControlName="date" placeholder="" class="form-control" required>
-                                    <div *ngIf="form.controls.date.invalid && (form.controls.date.dirty || form.controls.date.touched)" class="alert-danger">
-                                       Date is required
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><p>Bill Title</p></td>
-                                <td>
-                                    <input type="text" formControlName="name" placeholder=""  class="form-control" required>
-                                    <div *ngIf="form.controls.name.invalid && (form.controls.name.dirty || form.controls.name.touched)" class="alert-danger">
-                                        Name is required
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><p>Attachment</p></td>
-                                <td>
-                                    <div class="image_button">
-                                        <input type="file" (change)="selectFile($event)" id="image" class="form-control" required>
-                                        <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                                            Uploaded {{progress.percentage}}%
-                                    </div>
-                                </td>
-                                    
-                            </tr>
-                            <button type="submit" class="save_button" [disabled] = "form.invalid || progress.percentage!=100" (click)="addNewBill(f);closeModal=1; " value="submit">Save Bill</button>
-                            <button type = "button" class="save_button" (click)="closeAddBillModal()">Close</button>
-                        </table>
-                    </form>
+
+        <div class="modal-container main__block" style="width: 500px; background: white; height: auto !important;">
+            <form action="#" [formGroup]="form" class="d-flex flex-column form-group" (ngSubmit)="getBill()" style="margin:auto !important;">
+                <button type="button" class="close" style="float: right !important; color: black !important;" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true" class="cros" style="float: right !important; color: black !important;">&times;</span>
+                </button>
+                <div align="center">
+                    <h1>Add bill</h1>
                 </div>
-            </div>
-        </ng-template>
+                <table class="table table-bordered table-hover table-responisve" style="border: 1px solid #ddd !important;">
+                    <tr>
+                        <td>
+                            <p>Select Date</p>
+                        </td>
+                        <td>
+                            <input type="date" formControlName="date" placeholder="" class="form-control" required>
+                            <div *ngIf="form.controls.date.invalid && (form.controls.date.dirty || form.controls.date.touched)" class="alert-danger">
+                                Date is required
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Bill Title</p>
+                        </td>
+                        <td>
+                            <input type="text" formControlName="name" placeholder="" class="form-control" required>
+                            <div *ngIf="form.controls.name.invalid && (form.controls.name.dirty || form.controls.name.touched)" class="alert-danger">
+                                Name is required
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Attachment</p>
+                        </td>
+                        <td>
+                            <div class="image_button">
+                                <input type="file" (change)="selectFile($event)" id="image" class="form-control" required>
+                                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                Uploaded {{progress.percentage}}%
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="save__btn" style="margin-bottom:20px;">
+                    <button type="submit" class="button__item" [disabled]="form.invalid || progress.percentage!=100" (click)="addNewBill(f);closeModal=1; "
+                        value="submit">Save</button>
+                    <button type="button" class="button__item" (click)="closeAddBillModal()">Close</button>
+
+                </div>
+
+            </form>
+        </div>
+
+    </ng-template>
 
 </section>

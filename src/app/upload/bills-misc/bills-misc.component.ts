@@ -24,7 +24,7 @@ import { Hotel } from "../../hotels/interfaces/hotel";
 import { DataStorageService } from "../../shared/services/data-storage.service";
 import { HelperService } from "../../shared/services/helper.service";
 import { DataProcessingService } from "../../shared/services/data-processing.service";
-import { HotelService } from "../../hotels/services/hotel.service";
+
 import { AuthService } from "../../auth/auth.service";
 import { BillService } from "../services/bill.service";
 import { UploadFileService } from "../../shared/services/upload-file.service";
@@ -69,7 +69,6 @@ export class BillsMiscComponent implements OnInit {
     private afs: AngularFirestore,
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private hotelService: HotelService,
     public dataProcessingService: DataProcessingService,
     private billService: BillService,
     private uploadService: UploadFileService,

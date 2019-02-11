@@ -34,9 +34,9 @@
             opacity: 0.5;
             font-weight: 600;" [hidden]="!byDate">Select Date</p>
                 <select class="custom-select" [(ngModel)]="dateOfItem" (change)="updateItemsByDate()" [hidden]="!byDate" style="width:50%;background-color:#F3F2F0; margin: 0 auto">
-          <option selected>Select Date</option>
-          <option *ngFor="let date of inventoryDates" value="{{date}}">{{date | date:'MM/dd/yy'}}</option>
-        </select>
+                    <option selected>Select Date</option>
+                    <option *ngFor="let date of inventoryDates" value="{{date}}">{{date | date:'MM/dd/yy'}}</option>
+                </select>
             </div>
 
 
@@ -44,9 +44,9 @@
                 <div class="d-flex flex-column">
                     <p class="date-range__title" [hidden]="!byType" style="color: darkslategray;opacity: 0.6;font-weight: 600; font-size:16px;">Select Type</p>
                     <select placeholder="Select Type" class="custom-select" [(ngModel)]="nameOfItem" [hidden]="!byType" (change)="updateItemsByType()">
-               <option selected>Select Employee</option>
-          <option *ngFor="let label of inventoryLabels" value="{{label}}">{{label}}</option>
-        </select>
+                        <option selected>Select Employee</option>
+                        <option *ngFor="let label of inventoryLabels" value="{{label}}">{{label}}</option>
+                    </select>
                 </div>
                 <div class="date-range__item d-flex justify-content-center align-items-center">
                     <input type="date" class="search__date__item" [(ngModel)]="dateFrom" [disabled]="!nameOfItem" [hidden]="!byType">
@@ -113,8 +113,8 @@
                         </td>
                     </tr>
                 </ng-container>
-               
-            </table>            
+
+            </table>
         </div>
         <!--///////////////////////////DEFAULT///////////////////////////////////-->
         <div class="main__title d-flex align-items-center" *ngIf="!byType && inventoryDates">
@@ -133,7 +133,7 @@
                                 <div style="display: inline;" (click)="selectedDate = i">
                                     <i class="far fa-edit"></i>
                                 </div>
-                            </ng-container> 
+                            </ng-container>
                         </th>
                     </tr>
                 </thead>
@@ -187,106 +187,124 @@
                                 <input class="cell_edit" disabled value="{{getMinso(item.date).minso * item.so + getMinso(item.date).minco * item.co -item.time}}">
                             </td>
                         </ng-container>
-                </ng-container>
+                    </ng-container>
                 </tr>
                 <tr *ngFor="let label of inventoryLabels" class="archive">
-                        <ng-container *ngIf="inventoryItems.hk[label].archive && showArchive">
-                            <td scope="row" class="type thick-border headcol" id="fname">
-                                <input class="checkbox" type="checkbox" [(ngModel)]="inventoryItems.hk[label].archive"  *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
+                    <ng-container *ngIf="inventoryItems.hk[label].archive && showArchive">
+                        <td scope="row" class="type thick-border headcol" id="fname">
+                            <input class="checkbox" type="checkbox" [(ngModel)]="inventoryItems.hk[label].archive" *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
+                        </td>
+                        <ng-container id="t-data" *ngFor="let item of inventoryItems.hk[label].data.slice(dateIndex, dateIndex + 8); let i = index">
+                            <td>
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.dnd">
                             </td>
-                            <ng-container id="t-data" *ngFor="let item of inventoryItems.hk[label].data.slice(dateIndex, dateIndex + 8); let i = index">
-                                <td>
-                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.dnd">
-                                </td>
-                                <td>
-                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.so">
-                                </td>
-                                <td>
-                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.co">
-                                </td>
-                                <td>
-                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.time">
-                                </td>
-                                <td>
-                                    <input class="cell_edit" disabled value="{{getMinso(item.date).minso * item.so + getMinso(item.date).minco * item.co}}">
-                                </td>
-                                <td class="thick-border">
-                                    <input class="cell_edit" disabled value="{{getMinso(item.date).minso * item.so + getMinso(item.date).minco * item.co -item.time}}">
-                                </td>
-                            </ng-container>
+                            <td>
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.so">
+                            </td>
+                            <td>
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.co">
+                            </td>
+                            <td>
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.time">
+                            </td>
+                            <td>
+                                <input class="cell_edit" disabled value="{{getMinso(item.date).minso * item.so + getMinso(item.date).minco * item.co}}">
+                            </td>
+                            <td class="thick-border">
+                                <input class="cell_edit" disabled value="{{getMinso(item.date).minso * item.so + getMinso(item.date).minco * item.co -item.time}}">
+                            </td>
                         </ng-container>
-                    </tr>
+                    </ng-container>
+                </tr>
             </table>
-                       
+
 
         </div>
 
         <!--POPUP ADD PROPERTY FORM-->
         <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
-            <div class="modal-container" style="width: 800px; background: white;">
-                <form class="main__block" [formGroup]="form" (submit)="saveFormInput()" #f="ngForm">
+            <div class="modal-container" style="width: 680px; background: white; padding-bottom: 0;">
+                <form class="main__block popup_block" [formGroup]="form" (submit)="saveFormInput()" #f="ngForm">
                     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true" class="cros">&times;</span>
-          </button>
+                        <span aria-hidden="true" class="cros">&times;</span>
+                    </button>
                     <div class="user__component d-flex flex-column">
                         <div class="user__block">
                             <div class="user__block__header d-flex justify-content-between align-items-center">
                                 <div class="user__text">
                                     <p>Add Housekeeping </p>
                                 </div>
-                                <div class="select__date d-flex justify-content-center align-items-center" >
-                                    <div>Select Date:</div>
-                                    <input type="date" class="search__date__item" formControlName="date" id="date" name="date" style="width:175px;" (change)="dateChangeOnAdd()" required placeholder="">
-                                </div>
 
-                                <!-- <button type="button" class="close" aria-label="Close">
-                  <span aria-hidden="true" class="cros">&times;</span>
-                </button>-->
+
                             </div>
                             <hr>
-                            <form formArrayName="inventories" *ngFor="let item of form.get('inventories').controls; let i=index" >
-
-                                <div [formGroupName]="0" *ngIf="i==0" class="row" style="margin-bottom: 20px;">
-                                    <div class="col-md-6" style="display:inline;"><b> Select Min S/O:</b><input type="number" class="form-control" style="border-bottom-style: solid;" formControlName="minso" id="minso" name="minso" placeholder=""></div>
-                                    <div class="col-md-6"><b>Select Min C/O:</b><input type="number" class="form-control" formControlName="minco" style="border-bottom-style: solid;" id="minco" name="minco" placeholder=""></div>                                    
+                            <div class="row" style="margin-bottom: 20px;">
+                                <div class="col-md-4" style="display:inline;">
+                                    <b> Select Min S/O:</b>
+                                    <input type="number" class="form-control" style="border-bottom-style: solid;" id="minso" name="minso" placeholder="">
                                 </div>
-                                
-                                
-                                <div  class="user__array_form">
+                                <div class="col-md-4">
+                                    <b>Select Min C/O:</b>
+                                    <input type="number" class="form-control" style="border-bottom-style: solid;" id="minco" name="minco" placeholder="">
+                                </div>
+                                <div class="col-md-4">
+                                    <b>Select Date:</b>
+                                    <input type="date" class="form-control" id="date" name="date" style="width:175px;" (change)="dateChangeOnAdd()" required
+                                        placeholder="">
+                                </div>
+                            </div>
+                            <form formArrayName="inventories" *ngFor="let item of form.get('inventories').controls; let i=index">
+
+
+
+
+                                <div class="user__array_form">
                                     <table>
-                                            <tr *ngIf="i==0">
+                                        <tr *ngIf="i==0">
 
-                                                    <td style="background-color: #F3F2F0;">item</td>
-                                                    <td style="background-color: #F3F2F0;">DND</td>
-                                                    <td style="background-color: #F3F2F0;">S/O</td>
-                                                    <td style="background-color: #F3F2F0;">C/O</td>
-                                                    <td style="background-color: #F3F2F0;">Time</td>
-                                                    <!--<input type="text" formControlName="threshold" id="threshold" name="threshold" placeholder="threshold" class="input">-->
-                                                    <!--<input type="text" formControlName="variance" id="variance" name="variance" placeholder="variance" class="input">-->
-                                                </tr>
-                                        <tr [formGroupName]="i" >
+                                            <td style="background-color: #F3F2F0;">item</td>
+                                            <td style="background-color: #F3F2F0;">DND</td>
+                                            <td style="background-color: #F3F2F0;">S/O</td>
+                                            <td style="background-color: #F3F2F0;">C/O</td>
+                                            <td style="background-color: #F3F2F0;">Time</td>
+                                            <!--<input type="text" formControlName="threshold" id="threshold" name="threshold" placeholder="threshold" class="input">-->
+                                            <!--<input type="text" formControlName="variance" id="variance" name="variance" placeholder="variance" class="input">-->
+                                        </tr>
+                                        <tr [formGroupName]="i">
 
-                                            <td><input type="text" formControlName="item" name="item" placeholder="Item" required class="input"></td>
-                                            <td><input type="text" formControlName="dnd"name="dnd" placeholder="DND" required class="input"></td>
-                                            <td><input type="text" formControlName="so"  name="so" placeholder="S/O" required class="input"></td>
-                                            <td><input type="text" formControlName="co"  name="co" placeholder="C/O" required class="input"></td>
-                                            <td><input type="text" formControlName="time" name="time" placeholder="Time" class="input"></td>
+                                            <td>
+                                                <input type="text" formControlName="item" name="item" placeholder="Item" required class="input">
+                                            </td>
+                                            <td>
+                                                <input type="text" formControlName="dnd" name="dnd" placeholder="DND" required class="input">
+                                            </td>
+                                            <td>
+                                                <input type="text" formControlName="so" name="so" placeholder="S/O" required class="input">
+                                            </td>
+                                            <td>
+                                                <input type="text" formControlName="co" name="co" placeholder="C/O" required class="input">
+                                            </td>
+                                            <td>
+                                                <input type="text" formControlName="time" name="time" placeholder="Time" class="input">
+                                            </td>
                                             <!--<input type="text" formControlName="threshold" id="threshold" name="threshold" placeholder="threshold" class="input">-->
                                             <!--<input type="text" formControlName="variance" id="variance" name="variance" placeholder="variance" class="input">-->
                                         </tr>
                                     </table>
                                 </div>
                             </form>
-                            <div class="add__item__block" (click)="addFormInput()">
-                                <button type="button" class="add__item__btn">
-                  Add Item
-                </button>
-                            </div>
-                            <div *ngIf="dateExists" class="alert alert-danger">
+                            <div class="row">
+                                <div class="add__item__block" (click)="addFormInput()">
+                                    <button type="button" class="add__item__btn">
+                                        Add Item
+                                    </button>
+                                </div>
+                                <div *ngIf="dateExists" class="alert alert-danger">
                                     {{dateExistsErrorMessage}}
-                                </div>  
-                            <div class="save__btn">
-                                <button class="add__btn" [disabled]="form.invalid">Save</button>
+                                </div>
+                                <div class="save__btn">
+                                    <button class="add__item__btn add__btn">Save</button>
+                                </div>
                             </div>
                         </div>
                     </div>

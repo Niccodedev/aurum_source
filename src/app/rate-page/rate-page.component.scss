@@ -1,16 +1,16 @@
 /*Specification*/
 
-$primary-color:        #0d0d0d;
-$title-color:          #E8E721;
-$color-fff:             #fff;
-$font-main:            Helvetica Neue;
-$font-thin:            HelveticaNeue Thin;
-$font-gray:            #707070;
-$font-gray4:           #F3F2F0;
-$font-bold:            700;
-$font-sz-12:           12px;
-$font-gray2:           #575652;
-$font-gray3:           #E6E5E2;
+$primary-color: #0d0d0d;
+$title-color: #e8e721;
+$color-fff: #fff;
+$font-main: Helvetica Neue;
+$font-thin: HelveticaNeue Thin;
+$font-gray: #707070;
+$font-gray4: #f3f2f0;
+$font-bold: 700;
+$font-sz-12: 12px;
+$font-gray2: #575652;
+$font-gray3: #e6e5e2;
 
 /*@font-face {
   font-family: HelveticaNeue Thin;
@@ -22,11 +22,12 @@ $font-gray3:           #E6E5E2;
 }*/
 
 body {
-  font-family: $font-main, Helvetica,  Arial,sans-serif;
+  font-family: $font-main, Helvetica, Arial, sans-serif;
   overflow-x: hidden;
   height: 100vh;
 }
-a , a:hover {
+a,
+a:hover {
   text-decoration: none;
   outline: none;
   color: $primary-color;
@@ -160,18 +161,18 @@ hr {
     }
   }
   .search__date__item {
-    border: 1px solid $font-gray;
+    // border: 1px solid; $font-gray;
+    border-radius: 3px;
     width: 170px;
     height: 36px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 18px;
-    font-weight: $font-bold;
+    // font-weight: $font-bold;
     background-color: $font-gray4;
     margin-left: 37px;
     box-shadow: 0 4px 5px -2px #000;
-
   }
   .input__transaction {
     margin-top: 20px;
@@ -207,5 +208,3 @@ hr {
     outline: none;
   }
 }
-
-

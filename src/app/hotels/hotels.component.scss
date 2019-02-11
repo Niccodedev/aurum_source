@@ -1,15 +1,15 @@
 /*Specification*/
 
-$primary-color:        #0d0d0d;
-$title-color:          #E8E721;
-$font-main:            Helvetica Neue;
-$font-thin:            HelveticaNeue Thin;
-$font-gray:            #707070;
-$font-bold:            700;
-$font-sz-12:           12px;
-$font-gray4:          #F3F2F0;
-$font-gray2:          #575652;
-$color-fff:           #fff;
+$primary-color: #0d0d0d;
+$title-color: #e8e721;
+$font-main: Helvetica Neue;
+$font-thin: HelveticaNeue Thin;
+$font-gray: #707070;
+$font-bold: 700;
+$font-sz-12: 12px;
+$font-gray4: #f3f2f0;
+$font-gray2: #575652;
+$color-fff: #fff;
 
 /*@font-face {
   font-family: HelveticaNeue Thin;
@@ -20,20 +20,21 @@ $color-fff:           #fff;
   src: url("../../fonts/Helvetica Neu Bold.ttf") format("opentype");
 }*/
 body {
-  font-family: $font-main, Helvetica,  Arial,sans-serif;
+  font-family: $font-main, Helvetica, Arial, sans-serif;
   overflow-x: hidden;
   height: 100vh;
 }
-a , a:hover {
+a,
+a:hover {
   text-decoration: none;
   color: $primary-color;
   outline: none;
 }
 a:hover {
-  text-shadow: 1px 0 10px #0d0d0d, 1px 1px 3px yellow;;
+  text-shadow: 1px 0 10px #0d0d0d, 1px 1px 3px yellow;
 }
 
-#logo { 
+#logo {
   background: #0d0d0d;
   position: fixed;
   height: 100vh;
@@ -78,7 +79,8 @@ hr {
   margin: 0;
 }
 
-button, button:hover {
+button,
+button:hover {
   text-decoration: none;
   color: $title-color;
   outline: none;
@@ -102,7 +104,6 @@ input:focus {
   left: 0;
 }
 #header {
-
   background: $primary-color;
   height: 55px;
   margin-left: 72px;
@@ -154,7 +155,6 @@ input:focus {
   cursor: pointer;
 }
 
-
 /*addNewHotelPopup*/
 #user {
   width: 100%;
@@ -169,38 +169,38 @@ input:focus {
   overflow: auto;
 }
 
-.add_property_block{
-    border: 10px solid #b1d1ff;
-    position: relative;
-    // height: calc(100vh - 55px);
-    overflow-y: auto;
-    padding:30px;
+.add_property_block {
+  border: 10px solid #b1d1ff;
+  position: relative;
+  // height: calc(100vh - 55px);
+  overflow-y: auto;
+  padding: 30px;
 }
 
-.save_button, button.save_button:hover {
-
+.save_button,
+button.save_button:hover {
   font-size: 26px;
   border: 1px solid $color-fff;
-  padding: 0 20px; 
+  padding: 0 20px;
   text-align: center;
   border-radius: 15px;
   background-color: $primary-color;
   color: $color-fff;
   font-weight: $font-bold;
   cursor: pointer;
-  margin:15px auto;
+  margin: 15px auto;
 }
 .image_button {
   font-size: 13px;
   border: 1px solid $color-fff;
-  padding: 0 20px; 
+  padding: 0 20px;
   text-align: center;
   border-radius: 15px;
   background-color: #aaa;
   color: yellow;
   font-weight: $font-bold;
   cursor: pointer;
-  margin:15px auto;
+  margin: 15px auto;
 }
 
 .user__block {
@@ -229,54 +229,55 @@ input:focus {
 //   margin-top: 15px;
 //   padding: 20px;
 // }
-.user__form {   
+.user__form {
   // display: flex;
   justify-content: center;
   align-items: center;
   .select__date {
-      margin-top: 10px;
-      display: flex;
-      align-items: stretch;
-      justify-content: space-between;
-      width: 360px;
+    margin-top: 10px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 360px;
   }
   .search__date__item {
-      border: 1px solid $font-gray;
-      width: 100px;
-      height: 35px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 18px;
-      font-weight: $font-bold;
-      background-color: $font-gray4;
-      margin-left: 37px;
-      box-shadow: 0 4px 5px -2px #000;
+    border: 1px solid $font-gray;
+    border-radius: 3px;
+    width: 100px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    // font-weight: $font-bold;
+    background-color: $font-gray4;
+    margin-left: 37px;
+    box-shadow: 0 4px 5px -2px #000;
   }
   .input__transaction {
-      margin-top: 20px;
+    margin-top: 20px;
   }
   .td-input {
-      width: 200px;
-      height: 35px;
-      padding-left: 8px;
-      color: $primary-color;
-      font-size: 20px;
-      text-align: center;
-      font-weight: $font-bold;
-      box-shadow: 0 4px 5px -2px #000;
+    width: 200px;
+    height: 35px;
+    padding-left: 8px;
+    color: $primary-color;
+    font-size: 20px;
+    text-align: center;
+    font-weight: $font-bold;
+    box-shadow: 0 4px 5px -2px #000;
   }
   .td-input:nth-child(2) {
-      margin-left: 20px;
+    margin-left: 20px;
   }
-   ::placeholder {
-      color: $font-gray2;
-      font-size: 20px;
-      text-align: center;
-      font-weight: $font-bold;
+  ::placeholder {
+    color: $font-gray2;
+    font-size: 20px;
+    text-align: center;
+    font-weight: $font-bold;
   }
   input:focus {
-      outline: none;
+    outline: none;
   }
   // .save__btn {
   //     .button__item {
@@ -293,19 +294,19 @@ input:focus {
   //         margin-top: 30px;
   //     }
   // }
-   .save__btn {
-      .button__item {
-          font-size: 26px;
-          border: 1px solid $color-fff;
-          padding: 0 20px;
-          width: 120px;
-          text-align: center;
-          border-radius: 15px;
-          background-color: $primary-color;
-          color: $color-fff;
-          font-weight: $font-bold;
-          cursor: pointer;
-      }
+  .save__btn {
+    .button__item {
+      font-size: 26px;
+      border: 1px solid $color-fff;
+      padding: 0 20px;
+      width: 120px;
+      text-align: center;
+      border-radius: 15px;
+      background-color: $primary-color;
+      color: $color-fff;
+      font-weight: $font-bold;
+      cursor: pointer;
+    }
   }
 }
 .city__block {
@@ -353,7 +354,7 @@ input:focus {
   border: 1px solid $primary-color;
 }
 /*Media Screen*/
-@media screen and (max-width: 872px){
+@media screen and (max-width: 872px) {
   .main__table {
     justify-content: center;
   }
@@ -363,7 +364,7 @@ input:focus {
     width: 100%;
   }
 }
-@media screen and (max-width: 535px){
+@media screen and (max-width: 535px) {
   .table__block {
     max-width: 90%;
   }
@@ -373,8 +374,8 @@ input:focus {
 }
 :host {
   .plus__circle {
-      svg {
-          width: 3em;
-      }
+    svg {
+      width: 3em;
+    }
   }
 }

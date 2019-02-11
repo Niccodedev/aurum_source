@@ -35,8 +35,10 @@ import { HKManager } from "../shared/classes/HKManager";
 })
 export class HKComponent extends HKManager implements OnInit {
   public archiveToggle = true;
-  @ViewChild("checkMe") checkMe: ElementRef;
-  @ViewChild("fname") fname: ElementRef;
+  @ViewChild("checkMe")
+  checkMe: ElementRef;
+  @ViewChild("fname")
+  fname: ElementRef;
   constructor(
     public modalService: NgbModal,
     public formBuilder: FormBuilder,
@@ -61,20 +63,19 @@ export class HKComponent extends HKManager implements OnInit {
     this.inventoryLabels = [];
     this.inventoryService.getInventories().subscribe(res => {
       this.inventoryItems = HelperService.getItemsByHotelId(res);
-      if (!this.inventoryItems) { 
+      if (!this.inventoryItems) {
         return;
       }
-      
-      if(!this.inventoryItems){
-        this.inventoryDates = []
-      
-      }
-      else if(this.inventoryItems.hk){       
-      this.getDates(
-        this.inventoryItems.hk[Object.keys(this.inventoryItems.hk)[0]]);      
+
+      if (!this.inventoryItems) {
+        this.inventoryDates = [];
+      } else if (this.inventoryItems.hk) {
+        this.getDates(
+          this.inventoryItems.hk[Object.keys(this.inventoryItems.hk)[0]]
+        );
         this.getLabels(this.inventoryItems.hk);
-      }else{
-        this.inventoryDates=[]
+      } else {
+        this.inventoryDates = [];
       }
     });
 
@@ -88,50 +89,61 @@ export class HKComponent extends HKManager implements OnInit {
   addItem(item, hotelId) {
     this.inventoryService.addHK(item, hotelId);
   }
- 
-  getMinso(date){
-    
+
+  getMinso(date) {
     let length = Object.keys(this.inventoryItems.hk).length;
-    for (let j = 0; j< length; j++){
-      let data = this.inventoryItems.hk[Object.keys(this.inventoryItems.hk)[j]].data;
-      for(let i = 0; i< data.length; i++) {      
-        if(data[i].date == date ){
-          if(date[i].minso!="" &&  data[i].co!="") {
+    for (let j = 0; j < length; j++) {
+      let data = this.inventoryItems.hk[Object.keys(this.inventoryItems.hk)[j]]
+        .data;
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].date == date) {
+          if (date[i].minso != "" && data[i].co != "") {
             return {
               minso: data[i].minso,
               minco: data[i].minco
-           }
+            };
           }
         }
       }
     }
   }
+
   saveFormInput() {
+    let minco = (<HTMLInputElement>document.getElementById("minco")).value;
+    alert(minco);
+    let minso = (<HTMLInputElement>document.getElementById("minso")).value;
+
+    let _date = (<HTMLInputElement>document.getElementById("date")).value;
+    alert(_date);
+    if (!minco) return;
+    if (!minso) return;
+    if (!_date) return;
+
     if (!this.inventoryItems || !this.inventoryItems.hk) {
       this.inventoryItems = {
         hk: {}
       };
-      this.inventoryDates = [];  
+      this.inventoryDates = [];
       this.inventoryService.addNewField();
     }
 
     this.form.value.inventories.forEach(item => {
       if (!this.inventoryItems.hk[item.item]) this.addNewItem(item.item);
     });
- 
-    let date = this.form.value.date
-      ? this.datePipe.transform(this.form.value.date, "yyyy-MM-dd")
+
+    let date = _date
+      ? this.datePipe.transform(_date, "yyyy-MM-dd")
       : this.datePipe.transform(new Date(), "MM-dd-YYYY");
     let indexOfItem = this.checkIfDateExist(date);
-   
+
     if (indexOfItem == -1) {
       this.addNewDate(date);
       indexOfItem = this.inventoryDates.length - 1;
     }
-    let minco = this.form.value.inventories[0].minco;
-    let minso = this.form.value.inventories[0].minso;
- 
-    this.form.value.inventories.forEach(item => {           
+    // let minco = this.form.value.inventories[0].minco;
+    // let minso = this.form.value.inventories[0].minso;
+
+    this.form.value.inventories.forEach(item => {
       this.inventoryItems.hk[item.item].data[indexOfItem].dnd = item.dnd;
       this.inventoryItems.hk[item.item].data[indexOfItem].so = item.so;
       this.inventoryItems.hk[item.item].data[indexOfItem].co = item.co;
@@ -142,14 +154,15 @@ export class HKComponent extends HKManager implements OnInit {
 
     this.inventoryDates.sort((a, b) => +new Date(b) - +new Date(a));
 
-    this.sortByDate();  
+    this.sortByDate();
     this.addItem(this.inventoryItems.hk, localStorage.hotelId);
-    this.openAddModalRef.close()
+    this.openAddModalRef.close();
+    return false;
   }
   addNewItem(name) {
     this.inventoryItems.hk[name] = {
-      archive:false,
-      data:[]
+      archive: false,
+      data: []
     };
     this.inventoryDates.forEach(date => {
       this.inventoryItems.hk[name].data.push({
@@ -159,7 +172,7 @@ export class HKComponent extends HKManager implements OnInit {
         co: "",
         minso: "",
         minco: "",
-        time: "",       
+        time: ""
       });
     });
   }
@@ -176,7 +189,7 @@ export class HKComponent extends HKManager implements OnInit {
         so: "",
         co: "",
         minso: "",
-        minco: "",       
+        minco: ""
       });
     }
   }
@@ -185,7 +198,7 @@ export class HKComponent extends HKManager implements OnInit {
   }
 
   sortByDate() {
-    for (let key in this.inventoryItems.hk) {                                           
+    for (let key in this.inventoryItems.hk) {
       this.inventoryItems.hk[key].data.sort(
         (a, b) => +new Date(b.date) - +new Date(a.date)
       );
@@ -194,7 +207,6 @@ export class HKComponent extends HKManager implements OnInit {
       this.inventoryItems.hk[Object.keys(this.inventoryItems.hk)[0]]
     );
   }
-
 
   updateItemsByType() {
     this.currentItem = this.inventoryItems.hk[this.nameOfItem];
@@ -219,4 +231,3 @@ export class HKComponent extends HKManager implements OnInit {
     console.log("saved states of check boxes", arr);
   }
 }
-

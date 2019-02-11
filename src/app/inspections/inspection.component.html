@@ -17,14 +17,14 @@
                         <a (click)="changeTable('type')" [ngClass]="{'dark-button':byType}" class="button__item">By Room</a>
                     </div>
                     <div *ngIf="archiveToggle==true && !byType && inventoryDates" class="type_button">
-                        <a class="button__item"  [ngClass]="{'green-border':showArchive}" (click)="showArchive = !showArchive">Archive</a>
+                        <a class="button__item" [ngClass]="{'green-border':showArchive}" (click)="showArchive = !showArchive">Archive</a>
 
                     </div>
                     <div *ngIf="archiveToggle==false && !byType && inventoryDates" class="type_button">
-                        <a class="button__item green-border"  (click)="updateItem();selectedDate=-1;showArchive=false;archiveToggle=true;"> Save Archive</a>
+                        <a class="button__item green-border" (click)="updateItem();selectedDate=-1;showArchive=false;archiveToggle=true;"> Save Archive</a>
                     </div>
                     <div class="type_button" *ngIf="selectedDate != -1" (click)="updateItem();selectedDate=-1">
-                            <a class="button__item purple-border">Save Edit</a>
+                        <a class="button__item purple-border">Save Edit</a>
                     </div>
                 </div>
             </div>
@@ -34,9 +34,9 @@
             opacity: 0.5;
             font-weight: 600;" [hidden]="!byDate">Select Date</p>
                 <select class="custom-select" [(ngModel)]="dateOfItem" (change)="updateItemsByDate()" [hidden]="!byDate" style="width:50%;background-color:#F3F2F0; margin: 0 auto">
-          <option selected>Select Date</option>
-          <option *ngFor="let date of inventoryDates" value="{{date}}">{{date | date:'MM/dd/yy'}}</option>
-        </select>
+                    <option selected>Select Date</option>
+                    <option *ngFor="let date of inventoryDates" value="{{date}}">{{date | date:'MM/dd/yy'}}</option>
+                </select>
             </div>
 
 
@@ -44,9 +44,9 @@
                 <div class="d-flex flex-column">
                     <p class="date-range__title" [hidden]="!byType" style="color: darkslategray;opacity: 0.6;font-weight: 600; font-size:16px;">Select Type</p>
                     <select placeholder="Select Type" class="custom-select" [(ngModel)]="nameOfItem" [hidden]="!byType" (change)="updateItemsByType()">
-               <option selected>Select Room</option>
-          <option *ngFor="let label of inventoryLabels" value="{{label}}">{{label}}</option>
-        </select>
+                        <option selected>Select Room</option>
+                        <option *ngFor="let label of inventoryLabels" value="{{label}}">{{label}}</option>
+                    </select>
                 </div>
                 <div class="date-range__item d-flex justify-content-center align-items-center">
                     <input type="date" class="search__date__item" [(ngModel)]="dateFrom" [disabled]="!nameOfItem" [hidden]="!byType">
@@ -70,28 +70,34 @@
                     <tr>
                         <td scope="row"></td>
                         <td style="background-color: #F3F2F0;" class="cleaning">
-                            <p><b>HK Cleaning</b></p>
+                            <p>
+                                <b>HK Cleaning</b>
+                            </p>
                         </td>
-                        <td style="background-color: #F3F2F0;" class="inspector">                            
-                            <p><b>Inspector</b></p>
+                        <td style="background-color: #F3F2F0;" class="inspector">
+                            <p>
+                                <b>Inspector</b>
+                            </p>
                         </td>
                         <td style="background-color: #F3F2F0;" class="commenting">
-                            <p><b>Dirty? Commands:</b></p>
+                            <p>
+                                <b>Dirty? Commands:</b>
+                            </p>
                         </td>
                     </tr>
                 </thead>
                 <ng-container *ngIf="currentItem">
                     <tr *ngFor="let item of currentItem.data | filterByDate: dateFrom: dateTo">
                         <td scope="row" class="type">{{item.date | date:'MM/dd/yy'}}</td>
-                        <td  class="cleaning">
+                        <td class="cleaning">
                             <input class="cell_edit" [(ngModel)]="item.cleaning" disabled>
                         </td>
-                        <td  class="inspector">
+                        <td class="inspector">
                             <input class="cell_edit" [(ngModel)]="item.inspector" disabled>
                         </td>
-                        <td  class="comments">
+                        <td class="comments">
                             <input class="cell_edit" [(ngModel)]="item.comments" disabled>
-                        </td>                    
+                        </td>
                     </tr>
                 </ng-container>
             </table>
@@ -105,7 +111,7 @@
                 <thead>
                     <tr>
                         <th scope="col" style="width: 10%;" class="thick-border headcol">Rooms</th>
-                        <th scope="col" class="col__items thick-border" colspan="3"  *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
+                        <th scope="col" class="col__items thick-border" colspan="3" *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8); let i = index">
                             {{date | date:'MM/dd/yy'}}
                             <ng-container *ngIf="selectedDate == i">
                                 <div style="display: inline;" (click)="selectedDate = i">
@@ -116,7 +122,7 @@
                                 <div style="display: inline;" (click)="selectedDate = i">
                                     <i class="far fa-edit"></i>
                                 </div>
-                            </ng-container> 
+                            </ng-container>
                         </th>
                     </tr>
                 </thead>
@@ -125,22 +131,23 @@
                         <td scope="row thick-border" class="type thick-border headcol"></td>
                         <ng-container *ngFor="let date of inventoryDates.slice(dateIndex, dateIndex + 8)">
                             <td style="background-color: #F3F2F0;" class="cleaning">
-                                <p >HK Cleaning</p>
+                                <p>HK Cleaning</p>
                             </td>
                             <td style="background-color: #F3F2F0;" class="inspector">
-                                <p >inspector    </p>
+                                <p>inspector </p>
                             </td>
-                            <td style="background-color: #F3F2F0;"  class="comments thick-border">
+                            <td style="background-color: #F3F2F0;" class="comments thick-border">
                                 <p class="comments">Dirty? commnets:</p>
-                            </td> 
+                            </td>
                         </ng-container>
                     </tr>
                 </thead>
-              
+
                 <tr *ngFor="let label of inventoryLabels">
                     <ng-container *ngIf="!inventoryItems.inspection[label].archive">
                         <td scope="row" class="type thick-border headcol" id="fname">
-                            <input class="checkbox" type="checkbox"   [(ngModel)] = "inventoryItems.inspection[label].archive" value="onoffswitch" id='checkMe' *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
+                            <input class="checkbox" type="checkbox" [(ngModel)]="inventoryItems.inspection[label].archive" value="onoffswitch" id='checkMe'
+                                *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
                         </td>
                         <ng-container id="t-data" *ngFor="let item of inventoryItems.inspection[label].data.slice(dateIndex, dateIndex + 8); let i = index">
                             <td>
@@ -156,80 +163,91 @@
                     </ng-container>
                 </tr>
                 <tr *ngFor="let label of inventoryLabels" class="archive">
-                        <ng-container *ngIf="inventoryItems.inspection[label].archive && showArchive" >
-                            <td scope="row" class="type thick-border headcol" id="fname">
-                                <input class="checkbox" type="checkbox" value="onoffswitch" id='checkMe' [(ngModel)]="inventoryItems.inspection[label].archive" *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
+                    <ng-container *ngIf="inventoryItems.inspection[label].archive && showArchive">
+                        <td scope="row" class="type thick-border headcol" id="fname">
+                            <input class="checkbox" type="checkbox" value="onoffswitch" id='checkMe' [(ngModel)]="inventoryItems.inspection[label].archive"
+                                *ngIf="showArchive" (change)="archiveToggle=false;"> {{label}}
+                        </td>
+                        <ng-container id="t-data" *ngFor="let item of inventoryItems.inspection[label].data.slice(dateIndex, dateIndex + 8); let i = index">
+                            <td>
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.cleaning">
                             </td>
-                            <ng-container id="t-data" *ngFor="let item of inventoryItems.inspection[label].data.slice(dateIndex, dateIndex + 8); let i = index">
-                                <td>
-                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.cleaning">
-                                </td>
-                                <td>
-                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.inspector">
-                                </td>
-                                <td class="thick-border">
-                                    <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.comments">
-                                </td>                               
-                            </ng-container>
+                            <td>
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.inspector">
+                            </td>
+                            <td class="thick-border">
+                                <input class="cell_edit" [disabled]="selectedDate != i" [(ngModel)]="item.comments">
+                            </td>
                         </ng-container>
-                    </tr>
+                    </ng-container>
+                </tr>
             </table>
-                      
+
         </div>
 
         <!--POPUP ADD PROPERTY FORM-->
         <ng-template #contentNewProperty let-c="close" let-d="dismiss" class="modal-lg">
-            <div class="modal-container" style="width: 800px; background: white;">
-                <form class="main__block" [formGroup]="form" (submit)="saveFormInput()" #f="ngForm">
+            <div class="modal-container" style="width:570px; margin:auto; background: white;">
+                <form class="main__block" style="height:auto !important;" [formGroup]="form" (submit)="saveFormInput()" #f="ngForm">
                     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true" class="cros">&times;</span>
-          </button>
+                        <span aria-hidden="true" class="cros">&times;</span>
+                    </button>
                     <div class="user__component d-flex flex-column">
-                        <div class="user__block">
-                            <div class="user__block__header d-flex justify-content-between align-items-center">
+                        <div class="user__block" style="width:540px;">
+                            <div class="user__block__header d-flex justify-content-between align-items-center" style="width:540px; background: white; margin:auto;">
                                 <div class="user__text">
                                     <p>Add Room</p>
                                 </div>
                                 <div class="select__date d-flex justify-content-center align-items-center">
                                     <div>Select Date:</div>
-                                    <input type="date"  (change)="dateChangeOnAdd()" style="width:170px;"  class="search__date__item" formControlName="date" required placeholder="">
+                                    <input type="date" (change)="dateChangeOnAdd()" style="width:170px;" class="search__date__item" formControlName="date" required
+                                        placeholder="">
                                 </div>
                             </div>
                             <form formArrayName="inventories" *ngFor="let item of form.get('inventories').controls; let i=index" class="user__array_form">
                                 <table>
                                     <tr *ngIf="i==0">
-                                            <td style="background-color: #F3F2F0;">
-                                                    <p>Room</p>
-                                                </td>
                                         <td style="background-color: #F3F2F0;">
-                                                <p >HK Cleaning</p>
-                                            </td>
-                                            <td style="background-color: #F3F2F0;">
-                                                <p>Inspector</p>
-                                            </td>
-                                            <td style="background-color: #F3F2F0;">
-                                                <p>Dirty? Comments:</p>
-                                            </td>                                           
-                                        </tr>
+                                            <p>Room</p>
+                                        </td>
+                                        <td style="background-color: #F3F2F0;">
+                                            <p>HK Cleaning</p>
+                                        </td>
+                                        <td style="background-color: #F3F2F0;">
+                                            <p>Inspector</p>
+                                        </td>
+                                        <td style="background-color: #F3F2F0;">
+                                            <p>Dirty? Comments:</p>
+                                        </td>
+                                    </tr>
                                     <tr [formGroupName]="i">
-                                        <td><input type="text" formControlName="item" id="item" name="item" placeholder="Room" class="input"></td>
-                                        <td><input type="text" formControlName="cleaning" id="cleaning" name="cleaning" placeholder="" class="input"></td>
-                                        <td><input type="text" formControlName="inspector" id="inspector" name="inspector" placeholder="" class="input"></td>
-                                        <td><input type="text" formControlName="comments" id="comments" name="comments" placeholder="" class="input"></td>                                       
+                                        <td>
+                                            <input type="text" formControlName="item" id="item" name="item" placeholder="Room" class="input">
+                                        </td>
+                                        <td>
+                                            <input type="text" formControlName="cleaning" id="cleaning" name="cleaning" placeholder="" class="input">
+                                        </td>
+                                        <td>
+                                            <input type="text" formControlName="inspector" id="inspector" name="inspector" placeholder="" class="input">
+                                        </td>
+                                        <td>
+                                            <input type="text" formControlName="comments" id="comments" name="comments" placeholder="" class="input">
+                                        </td>
                                     </tr>
                                 </table>
                             </form>
-                            <div class="add__item__block" (click)="addFormInput()">
-                                <button type="button" class="add__item__btn">
-                  Add Item
-                </button>
-                            </div>
-                            <div *ngIf="dateExists" class="alert alert-danger">
+                            <div class="row" style="margin-left:30px; margin-bottom:30px;">
+                                <div class="add__item__block" (click)="addFormInput()">
+                                    <button type="button" class="add__item__btn">
+                                        Add Item
+                                    </button>
+                                </div>
+                                <div *ngIf="dateExists" class="alert alert-danger">
                                     {{dateExistsErrorMessage}}
-                                </div>  
-                            <div class="save__btn">
-                                <button class="add__btn" [disabled]="form.invalid">Save</button>
-                               
+                                </div>
+                                <div class="save__btn">
+                                    <button class="add__btn" [disabled]="form.invalid">Save</button>
+                                </div>
                             </div>
                         </div>
                     </div>

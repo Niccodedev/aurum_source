@@ -13,114 +13,129 @@
   </div>
 </section>
 
-
-
 <section id="main">
   <div class="main__block">
     <div class="main__title">
       <h2>Select a property</h2>
     </div>
     <div class="main__table">
-      <div class="table__block" *ngFor="let hotel of hotels" (click)="goToNotifications(hotel.id)">
-        <img [src]="hotel.data.image" alt="hotel" class="table__image__item">
-        <hr> <hr>
+      <div
+        class="table__block"
+        *ngFor="let hotel of hotels"
+        (click)="goToNotifications(hotel)"
+      >
+        <img [src]="hotel.data.image" alt="hotel" class="table__image__item" />
+        <hr />
+        <hr />
         <p class="table__link__item">{{ hotel.data.name }}</p>
       </div>
 
-      <div [hidden] = "!canAddMoreProperty" class="plus__circle" (click)="openNewHotel(contentNewHotel)">
-       
-               <i class="fas fa-plus"></i>
+      <div
+        [hidden]="!canAddMoreProperty"
+        class="plus__circle"
+        (click)="openNewHotel(contentNewHotel)"
+      >
+        <i class="fas fa-plus"></i>
       </div>
-
     </div>
   </div>
 
-
   <!--POPUP ADD HOTEL FORM-->
   <ng-template #contentNewHotel let-c="close" let-d="dismiss" class="modal-lg">
-    <form  [formGroup]="form" class="add_property_block" (ngSubmit)="addNewHotel()">
-        <div class="super__admin__block d-flex flex-column align-items-center create_admin_haader"> 
-            <h1> Add New Hotel</h1>   
-        </div> 
-     <div class="panel">                     
-            <table class="table table-bordered table-hover table-responisve" style="border: 1px solid #ddd !important;">
-                        <tr>
-                            <td><p>Name</p></td>
-                            <td>
-                                <input type="text" id="name" formControlName = "name" class = "form-control"  placeholder="">
-                                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert-danger">
-                                   Propery name is required
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="select__date">
-                            <td><p>Address</p></td>                                    
-                            <td>
-                                <input type="text" id="address" formControlName="address" class = "form-control" placeholder="">
-                                <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert-danger">
-                                   Address is required
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><p>City</p></td>
-                            <td>
-                                <input type="text" id="city" formControlName="city"  placeholder="" class = "form-control" class = "form-control">
-                                <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert-danger">
-                                    City is required
-                                </div>
-                            </td>
-                        </tr>                        
-                        <tr>
-                            <td><p>Image</p></td>
-                            <td>
-                                <div class="image_button">
-                                    <input type="file" (change)="selectFile($event)" id="image">
-                                    <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                                      Uploaded {{progress.percentage}}%
-                                </div>
-                            </td>
-                        </tr>
-                        
-            </table>
-            <div align="center">
-                <button type="submit"  class="save_button" (click)="addNewHotel()" [disabled] = "form.invalid || progress.percentage!=100" value="submit">Add New Hotel</button>
-                <!-- <h1 (click)="upload()">CLICK</h1> -->
-            </div>
-            
-            
-            
-            
-            
-            
-        </div> 
-</form>
-    <!-- <form action="#" class="user__form">
-      <div class="name__block">
-        <label for="name"><p>Name:</p></label>
-        <input type="text" id="name" [(ngModel)]="name" placeholder="" name="name" class="input" required>
+    <form
+      [formGroup]="form"
+      class="add_property_block"
+      (ngSubmit)="addNewHotel()"
+    >
+      <div
+        class="super__admin__block d-flex flex-column align-items-center create_admin_haader"
+      >
+        <h1>Add New Hotel</h1>
       </div>
-      <div class="address__block">
-        <label for="address"><p>Address:</p></label>
-        <input type="text" id="address" [(ngModel)]="address"  placeholder="" name="address" class="input" required>
-      </div>
-      <div class="city__block">
-        <label for="city"><p>City:</p></label>
-        <input type="text"  id="city" [(ngModel)]="city" placeholder="" name="city" class="input" required>
-      </div>
+      <div class="panel">
+        <table
+          class="table table-bordered table-hover table-responisve"
+          style="border: 1px solid #ddd !important;"
+        >
+          <tr>
+            <td><p>Name</p></td>
+            <td>
+              <input
+                type="text"
+                id="name"
+                formControlName="name"
+                class="form-control"
+                placeholder=""
+              />
+              <div
+                *ngIf="name.invalid && (name.dirty || name.touched)"
+                class="alert-danger"
+              >
+                Propery name is required
+              </div>
+            </td>
+          </tr>
+          <tr class="select__date">
+            <td><p>Address</p></td>
+            <td>
+              <input
+                type="text"
+                id="address"
+                formControlName="address"
+                class="form-control"
+                placeholder=""
+              />
+              <div
+                *ngIf="address.invalid && (address.dirty || address.touched)"
+                class="alert-danger"
+              >
+                Address is required
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><p>City</p></td>
+            <td>
+              <input
+                type="text"
+                id="city"
+                formControlName="city"
+                placeholder=""
+                class="form-control"
+                class="form-control"
+              />
+              <div
+                *ngIf="city.invalid && (city.dirty || city.touched)"
+                class="alert-danger"
+              >
+                City is required
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><p>Image</p></td>
+            <td>
+              <div class="image_button">
+                <input type="file" (change)="selectFile($event)" id="image" />
+                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                Uploaded {{ progress.percentage }}%
+              </div>
+            </td>
+          </tr>
+        </table>
 
-      <div class="image__block">
-        <label for="image"><p>Image</p></label>
-        <button type="button" class="image__btn">
-          <input type="file" class="image__btn" (change)="selectFile($event)" id="image">
-          <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-          Upload
-        </button>
+        <div align="center">
+          <button
+            type="submit"
+            class="save_button"
+            (click)="addNewHotel()"
+            [disabled]="form.invalid || progress.percentage != 100"
+            value="submit"
+          >
+            Add New Hotel
+          </button>
+        </div>
       </div>
-
-      <button type="submit" class="add__btn" (click)="addNewHotel()" value="submit">Add New Property</button>
-      <h1 (click)="upload()">CLICK</h1>
-    </form> -->
+    </form>
   </ng-template>
-
 </section>

@@ -54,7 +54,6 @@ export class HotelService {
     });
   }
   getAdminHotels(adminId) {
-    // afs.collection('items', ref => ref.where('size', '==', 'large'))
     this.hotelsCol = this.afs.collection("hotels");
     return this.hotelsCol.snapshotChanges().map(actions => {
       return actions.map(a => {
@@ -66,9 +65,6 @@ export class HotelService {
   }
 
   addHotel(hotel) {
-    console.log(hotel);
-    //hotel.adminId = "Qll6jGpR77N27Ln55PCYEcIWXvr2"
-    //hotel.image = "https://firebasestorage.googleapis.com/v0/b/aurumbackend.appspot.com/o/uploads%2FStockUP_Video_Background-min.jpeg?alt=media&token=46f7b892-e35e-421b-9a49-b812db4b7ba8"
     this.afs.collection("hotels").add(hotel);
   }
 
@@ -76,25 +72,6 @@ export class HotelService {
     let index = url.lastIndexOf("?");
     return url.substring(url.indexOf("%2F") + 3, url.indexOf("?"));
   }
-  // deleteBillService(billId) {
-  //   let billRef = this.afs.doc(`bills/${billId}`).ref;
-  //   billRef
-  //     .get()
-  //     .then(doc => {
-  //       if (doc.exists) {
-  //         let data = doc.data();
-  //         let fileName = this.getFileName(data.image);
-  //         this.uploadFileService
-  //           .deleteFileUpload(fileName)
-  //           .then(() => billRef.delete());
-  //       } else {
-  //         console.log("No such document!");
-  //       }
-  //     })
-  //     .catch(function(error) {
-  //       console.log("Error getting document:", error);
-  //     });
-  // }
 
   deleteHotel(hotelId) {
     let hotelRef = this.afs.doc(`hotels/${localStorage.hotelId}`).ref;
@@ -114,6 +91,7 @@ export class HotelService {
       .catch(function(error) {
         console.log("Error getting document:", error);
       });
+
     this.notification.deleteNotifationByHotelId(hotelId);
     this.activityChatService.deleteAllMessageByHotelId(hotelId);
     this.inventoryService.deleteInventoryByHotelId(hotelId);
